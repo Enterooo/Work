@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CG Loiha Paneli</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{
+  width:100%;height:100%;
+  font-family:'Nunito',sans-serif;
+  background:#d6ccc2;
+  overflow:hidden;
+}
+
+/* ── SCREEN ── */
+.screen{
+  width:1100px;height:680px;
+  background:#edede9;
+  border-radius:28px;
+  box-shadow:0 28px 80px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.9);
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  display:flex;
+  overflow:hidden;
+}
+
+/* ── SIDEBAR ── */
+.left{
+  width:220px;flex-shrink:0;
+  background:#d6ccc2;
+  border-right:1.5px solid rgba(0,0,0,.07);
+  display:flex;flex-direction:column;
+  padding:22px 14px;
+  gap:8px;
+}
+.left-logo{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 12px 18px;
+  border-bottom:1.5px solid rgba(0,0,0,.07);
+  margin-bottom:6px;
+}
+.left-logo-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(145deg,#33c4b3,#25a090);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;
+  box-shadow:3px 3px 8px rgba(43,181,165,.3);
+}
+.left-logo-text{
+  font-size:13px;font-weight:800;color:#3a2810;
+  line-height:1.2;
+}
+.left-logo-sub{
+  font-size:10px;color:#9a8878;font-weight:600;
+}
+
+.tc{
+  border-radius:14px;
+  padding:11px 13px;
+  display:flex;align-items:center;gap:10px;
+  cursor:pointer;
+  background:#e3d5ca;
+  box-shadow:2px 2px 6px rgba(0,0,0,.07),-1px -1px 3px rgba(255,255,255,.7);
+  transition:all .2s;
+  opacity:.45;
+}
+.tc:hover{opacity:.65;}
+.tc-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#b8a898;flex-shrink:0;
+}
+.tc-name{font-size:12px;font-weight:700;color:#6a5040;}
+.tc-badge{
+  margin-left:auto;
+  background:#d6ccc2;
+  border:1px solid rgba(0,0,0,.08);
+  border-radius:7px;
+  padding:2px 7px;
+  font-size:10px;font-weight:700;color:#9a8878;
+}
+
+/* ── MAIN ── */
+.main{
+  flex:1;
+  display:flex;flex-direction:column;
+  position:relative;
+  background:#edede9;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  height:58px;flex-shrink:0;
+  background:#edede9;
+  border-bottom:1.5px solid rgba(0,0,0,.06);
+  display:flex;align-items:center;
+  padding:0 28px;
+  gap:14px;
+}
+.tb-title{
+  font-size:15px;font-weight:800;color:#3a2010;
+  opacity:.3;
+}
+.tb-spacer{flex:1;}
+.tb-dot{
+  width:32px;height:32px;border-radius:50%;
+  background:#d6ccc2;
+  box-shadow:2px 2px 6px rgba(0,0,0,.1),-1px -1px 3px rgba(255,255,255,.8);
+  opacity:.4;
+}
+
+/* ── CONTENT — TEZ ORADA ── */
+.content{
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:0;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Decorative bg circles */
+.content::before{
+  content:'';
+  position:absolute;
+  width:420px;height:420px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(43,181,165,.08) 0%,transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  animation:pulse 3s ease-in-out infinite;
+}
+.content::after{
+  content:'';
+  position:absolute;
+  width:280px;height:280px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(43,181,165,.12) 0%,transparent 70%);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  animation:pulse 3s ease-in-out infinite .5s;
+}
+
+@keyframes pulse{
+  0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1;}
+  50%{transform:translate(-50%,-50%) scale(1.08);opacity:.7;}
+}
+
+/* Outer ring */
+.ring{
+  position:absolute;
+  border-radius:50%;
+  border:1.5px solid rgba(43,181,165,.15);
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  animation:ringPulse 4s ease-in-out infinite;
+}
+.ring-1{width:500px;height:500px;animation-delay:0s;}
+.ring-2{width:600px;height:600px;animation-delay:.6s;border-color:rgba(43,181,165,.08);}
+.ring-3{width:700px;height:700px;animation-delay:1.2s;border-color:rgba(43,181,165,.04);}
+@keyframes ringPulse{
+  0%,100%{opacity:1;transform:translate(-50%,-50%) scale(1);}
+  50%{opacity:.4;transform:translate(-50%,-50%) scale(1.04);}
+}
+
+/* Center card */
+.coming-card{
+  position:relative;z-index:2;
+  background:#f5ebe0;
+  border-radius:28px;
+  padding:52px 64px;
+  box-shadow:
+    8px 8px 30px rgba(0,0,0,.1),
+    -4px -4px 14px rgba(255,255,255,.9),
+    0 0 0 1px rgba(255,255,255,.6) inset;
+  text-align:center;
+  animation:cardIn .8s cubic-bezier(.34,1.56,.64,1) both;
+}
+@keyframes cardIn{
+  from{opacity:0;transform:translateY(30px) scale(.93);}
+  to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+/* Icon */
+.coming-icon-wrap{
+  width:76px;height:76px;border-radius:20px;
+  background:linear-gradient(145deg,#33c4b3,#1e9d8e);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  box-shadow:4px 4px 16px rgba(43,181,165,.35),-2px -2px 8px rgba(255,255,255,.5);
+  animation:iconFloat 3s ease-in-out infinite;
+}
+@keyframes iconFloat{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-6px);}
+}
+.coming-icon-wrap svg{
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,.15));
+}
+
+/* Badge */
+.coming-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#e3d5ca;
+  border-radius:30px;
+  padding:5px 16px;
+  font-size:11px;font-weight:700;
+  color:#8a7060;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  margin-bottom:20px;
+  box-shadow:2px 2px 6px rgba(0,0,0,.07),-1px -1px 3px rgba(255,255,255,.7);
+}
+.coming-badge-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:#2bb5a5;
+  animation:blink 1.4s ease-in-out infinite;
+}
+@keyframes blink{
+  0%,100%{opacity:1;}50%{opacity:.2;}
+}
+
+/* Title */
+.coming-title{
+  font-size:48px;font-weight:900;
+  color:#3a2010;
+  line-height:1;
+  letter-spacing:-.02em;
+  margin-bottom:10px;
+  font-family:'Nunito',sans-serif;
+}
+.coming-title span{
+  background:linear-gradient(135deg,#2bb5a5,#1e9d8e);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+
+/* Sub */
+.coming-sub{
+  font-size:14px;font-weight:600;
+  color:#9a8878;
+  margin-bottom:36px;
+  line-height:1.6;
+}
+
+/* Progress bar */
+.prog-wrap{
+  background:#e3d5ca;
+  border-radius:30px;
+  height:8px;
+  width:320px;
+  margin:0 auto 12px;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,.1),inset -1px -1px 3px rgba(255,255,255,.7);
+  overflow:hidden;
+}
+.prog-bar{
+  height:100%;
+  width:0%;
+  border-radius:30px;
+  background:linear-gradient(90deg,#2bb5a5,#33c4b3,#25e0cc);
+  background-size:200% 100%;
+  animation:fillBar 2.5s cubic-bezier(.4,0,.2,1) 0.4s forwards, shimmer 2s linear infinite 3s;
+  box-shadow:0 0 12px rgba(43,181,165,.4);
+}
+@keyframes fillBar{
+  from{width:0%;}to{width:72%;}
+}
+@keyframes shimmer{
+  from{background-position:100% 0;}to{background-position:-100% 0;}
+}
+.prog-label{
+  font-size:11px;font-weight:700;
+  color:#b8a898;
+  letter-spacing:.04em;
+  animation:labelIn 1s ease .6s both;
+}
+@keyframes labelIn{
+  from{opacity:0;}to{opacity:1;}
+}
+
+/* Dots loader */
+.dots-row{
+  display:flex;gap:8px;
+  margin-top:28px;
+  justify-content:center;
+}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#d5bdaf;
+  animation:dotBounce 1.4s ease-in-out infinite;
+}
+.dot:nth-child(1){animation-delay:0s;}
+.dot:nth-child(2){animation-delay:.2s;}
+.dot:nth-child(3){animation-delay:.4s;}
+@keyframes dotBounce{
+  0%,80%,100%{transform:scale(.8);background:#d5bdaf;}
+  40%{transform:scale(1.3);background:#2bb5a5;}
+}
+
+/* Corner decorations */
+.corner-tag{
+  position:absolute;
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px;font-weight:500;
+  color:#c5b5a5;
+  opacity:.5;
+}
+.corner-tag.tl{top:24px;left:24px;}
+.corner-tag.br{bottom:24px;right:24px;}
+
+/* Floating mini cards */
+.float-card{
+  position:absolute;
+  z-index:1;
+  background:#f5ebe0;
+  border-radius:14px;
+  padding:10px 14px;
+  display:flex;align-items:center;gap:8px;
+  box-shadow:4px 4px 14px rgba(0,0,0,.09),-2px -2px 7px rgba(255,255,255,.85);
+  font-size:11px;font-weight:700;color:#7a6050;
+  opacity:0;
+  animation:floatCardIn .7s ease forwards;
+}
+.float-card:nth-child(1){
+  top:120px;left:60px;
+  animation-delay:.9s;
+  animation-name:floatCardIn, floatA;
+  animation-duration:.7s, 5s;
+  animation-timing-function:ease, ease-in-out;
+  animation-fill-mode:forwards, none;
+  animation-delay:.9s, 1.6s;
+  animation-iteration-count:1, infinite;
+}
+.float-card:nth-child(2){
+  bottom:130px;right:50px;
+  animation-delay:1.1s;
+  animation-name:floatCardIn, floatB;
+  animation-duration:.7s, 5s;
+  animation-timing-function:ease, ease-in-out;
+  animation-fill-mode:forwards, none;
+  animation-delay:1.1s, 1.8s;
+  animation-iteration-count:1, infinite;
+}
+.float-card:nth-child(3){
+  top:150px;right:55px;
+  animation-delay:1.3s;
+  animation-name:floatCardIn, floatA;
+  animation-duration:.7s, 6s;
+  animation-timing-function:ease, ease-in-out;
+  animation-fill-mode:forwards, none;
+  animation-delay:1.3s, 2s;
+  animation-iteration-count:1, infinite;
+}
+@keyframes floatCardIn{
+  from{opacity:0;transform:translateY(12px);}
+  to{opacity:1;transform:translateY(0);}
+}
+@keyframes floatA{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-8px);}
+}
+@keyframes floatB{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(8px);}
+}
+.fc-color{
+  width:10px;height:10px;border-radius:4px;
+  flex-shrink:0;
+}
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- SIDEBAR -->
+  <div class="left">
+    <div class="left-logo">
+      <div class="left-logo-icon">🎬</div>
+      <div>
+        <div class="left-logo-text">CG Loiha</div>
+        <div class="left-logo-sub">Paneli</div>
+      </div>
+    </div>
+
+    <!-- Ghost menu items -->
+    <div class="tc"><div class="tc-dot"></div><div class="tc-name">Loyihalar</div><div class="tc-badge">—</div></div>
+    <div class="tc"><div class="tc-dot"></div><div class="tc-name">Render</div><div class="tc-badge">—</div></div>
+    <div class="tc"><div class="tc-dot"></div><div class="tc-name">Asset kutubxona</div><div class="tc-badge">—</div></div>
+    <div class="tc"><div class="tc-dot"></div><div class="tc-name">Timeline</div><div class="tc-badge">—</div></div>
+    <div class="tc"><div class="tc-dot"></div><div class="tc-name">Komanda</div><div class="tc-badge">—</div></div>
+    <div class="tc"><div class="tc-dot"></div><div class="tc-name">Hisobotlar</div><div class="tc-badge">—</div></div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <a href="launcher.html" style="
+        display:flex;align-items:center;gap:7px;
+        background:#e3d5ca;
+        border-radius:11px;
+        padding:7px 14px;
+        font-size:12px;font-weight:700;color:#6a5040;
+        text-decoration:none;
+        box-shadow:2px 2px 6px rgba(0,0,0,.09),-1px -1px 3px rgba(255,255,255,.75);
+        transition:all .18s;
+        flex-shrink:0;
+      " onmouseover="this.style.background='#d5bdaf'" onmouseout="this.style.background='#e3d5ca'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6a5040" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Orqaga
+      </a>
+      <div class="tb-title" style="margin-left:10px;">CG Loiha Paneli</div>
+      <div class="tb-spacer"></div>
+      <div class="tb-dot"></div>
+      <div class="tb-dot"></div>
+      <div class="tb-dot"></div>
+    </div>
+
+    <!-- COMING SOON CONTENT -->
+    <div class="content">
+
+      <!-- Rings -->
+      <div class="ring ring-1"></div>
+      <div class="ring ring-2"></div>
+      <div class="ring ring-3"></div>
+
+      <!-- Floating cards -->
+      <div class="float-card">
+        <div class="fc-color" style="background:#2bb5a5;"></div>
+        3D Modellar
+      </div>
+      <div class="float-card">
+        <div class="fc-color" style="background:#e8a87c;"></div>
+        Render navbati
+      </div>
+      <div class="float-card">
+        <div class="fc-color" style="background:#9b89c4;"></div>
+        VFX Assets
+      </div>
+
+      <!-- Corner tags -->
+      <div class="corner-tag tl">// CG_PANEL v1.0</div>
+      <div class="corner-tag br">© 2025 Studio</div>
+
+      <!-- Main card -->
+      <div class="coming-card">
+
+        <div class="coming-icon-wrap">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+
+        <div class="coming-badge">
+          <div class="coming-badge-dot"></div>
+          Ishlab chiqilmoqda
+        </div>
+
+        <div class="coming-title">Tez<br><span>Orada!</span></div>
+
+        <div class="coming-sub">
+          CG loiha paneli to'liq funksionalligi<br>
+          yaratilmoqda. Kuting!
+        </div>
+
+        <div class="prog-wrap">
+          <div class="prog-bar"></div>
+        </div>
+        <div class="prog-label">72% tayyor</div>
+
+        <div class="dots-row">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

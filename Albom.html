@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albom</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F5F2ED;--ink:#1C1C1C;--mute:#888;--accent:#8B6F47;--line:rgba(0,0,0,.1);--danger:#C0392B}
+body{background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif;font-weight:300;min-height:100vh}
+
+/* TOPBAR */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(245,242,237,.97);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);padding:0 2rem;height:58px;
+  display:flex;align-items:center;gap:1rem}
+.logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;
+  white-space:nowrap;cursor:pointer;border-bottom:1px dashed transparent;
+  transition:border-color .2s;padding-bottom:1px}
+.logo:hover{border-color:var(--accent)}
+.filters{display:flex;gap:.4rem;overflow-x:auto;flex:1;padding:0 .5rem}
+.filters::-webkit-scrollbar{display:none}
+.fb{background:none;border:1px solid var(--line);cursor:pointer;font-family:'Jost',sans-serif;
+  font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);
+  padding:.28rem .75rem;white-space:nowrap;transition:all .18s;border-radius:2px}
+.fb.on,.fb:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+.acts{display:flex;gap:.45rem;flex-shrink:0}
+.btn{display:inline-flex;align-items:center;gap:.35rem;border:none;cursor:pointer;
+  font-family:'Jost',sans-serif;font-size:.75rem;font-weight:500;
+  padding:.44rem .9rem;transition:opacity .2s;border-radius:2px;white-space:nowrap}
+.ba{background:var(--accent);color:#fff}.be{background:var(--ink);color:#fff}
+.bd{background:var(--danger);color:#fff}.bm{background:rgba(0,0,0,.08);color:var(--ink)}
+.bg{background:rgba(0,0,0,.07);color:var(--ink)}
+.btn:hover{opacity:.82}
+
+/* COVER */
+.cover{padding:4rem 2.5rem 3rem;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap}
+.cover-title{font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem,9vw,7.5rem);font-weight:600;line-height:.9;letter-spacing:-.02em;
+  cursor:pointer;border-bottom:2px dashed transparent;transition:border-color .2s;padding-bottom:4px}
+.cover-title:hover{border-color:var(--accent)}
+.cover-r{text-align:right}
+.bign{font-family:'Cormorant Garamond',serif;font-size:5rem;font-weight:600;
+  color:rgba(0,0,0,.05);line-height:1;margin-bottom:.4rem}
+.csub{font-size:.85rem;color:var(--mute);max-width:240px;line-height:1.65;text-align:right}
+
+/* GALLERY */
+.gallery{padding:2.5rem 2.5rem 6rem;columns:3;column-gap:1.3rem}
+.card{break-inside:avoid;margin-bottom:1.3rem;background:#fff;overflow:hidden;
+  cursor:pointer;position:relative;transition:transform .3s,box-shadow .3s;
+  opacity:0;transform:translateY(14px)}
+.card.vis{opacity:1;transform:none;transition:opacity .4s ease,transform .4s ease,box-shadow .3s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 32px rgba(0,0,0,.1)}
+.thumb{width:100%;overflow:hidden;background:#e0dbd4;position:relative}
+.thumb img,.thumb video{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+.card:hover .thumb img,.card:hover .thumb video{transform:scale(1.04)}
+.card.rs .thumb{aspect-ratio:4/3}.card.rt .thumb{aspect-ratio:3/4}
+.card.rw .thumb{aspect-ratio:16/9}.card.rq .thumb{aspect-ratio:1/1}
+.mcnt{position:absolute;bottom:.5rem;right:.5rem;background:rgba(0,0,0,.52);color:#fff;
+  font-size:.65rem;padding:.16rem .45rem;display:flex;align-items:center;gap:.2rem;
+  backdrop-filter:blur(4px);border-radius:2px}
+.vplay{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.48);
+  display:flex;align-items:center;justify-content:center;pointer-events:none}
+.cnum{position:absolute;top:.6rem;left:.6rem;background:var(--accent);color:#fff;
+  font-size:.63rem;letter-spacing:.06em;padding:.16rem .45rem}
+.cbody{padding:.9rem 1rem 1.1rem}
+.ccat{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.28rem}
+.ctitle{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;line-height:1.2;margin-bottom:.18rem}
+.cmeta{font-size:.73rem;color:var(--mute)}
+
+/* edit mode overlay buttons */
+.card-actions{position:absolute;top:.5rem;right:.5rem;display:none;gap:.3rem;z-index:5}
+body.em .card-actions{display:flex}
+body.em .card{outline:2px dashed rgba(192,57,43,.25)}
+.cact{width:28px;height:28px;border-radius:50%;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:.75rem;transition:opacity .2s}
+.cact:hover{opacity:.85}
+.cact-edit{background:var(--ink);color:#fff}
+.cact-del{background:var(--danger);color:#fff}
+
+/* EMPTY */
+.empty{text-align:center;padding:5rem 2rem;color:var(--mute);display:none}
+.empty svg{opacity:.18;margin:0 auto 1rem;display:block}
+.empty h3{font-family:'Cormorant Garamond',serif;font-size:1.7rem;color:var(--ink);margin-bottom:.4rem}
+
+/* LIGHTBOX */
+.lb{display:none;position:fixed;inset:0;z-index:300;background:rgba(8,8,8,.97);flex-direction:column}
+.lb.open{display:flex}
+.lbtop{display:flex;align-items:center;justify-content:space-between;
+  padding:.9rem 1.8rem;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.lbtl{display:flex;flex-direction:column;gap:.15rem}
+.lbcat{font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lbtitle{font-family:'Cormorant Garamond',serif;font-size:1.25rem;color:#fff}
+.lbx{background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);
+  font-size:1.5rem;line-height:1;padding:.1rem .5rem;transition:color .2s}
+.lbx:hover{color:#fff}
+.lbbody{display:flex;flex:1;overflow:hidden;min-height:0}
+.lbview{flex:1;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;background:#030303;cursor:zoom-in}
+.lbview.panning{cursor:grab}.lbview.panning:active{cursor:grabbing}
+.lbview img{max-width:100%;max-height:calc(100vh - 160px);object-fit:contain;display:block;
+  transform-origin:center center;transition:transform .22s ease;
+  user-select:none;-webkit-user-drag:none;pointer-events:none}
+.lbview video{max-width:100%;max-height:calc(100vh - 160px);display:block;outline:none}
+.lbview .nomedia{color:rgba(255,255,255,.15);font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;text-align:center;padding:3rem;pointer-events:none}
+.arr{position:absolute;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.07);border:none;cursor:pointer;color:#fff;
+  width:42px;height:56px;font-size:1.1rem;display:flex;align-items:center;
+  justify-content:center;transition:background .2s;z-index:4}
+.arr:hover{background:rgba(255,255,255,.15)}
+.arrl{left:0;border-radius:0 3px 3px 0}.arrr{right:0;border-radius:3px 0 0 3px}
+.mctr{position:absolute;bottom:.75rem;left:50%;transform:translateX(-50%);
+  background:rgba(0,0,0,.5);color:#fff;font-size:.7rem;
+  padding:.2rem .65rem;border-radius:20px;pointer-events:none;z-index:3}
+/* zoom bar */
+.zbar{position:absolute;top:.8rem;right:.8rem;display:flex;align-items:center;gap:.3rem;
+  background:rgba(0,0,0,.6);padding:.3rem .5rem;border-radius:30px;backdrop-filter:blur(8px);
+  z-index:5;opacity:0;transition:opacity .22s}
+.lbview:hover .zbar{opacity:1}
+.zbar button{background:rgba(255,255,255,.08);border:none;cursor:pointer;color:#fff;
+  width:26px;height:26px;font-size:1rem;display:flex;align-items:center;
+  justify-content:center;border-radius:50%;transition:background .15s;flex-shrink:0}
+.zbar button:hover{background:rgba(255,255,255,.2)}
+.zlvl{font-size:.7rem;color:rgba(255,255,255,.7);min-width:36px;text-align:center}
+.zrst{font-size:.62rem;padding:0 .3rem!important;width:auto!important;border-radius:3px!important}
+/* sidebar */
+.lbside{width:300px;flex-shrink:0;border-left:1px solid rgba(255,255,255,.07);
+  display:flex;flex-direction:column;overflow:hidden}
+.lbinf{padding:1.3rem;flex:1;overflow-y:auto}
+.lbinf::-webkit-scrollbar{width:3px}
+.lbinf::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px}
+.il{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:.28rem}
+.iv{color:rgba(255,255,255,.78);font-size:.85rem;line-height:1.55;margin-bottom:1rem}
+.iv.big{font-family:'Cormorant Garamond',serif;font-size:1.35rem;color:#fff;line-height:1.15}
+.itags{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:1rem}
+.itag{font-size:.68rem;padding:.2rem .5rem;border:1px solid rgba(255,255,255,.14);color:rgba(255,255,255,.4)}
+.strip{padding:.65rem;border-top:1px solid rgba(255,255,255,.07);
+  display:flex;gap:.4rem;overflow-x:auto;flex-shrink:0;min-height:74px;align-items:center}
+.strip::-webkit-scrollbar{height:3px}
+.strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.18);border-radius:2px}
+.simg{width:54px;height:54px;flex-shrink:0;cursor:pointer;object-fit:cover;
+  opacity:.45;border:2px solid transparent;border-radius:2px;transition:opacity .2s}
+.simg.on,.simg:hover{opacity:1;border-color:var(--accent)}
+.svid{width:54px;height:54px;flex-shrink:0;cursor:pointer;border:2px solid transparent;
+  border-radius:2px;background:#1a1a1a;display:flex;align-items:center;
+  justify-content:center;opacity:.45;transition:opacity .2s}
+.svid.on,.svid:hover{opacity:1;border-color:var(--accent)}
+.sadd{width:54px;height:54px;flex-shrink:0;border:2px dashed rgba(255,255,255,.18);
+  background:none;cursor:pointer;color:rgba(255,255,255,.35);font-size:1.4rem;
+  display:flex;align-items:center;justify-content:center;transition:all .2s;border-radius:2px}
+.sadd:hover{border-color:var(--accent);color:var(--accent)}
+.lbbtns{padding:.65rem 1.1rem;border-top:1px solid rgba(255,255,255,.07);
+  display:flex;gap:.45rem;justify-content:flex-end;flex-shrink:0}
+
+/* OVERLAYS */
+.ov{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.55);
+  align-items:center;justify-content:center;padding:1rem}
+.ov.open{display:flex}
+.modal{background:var(--bg);width:100%;max-width:540px;padding:2rem;
+  position:relative;max-height:92vh;overflow-y:auto;border-radius:2px}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-weight:600;margin-bottom:1.5rem}
+.f{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1rem}
+.f label{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.f input,.f select,.f textarea{border:1px solid var(--line);background:#fff;
+  padding:.62rem .82rem;font-family:'Jost',sans-serif;font-size:.86rem;color:var(--ink);
+  outline:none;resize:none;transition:border-color .18s;border-radius:2px}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--accent)}
+.f textarea{height:80px}
+.dz{border:2px dashed var(--line);padding:1.5rem;text-align:center;
+  cursor:pointer;transition:all .18s;border-radius:2px;background:#faf9f7}
+.dz:hover,.dz.drag{border-color:var(--accent);background:#fdf9f4}
+.dz p{font-size:.8rem;color:var(--mute);margin-top:.3rem}
+.dzsub{font-size:.7rem;opacity:.55}
+.lf{font-size:.78rem;color:var(--accent);margin-top:.45rem;display:none}
+.prevs{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.65rem}
+.pv{position:relative;width:70px;height:70px;background:#e8e0d8;border-radius:2px;overflow:hidden}
+.pv img,.pv video{width:100%;height:100%;object-fit:cover;display:block}
+.pv .rm{position:absolute;top:2px;right:2px;background:var(--danger);color:#fff;
+  border:none;cursor:pointer;width:17px;height:17px;border-radius:50%;font-size:10px;
+  display:flex;align-items:center;justify-content:center}
+.pv .vb{position:absolute;bottom:2px;left:2px;background:rgba(0,0,0,.6);color:#fff;
+  font-size:8px;padding:1px 3px;border-radius:1px}
+.mfoot{display:flex;gap:.45rem;justify-content:flex-end;margin-top:1.3rem}
+.mcls{position:absolute;top:.85rem;right:.85rem;background:none;border:none;
+  cursor:pointer;font-size:1.2rem;color:var(--mute);transition:color .2s}
+.mcls:hover{color:var(--ink)}
+
+/* CATEGORY MANAGER */
+.catmgr{max-width:460px}
+.catmgr .catlist{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.2rem;max-height:280px;overflow-y:auto}
+.catrow{display:flex;align-items:center;gap:.5rem;padding:.5rem .7rem;background:#fff;
+  border:1px solid var(--line);border-radius:2px}
+.catrow .drag-handle{cursor:grab;color:var(--mute);font-size:.9rem;flex-shrink:0}
+.catrow input{flex:1;border:none;background:none;font-family:'Jost',sans-serif;
+  font-size:.88rem;color:var(--ink);outline:none;padding:0}
+.catrow .rmc{background:none;border:none;cursor:pointer;color:var(--mute);font-size:.85rem;
+  width:22px;height:22px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;transition:all .15s;flex-shrink:0}
+.catrow .rmc:hover{background:var(--danger);color:#fff}
+.add-cat-row{display:flex;gap:.5rem;margin-bottom:.5rem}
+.add-cat-row input{flex:1;border:1px solid var(--line);background:#fff;
+  padding:.55rem .75rem;font-family:'Jost',sans-serif;font-size:.85rem;
+  color:var(--ink);outline:none;border-radius:2px}
+.add-cat-row input:focus{border-color:var(--accent)}
+
+/* TITLE EDIT inline */
+.title-edit-wrap{display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem}
+.title-edit-wrap input{font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  border:none;border-bottom:2px solid var(--accent);background:none;
+  outline:none;color:var(--ink);width:100%}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%) translateY(80px);
+  background:var(--ink);color:#fff;padding:.55rem 1.3rem;font-size:.8rem;
+  border-radius:2px;z-index:600;transition:transform .28s ease;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+@media(max-width:900px){.gallery{columns:2}.lbside{width:240px}}
+@media(max-width:600px){
+  .topbar{padding:0 1rem}.gallery{columns:1;padding:1.5rem 1rem 5rem}
+  .cover{padding:3rem 1.5rem 2.5rem}.lbside{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="logo" id="siteLogo" onclick="openTitleEdit()">Ijodlarim</div>
+  <div class="filters" id="filters"></div>
+  <div class="acts">
+    <button class="btn bg" onclick="openCatMgr()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      Bo'limlar
+    </button>
+    <button class="btn ba" onclick="openAdd()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Qo'shish
+    </button>
+    <button class="btn be" id="eBtn" onclick="toggleEdit()">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+      Tahrirlash
+    </button>
+  </div>
+</div>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-title" id="coverTitle" onclick="openTitleEdit()">Ijodlarim</div>
+  <div class="cover-r">
+    <div class="bign" id="bigN">0</div>
+    <p class="csub">Interyer dizayn loyihalari. Rasm va videolarni ko'rish uchun bosing.</p>
+  </div>
+</div>
+
+<div class="gallery" id="gallery"></div>
+<div class="empty" id="empty">
+  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+  <h3>Loyiha yo'q</h3>
+  <p>"Qo'shish" tugmasini bosib loyiha qo'shing.</p>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <div class="lbtop">
+    <div class="lbtl">
+      <div class="lbcat" id="lbCat"></div>
+      <div class="lbtitle" id="lbTitle"></div>
+    </div>
+    <button class="lbx" onclick="closeLb()">✕</button>
+  </div>
+  <div class="lbbody">
+    <div class="lbview" id="lbView">
+      <button class="arr arrl" onclick="shift(-1)">&#8592;</button>
+      <button class="arr arrr" onclick="shift(1)">&#8594;</button>
+      <div class="mctr" id="mctr"></div>
+      <div class="zbar" id="zbar">
+        <button onclick="zStep(-1)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <span class="zlvl" id="zLvl">100%</span>
+        <button onclick="zStep(1)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <button class="zrst" onclick="zReset()">↺</button>
+      </div>
+    </div>
+    <div class="lbside">
+      <div class="lbinf">
+        <div class="il">Loyiha</div><div class="iv big" id="siTitle"></div>
+        <div class="il">Kategoriya</div><div class="iv" id="siCat"></div>
+        <div class="il">Ma'lumot</div><div class="iv" id="siMeta"></div>
+        <div class="il">Tavsif</div><div class="iv" id="siDesc"></div>
+        <div class="il">Teglar</div><div class="itags" id="siTags"></div>
+      </div>
+      <div class="strip" id="strip"></div>
+      <div class="lbbtns">
+        <button class="btn be" style="font-size:.72rem;padding:.35rem .75rem" onclick="openEditFromLb()">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+          Tahrirlash
+        </button>
+        <button class="btn bd" style="font-size:.72rem;padding:.35rem .75rem" onclick="delP(curId)">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6"/></svg>
+          O'chirish
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECT MODAL -->
+<div class="ov" id="modal">
+  <div class="modal">
+    <button class="mcls" onclick="closeModal()">✕</button>
+    <h2 id="mHead">Yangi Loyiha</h2>
+    <div class="f"><label>Loyiha nomi *</label><input id="mName" placeholder="Skandinaviya Minimal"></div>
+    <div class="f">
+      <label>Kategoriya *</label>
+      <select id="mCat"><option value="">Tanlang...</option></select>
+    </div>
+    <div class="f"><label>Joylashuv / Yil / Maydon</label><input id="mMeta" placeholder="Toshkent · 2024 · 65 m²"></div>
+    <div class="f"><label>Tavsif</label><textarea id="mDesc" placeholder="Loyiha haqida..."></textarea></div>
+    <div class="f"><label>Teglar (vergul bilan)</label><input id="mTags" placeholder="Minimal, Oq, Zamonaviy"></div>
+    <div class="f">
+      <label>Rasmlar va Videolar</label>
+      <div class="dz" id="dz">
+        <input type="file" id="mFiles" multiple accept="image/*,video/*" style="display:none">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:.35;margin:0 auto;display:block">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17,8 12,3 7,8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <p>Bosing yoki suring</p><p class="dzsub">JPG · PNG · WebP · MP4 · MOV</p>
+      </div>
+      <div class="lf" id="lf">⏳ Yuklanmoqda...</div>
+      <div class="prevs" id="prevs"></div>
+    </div>
+    <div class="mfoot">
+      <button class="btn bm" onclick="closeModal()">Bekor</button>
+      <button class="btn ba" onclick="saveProject()">Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY MANAGER MODAL -->
+<div class="ov" id="catModal">
+  <div class="modal catmgr">
+    <button class="mcls" onclick="closeCatMgr()">✕</button>
+    <h2>Bo'limlarni boshqarish</h2>
+    <div class="catlist" id="catList"></div>
+    <div class="add-cat-row">
+      <input id="newCatInput" placeholder="Yangi bo'lim nomi..." onkeydown="if(event.key==='Enter')addCat()">
+      <button class="btn ba" onclick="addCat()">+ Qo'shish</button>
+    </div>
+    <div class="mfoot">
+      <button class="btn bm" onclick="closeCatMgr()">Yopish</button>
+      <button class="btn ba" onclick="saveCats()">Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<!-- TITLE EDIT MODAL -->
+<div class="ov" id="titleModal">
+  <div class="modal" style="max-width:400px">
+    <button class="mcls" onclick="closeTitleEdit()">✕</button>
+    <h2>Sarlavhani o'zgartirish</h2>
+    <div class="title-edit-wrap">
+      <input id="titleInput" placeholder="Ijodlarim" onkeydown="if(event.key==='Enter')saveTitleEdit()">
+    </div>
+    <div class="mfoot">
+      <button class="btn bm" onclick="closeTitleEdit()">Bekor</button>
+      <button class="btn ba" onclick="saveTitleEdit()">Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toastEl"></div>
+
+<script>
+// ═══════════════ DATA ═══════════════
+const media = {};
+let projects = [];
+let nextId   = 1;
+let siteTitle = 'Ijodlarim';
+let categories = ['Yashash Xonasi','Oshxona','Yotoqxona','Hammom','Ofis','Tijorat'];
+
+function saveMeta(){
+  try{
+    localStorage.setItem('alb7_p', JSON.stringify(projects));
+    localStorage.setItem('alb7_n', String(nextId));
+    localStorage.setItem('alb7_title', siteTitle);
+    localStorage.setItem('alb7_cats', JSON.stringify(categories));
+  }catch(e){}
+}
+function loadMeta(){
+  try{
+    const p=localStorage.getItem('alb7_p');
+    const n=localStorage.getItem('alb7_n');
+    const t=localStorage.getItem('alb7_title');
+    const c=localStorage.getItem('alb7_cats');
+    if(p) projects=JSON.parse(p);
+    if(n) nextId=parseInt(n)||1;
+    if(t) siteTitle=t;
+    if(c) categories=JSON.parse(c);
+    projects.forEach(p=>{ if(!media[p.id]) media[p.id]=[]; });
+  }catch(e){ projects=[]; }
+}
+
+function readFile(file){
+  return new Promise(res=>{
+    const r=new FileReader();
+    r.onload=e=>res(e.target.result);
+    r.readAsDataURL(file);
+  });
+}
+async function readFiles(files, onProg){
+  const out=[];
+  for(let i=0;i<files.length;i++){
+    const src=await readFile(files[i]);
+    out.push({type:files[i].type.startsWith('video')?'video':'image', src});
+    if(onProg) onProg(i+1,files.length);
+  }
+  return out;
+}
+
+// ═══════════════ STATE ═══════════════
+let activeFilt='all', curId=null, curMi=0, pendM=[], editId=null;
+let zScale=1, zTx=0, zTy=0;
+let isPanning=false, panStartX=0, panStartY=0, panTx=0, panTy=0;
+const Z_STEPS=[0.5,0.75,1,1.5,2,3,4,5];
+const RATIOS=['rs','rt','rw','rq'];
+const COLORS=[
+  ['#C8B99A','#8B9EA8'],['#2E6B7E','#4A8FA0'],['#E8C99A','#D4A96A'],
+  ['#2A2A2A','#3D3D3D'],['#A8C4CC','#7BA8B4'],['#B5956A','#8B7355'],
+  ['#4A7C59','#3D6649'],['#E8E0D8','#D0C4B8'],['#1C3A4A','#2E5A6E'],
+  ['#D4C5B0','#C0AA90'],['#5A3E2B','#7A5540'],['#6B8E9A','#4A7080'],
+];
+
+// ═══════════════ TITLE ═══════════════
+function updateTitleUI(){
+  document.getElementById('siteLogo').textContent = siteTitle;
+  document.getElementById('coverTitle').textContent = siteTitle;
+  document.title = siteTitle;
+}
+function openTitleEdit(){
+  document.getElementById('titleInput').value = siteTitle;
+  document.getElementById('titleModal').classList.add('open');
+  setTimeout(()=>document.getElementById('titleInput').focus(), 100);
+}
+function closeTitleEdit(){ document.getElementById('titleModal').classList.remove('open'); }
+function saveTitleEdit(){
+  const v=document.getElementById('titleInput').value.trim();
+  if(v){ siteTitle=v; updateTitleUI(); saveMeta(); toast('Sarlavha saqlandi ✓'); }
+  closeTitleEdit();
+}
+
+// ═══════════════ FILTERS ═══════════════
+function buildFilters(){
+  const el=document.getElementById('filters');
+  const cats=categories;
+  el.innerHTML=`<button class="fb on" data-cat="all">Barchasi</button>`
+    + cats.map(c=>`<button class="fb" data-cat="${c}">${c}</button>`).join('');
+  // reapply active filter
+  if(activeFilt!=='all'){
+    const valid=cats.includes(activeFilt);
+    if(!valid) activeFilt='all';
+  }
+  el.querySelectorAll('.fb').forEach(b=>{
+    if(b.dataset.cat===activeFilt) b.classList.add('on');
+    else b.classList.remove('on');
+  });
+}
+document.getElementById('filters').addEventListener('click',e=>{
+  const b=e.target.closest('.fb'); if(!b) return;
+  document.querySelectorAll('.fb').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); activeFilt=b.dataset.cat; render(activeFilt);
+});
+
+// ═══════════════ CATEGORY MANAGER ═══════════════
+let editCats=[];
+function openCatMgr(){
+  editCats=[...categories];
+  renderCatList();
+  document.getElementById('catModal').classList.add('open');
+}
+function closeCatMgr(){ document.getElementById('catModal').classList.remove('open'); }
+function renderCatList(){
+  const el=document.getElementById('catList');
+  el.innerHTML=editCats.map((c,i)=>`
+    <div class="catrow" draggable="true" data-i="${i}">
+      <span class="drag-handle">⠿</span>
+      <input value="${c}" onchange="editCats[${i}]=this.value">
+      <button class="rmc" onclick="editCats.splice(${i},1);renderCatList()">✕</button>
+    </div>`).join('');
+  // drag-to-reorder
+  let dragI=null;
+  el.querySelectorAll('.catrow').forEach(row=>{
+    row.addEventListener('dragstart',()=>{ dragI=parseInt(row.dataset.i); row.style.opacity='.4'; });
+    row.addEventListener('dragend',()=>{ row.style.opacity=''; dragI=null; });
+    row.addEventListener('dragover',e=>{ e.preventDefault(); });
+    row.addEventListener('drop',()=>{
+      if(dragI===null) return;
+      const toI=parseInt(row.dataset.i);
+      const moved=editCats.splice(dragI,1)[0];
+      editCats.splice(toI,0,moved);
+      renderCatList();
+    });
+  });
+}
+function addCat(){
+  const inp=document.getElementById('newCatInput');
+  const v=inp.value.trim(); if(!v) return;
+  if(!editCats.includes(v)){ editCats.push(v); renderCatList(); }
+  inp.value='';
+}
+function saveCats(){
+  categories=[...editCats];
+  saveMeta(); buildFilters();
+  // rebuild modal select
+  populateCatSelect();
+  closeCatMgr(); toast("Bo'limlar saqlandi ✓");
+}
+function populateCatSelect(){
+  const sel=document.getElementById('mCat');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">Tanlang...</option>'
+    +categories.map(c=>`<option${c===cur?' selected':''}>${c}</option>`).join('');
+}
+
+// ═══════════════ RENDER ═══════════════
+function render(fcat='all'){
+  const g=document.getElementById('gallery');
+  const em=document.getElementById('empty');
+  const list=fcat==='all'?projects:projects.filter(p=>p.cat===fcat);
+  document.getElementById('bigN').textContent=projects.length;
+
+  if(!list.length){ g.innerHTML=''; em.style.display='block'; return; }
+  em.style.display='none';
+
+  g.innerHTML=list.map((p)=>{
+    const ri=projects.indexOf(p);
+    const ratio=RATIOS[ri%RATIOS.length];
+    const col=COLORS[ri%COLORS.length];
+    const num=String(ri+1).padStart(2,'0');
+    const ms=media[p.id]||[];
+    const first=ms[0];
+    let thumbHTML;
+    if(first){
+      const badge=ms.length>1
+        ?`<div class="mcnt"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>${ms.length}</div>`:'';
+      if(first.type==='video'){
+        thumbHTML=`<div class="thumb"><video src="${first.src}" muted playsinline preload="metadata"></video><div class="vplay"><svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg></div>${badge}</div>`;
+      } else {
+        thumbHTML=`<div class="thumb"><img src="${first.src}" alt="${p.name}">${badge}</div>`;
+      }
+    } else {
+      thumbHTML=`<div class="thumb"><div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,${col[0]},${col[1]})"><span style="font-family:'Cormorant Garamond',serif;font-size:2.8rem;color:rgba(255,255,255,.1);font-weight:600">${num}</span></div></div>`;
+    }
+    return `<div class="card ${ratio}" onclick="openLb(${p.id})">
+      <span class="cnum">${num}</span>${thumbHTML}
+      <div class="cbody">
+        <div class="ccat">${p.cat}</div>
+        <div class="ctitle">${p.name}</div>
+        <div class="cmeta">${p.meta||''}</div>
+      </div>
+      <div class="card-actions">
+        <button class="cact cact-edit" onclick="event.stopPropagation();openEditById(${p.id})" title="Tahrirlash">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg>
+        </button>
+        <button class="cact cact-del" onclick="event.stopPropagation();delP(${p.id})" title="O'chirish">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3,6 5,6 21,6"/><path d="M19,6v14a2,2,0,0,1-2,2H7a2,2,0,0,1-2-2V6"/></svg>
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+
+  requestAnimationFrame(()=>{
+    document.querySelectorAll('.card').forEach((c,i)=>setTimeout(()=>c.classList.add('vis'),i*38));
+  });
+}
+
+// ═══════════════ EDIT MODE ═══════════════
+function toggleEdit(){
+  document.body.classList.toggle('em');
+  const b=document.getElementById('eBtn');
+  if(document.body.classList.contains('em')){
+    b.style.background='var(--danger)';
+    b.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20,6 9,17 4,12"/></svg> Tayyor';
+  } else {
+    b.style.background='var(--ink)';
+    b.innerHTML='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></svg> Tahrirlash';
+  }
+}
+
+// ═══════════════ ZOOM ═══════════════
+function applyZoom(noAnim){
+  const img=document.querySelector('#lbView img'); if(!img) return;
+  img.style.transition=noAnim?'none':'transform .22s ease';
+  img.style.transform=`translate(${zTx}px,${zTy}px) scale(${zScale})`;
+  document.getElementById('zLvl').textContent=Math.round(zScale*100)+'%';
+  document.getElementById('lbView').classList.toggle('panning',zScale>1);
+}
+function zStep(dir){
+  const ci=Z_STEPS.findIndex(s=>s>=zScale-.01);
+  let ni=Math.max(0,Math.min(ci+dir,Z_STEPS.length-1));
+  zScale=Z_STEPS[ni];
+  if(zScale===1){zTx=0;zTy=0;}
+  applyZoom();
+}
+function zReset(){ zScale=1;zTx=0;zTy=0; applyZoom(); }
+function resetZoom(){
+  zScale=1;zTx=0;zTy=0;
+  const img=document.querySelector('#lbView img');
+  if(img){img.style.transition='none';img.style.transform='';}
+  const v=document.getElementById('lbView');
+  if(v) v.classList.remove('panning');
+  const lv=document.getElementById('zLvl'); if(lv) lv.textContent='100%';
+}
+function setupZoom(){
+  const view=document.getElementById('lbView');
+  view.addEventListener('wheel',e=>{
+    if(!view.querySelector('img')) return;
+    e.preventDefault();
+    const ci=Z_STEPS.findIndex(s=>s>=zScale-.01);
+    let ni=Math.max(0,Math.min(ci+(e.deltaY<0?1:-1),Z_STEPS.length-1));
+    zScale=Z_STEPS[ni]; if(zScale===1){zTx=0;zTy=0;} applyZoom();
+  },{passive:false});
+  view.addEventListener('dblclick',e=>{
+    if(!view.querySelector('img')) return;
+    if(zScale===1){
+      const r=view.getBoundingClientRect();
+      zScale=2.5; zTx=-(e.clientX-r.left-r.width/2)*.7; zTy=-(e.clientY-r.top-r.height/2)*.7;
+    } else { zScale=1;zTx=0;zTy=0; }
+    applyZoom();
+  });
+  view.addEventListener('mousedown',e=>{
+    if(!view.querySelector('img')||zScale<=1) return;
+    if(e.target.closest('.arr,.zbar,.mctr')) return;
+    isPanning=true; panStartX=e.clientX; panStartY=e.clientY; panTx=zTx; panTy=zTy;
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove',e=>{
+    if(!isPanning) return;
+    zTx=panTx+(e.clientX-panStartX); zTy=panTy+(e.clientY-panStartY); applyZoom(true);
+  });
+  window.addEventListener('mouseup',()=>isPanning=false);
+  // touch
+  let t0=null,t1=null,initDist=0,initScale=1;
+  view.addEventListener('touchstart',e=>{
+    if(e.touches.length===1&&zScale>1){t0=e.touches[0];t1=null;panStartX=t0.clientX;panStartY=t0.clientY;panTx=zTx;panTy=zTy;}
+    else if(e.touches.length===2){t0=e.touches[0];t1=e.touches[1];initDist=Math.hypot(t1.clientX-t0.clientX,t1.clientY-t0.clientY);initScale=zScale;}
+    e.preventDefault();
+  },{passive:false});
+  view.addEventListener('touchmove',e=>{
+    if(e.touches.length===1&&zScale>1&&t0&&!t1){zTx=panTx+e.touches[0].clientX-panStartX;zTy=panTy+e.touches[0].clientY-panStartY;applyZoom(true);}
+    else if(e.touches.length===2&&t0&&t1){const d=Math.hypot(e.touches[1].clientX-e.touches[0].clientX,e.touches[1].clientY-e.touches[0].clientY);zScale=Math.max(.5,Math.min(5,initScale*(d/initDist)));if(zScale<=1){zTx=0;zTy=0;}applyZoom(true);}
+    e.preventDefault();
+  },{passive:false});
+  view.addEventListener('touchend',e=>{if(e.touches.length<2)t1=null;if(e.touches.length===0)t0=null;});
+}
+
+// ═══════════════ LIGHTBOX ═══════════════
+function openLb(id){
+  curId=id; curMi=0;
+  const p=projects.find(x=>x.id===id); if(!p) return;
+  document.getElementById('lbCat').textContent=p.cat;
+  document.getElementById('lbTitle').textContent=p.name;
+  document.getElementById('siTitle').textContent=p.name;
+  document.getElementById('siCat').textContent=p.cat;
+  document.getElementById('siMeta').textContent=p.meta||'—';
+  document.getElementById('siDesc').textContent=p.desc||'—';
+  document.getElementById('siTags').innerHTML=(p.tags||[]).map(t=>`<span class="itag">${t}</span>`).join('');
+  drawViewer(); drawStrip();
+  document.getElementById('lb').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLb(){
+  document.getElementById('lb').classList.remove('open');
+  document.body.style.overflow='';
+  document.querySelectorAll('#lbView video').forEach(v=>v.pause());
+  resetZoom();
+}
+
+function drawViewer(){
+  const view=document.getElementById('lbView');
+  view.querySelectorAll('img,video,.nomedia').forEach(el=>el.remove());
+  resetZoom();
+  const ms=media[curId]||[];
+  const zbar=document.getElementById('zbar');
+  if(!ms.length){
+    const d=document.createElement('div');d.className='nomedia';
+    d.textContent="Media yo'q — + tugmasini bosing";
+    view.insertBefore(d,view.querySelector('.arrr'));
+    document.getElementById('mctr').textContent='';
+    zbar.style.display='none'; return;
+  }
+  const m=ms[curMi];
+  document.getElementById('mctr').textContent=`${curMi+1} / ${ms.length}`;
+  if(m.type==='video'){
+    const el=document.createElement('video');
+    el.src=m.src; el.controls=true;
+    view.insertBefore(el,view.querySelector('.arrr'));
+    zbar.style.display='none';
+  } else {
+    const el=document.createElement('img'); el.src=m.src; el.alt='';
+    view.insertBefore(el,view.querySelector('.arrr'));
+    zbar.style.display='';
+  }
+}
+function drawStrip(){
+  const s=document.getElementById('strip'); s.innerHTML='';
+  const lbl=document.createElement('label'); lbl.className='sadd';
+  const inp=document.createElement('input');
+  inp.type='file'; inp.accept='image/*,video/*'; inp.multiple=true; inp.style.display='none';
+  inp.onchange=addMediaLb;
+  lbl.appendChild(inp); lbl.appendChild(document.createTextNode('+'));
+  s.appendChild(lbl);
+  (media[curId]||[]).forEach((m,mi)=>{
+    if(m.type==='video'){
+      const d=document.createElement('div');
+      d.className='svid'+(mi===curMi?' on':'');
+      d.innerHTML=`<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.7)" stroke-width="2"><polygon points="5,3 19,12 5,21"/></svg>`;
+      d.title="O'ng klik: o'chirish"; d.onclick=()=>goMi(mi);
+      d.oncontextmenu=e=>{e.preventDefault();delMedia(mi)};
+      s.appendChild(d);
+    } else {
+      const img=document.createElement('img');
+      img.src=m.src; img.className='simg'+(mi===curMi?' on':'');
+      img.title="O'ng klik: o'chirish"; img.onclick=()=>goMi(mi);
+      img.oncontextmenu=e=>{e.preventDefault();delMedia(mi)};
+      s.appendChild(img);
+    }
+  });
+}
+function goMi(mi){ curMi=mi; document.querySelectorAll('#lbView video').forEach(v=>v.pause()); drawViewer(); drawStrip(); }
+function shift(d){
+  const ms=media[curId]||[]; if(!ms.length) return;
+  curMi=(curMi+d+ms.length)%ms.length;
+  document.querySelectorAll('#lbView video').forEach(v=>v.pause());
+  drawViewer(); drawStrip();
+}
+async function addMediaLb(e){
+  const files=Array.from(e.target.files); if(!files.length) return;
+  toast('Yuklanmoqda...');
+  if(!media[curId]) media[curId]=[];
+  const loaded=await readFiles(files);
+  loaded.forEach(m=>media[curId].push(m));
+  curMi=media[curId].length-1;
+  drawViewer(); drawStrip(); render(activeFilt);
+  e.target.value=''; toast(`${files.length} ta media qo'shildi ✓`);
+}
+function delMedia(mi){
+  if(!confirm("Bu mediani o'chirasizmi?")) return;
+  media[curId].splice(mi,1);
+  if(curMi>=media[curId].length) curMi=Math.max(0,media[curId].length-1);
+  drawViewer(); drawStrip(); render(activeFilt); toast("Media o'chirildi");
+}
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('open')) return;
+  if(e.key==='Escape'){ if(zScale>1) zReset(); else closeLb(); }
+  if(e.key==='ArrowRight'&&zScale===1) shift(1);
+  if(e.key==='ArrowLeft'&&zScale===1)  shift(-1);
+  if(e.key==='+'||e.key==='=') zStep(1);
+  if(e.key==='-') zStep(-1);
+  if(e.key==='0') zReset();
+});
+
+// ═══════════════ MODAL ═══════════════
+function openAdd(){
+  editId=null; pendM=[];
+  document.getElementById('mHead').textContent='Yangi Loyiha';
+  ['mName','mMeta','mTags','mDesc'].forEach(id=>document.getElementById(id).value='');
+  populateCatSelect();
+  document.getElementById('mCat').value='';
+  document.getElementById('prevs').innerHTML='';
+  document.getElementById('lf').style.display='none';
+  document.getElementById('modal').classList.add('open');
+}
+
+function openEditById(id){
+  const p=projects.find(x=>x.id===id); if(!p) return;
+  editId=id; pendM=[];
+  document.getElementById('mHead').textContent='Loyihani Tahrirlash';
+  document.getElementById('mName').value=p.name||'';
+  populateCatSelect();
+  document.getElementById('mCat').value=p.cat||'';
+  document.getElementById('mMeta').value=p.meta||'';
+  document.getElementById('mDesc').value=p.desc||'';
+  document.getElementById('mTags').value=(p.tags||[]).join(', ');
+  document.getElementById('prevs').innerHTML='';
+  document.getElementById('lf').style.display='none';
+  document.getElementById('modal').classList.add('open');
+}
+
+function openEditFromLb(){ openEditById(curId); }
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+  editId=null; pendM=[];
+}
+
+document.getElementById('mFiles').addEventListener('change', async function(e){
+  const files=Array.from(e.target.files); if(!files.length) return;
+  const lf=document.getElementById('lf');
+  lf.style.display='block'; lf.textContent='⏳ Yuklanmoqda...';
+  const loaded=await readFiles(files,(d,t)=>{ lf.textContent=`⏳ ${d}/${t} yuklanmoqda...`; });
+  loaded.forEach(m=>pendM.push(m));
+  lf.style.display='none'; drawPrevs(); e.target.value='';
+});
+const dz=document.getElementById('dz');
+dz.onclick=()=>document.getElementById('mFiles').click();
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',async e=>{
+  e.preventDefault(); dz.classList.remove('drag');
+  const files=Array.from(e.dataTransfer.files).filter(f=>f.type.startsWith('image')||f.type.startsWith('video'));
+  if(!files.length) return;
+  const lf=document.getElementById('lf'); lf.style.display='block';
+  const loaded=await readFiles(files,(d,t)=>{ lf.textContent=`⏳ ${d}/${t}`; });
+  loaded.forEach(m=>pendM.push(m)); lf.style.display='none'; drawPrevs();
+});
+function drawPrevs(){
+  document.getElementById('prevs').innerHTML=pendM.map((m,i)=>`
+    <div class="pv">
+      ${m.type==='video'?`<video src="${m.src}" muted playsinline></video><div class="vb">video</div>`:`<img src="${m.src}" alt="">`}
+      <button class="rm" onclick="pendM.splice(${i},1);drawPrevs()">✕</button>
+    </div>`).join('');
+}
+function saveProject(){
+  const name=document.getElementById('mName').value.trim();
+  const cat=document.getElementById('mCat').value;
+  if(!name){ alert('Loyiha nomini kiriting'); return; }
+  if(!cat){  alert('Kategoriyani tanlang');   return; }
+  const tags=document.getElementById('mTags').value.split(',').map(t=>t.trim()).filter(Boolean);
+  const meta=document.getElementById('mMeta').value.trim();
+  const desc=document.getElementById('mDesc').value.trim();
+
+  if(editId!==null){
+    const p=projects.find(x=>x.id===editId);
+    Object.assign(p,{name,cat,meta,desc,tags});
+    if(!media[editId]) media[editId]=[];
+    pendM.forEach(m=>media[editId].push(m));
+    saveMeta();
+    if(document.getElementById('lb').classList.contains('open')){
+      document.getElementById('siTitle').textContent=name;
+      document.getElementById('siCat').textContent=cat;
+      document.getElementById('siMeta').textContent=meta||'—';
+      document.getElementById('siDesc').textContent=desc||'—';
+      document.getElementById('siTags').innerHTML=(tags||[]).map(t=>`<span class="itag">${t}</span>`).join('');
+      if(pendM.length){ curMi=media[editId].length-1; drawViewer(); drawStrip(); }
+    }
+    toast('Loyiha yangilandi ✓');
+  } else {
+    const id=nextId++;
+    const p={id,name,cat,meta,desc,tags};
+    projects.unshift(p); media[id]=[...pendM];
+    saveMeta(); toast("Loyiha qo'shildi ✓");
+  }
+  render(activeFilt); closeModal();
+}
+
+// ═══════════════ DELETE ═══════════════
+function delP(id){
+  const p=projects.find(x=>x.id===id);
+  if(!p||!confirm(`"${p.name}" o'chirilsinmi?`)) return;
+  delete media[id];
+  projects=projects.filter(x=>x.id!==id);
+  saveMeta();
+  if(document.getElementById('lb').classList.contains('open')&&curId===id) closeLb();
+  render(activeFilt); toast("Loyiha o'chirildi");
+}
+
+// ═══════════════ TOAST ═══════════════
+function toast(msg){
+  const t=document.getElementById('toastEl');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+// ═══════════════ INIT ═══════════════
+loadMeta();
+if(!projects.length){
+  const demos=[
+    {name:'Skandinaviya Minimal',    cat:'Yashash Xonasi',meta:'Toshkent · 2024 · 65 m²', desc:'Oq va yog\'och tonlarida qulay yashash xonasi.',tags:['Minimal','Oq']},
+    {name:'Ko\'k Sakin Yotoqxona',  cat:'Yotoqxona',      meta:'Samarqand · 2024 · 28 m²',desc:'Teran ko\'k ranglar va tabiiy to\'qimalar.',   tags:['Ko\'k','Tinch']},
+    {name:'Issiq Zamonaviy Oshxona',cat:'Oshxona',         meta:'Toshkent · 2024 · 22 m²', desc:'Oltin va yog\'och aksentlari.',                tags:['Zamonaviy','Issiq']},
+    {name:'Ijodiy Studiya Ofisi',   cat:'Ofis',            meta:'Toshkent · 2023 · 120 m²',desc:'Ochiq makonli ijodiy ofis.',                   tags:['Ijodiy','Ochiq']},
+    {name:'Spa Hammom',             cat:'Hammom',           meta:'Nukus · 2023 · 14 m²',    desc:'Yorug\' plitalar bilan spa hammom.',           tags:['Spa']},
+    {name:'Botanikal Kafe',         cat:'Tijorat',          meta:'Toshkent · 2023 · 80 m²', desc:'O\'simliklar bilan to\'ldirilgan kafe.',       tags:['Kafe','Yashil']},
+    {name:'Oq Klassik Oshxona',     cat:'Oshxona',          meta:'Namangan · 2023 · 18 m²', desc:'Vaqt sinovidan o\'tgan klassik oshxona.',     tags:['Klassik','Oq']},
+    {name:'Qora Marmar Hammom',     cat:'Hammom',           meta:'Toshkent · 2022 · 16 m²', desc:'Qora marmar va oltin aksentlar.',             tags:['Qora','Marmar']},
+    {name:'Luxury Restoran',        cat:'Tijorat',          meta:'Toshkent · 2022 · 200 m²',desc:'Premium restoran interyeri.',                 tags:['Restoran','Premium']},
+    {name:'Minimal Yotoqxona',      cat:'Yotoqxona',        meta:'Andijon · 2022 · 30 m²',  desc:'Qum rangi minimal yotoqxona.',                tags:['Minimal','Qum']},
+  ];
+  demos.forEach(d=>{ d.id=nextId++; projects.push(d); media[d.id]=[]; });
+  saveMeta();
+}
+updateTitleUI();
+buildFilters();
+populateCatSelect();
+render();
+setupZoom();
+</script>
+</body>
+</html>

@@ -1,0 +1,2071 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Life Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/*
+  PALITRA (Ishlar uslubi):
+  --p1: #edede9  (fon, ekran)
+  --p2: #d6ccc2  (sidebar, topbar)
+  --p3: #f5ebe0  (karta, modal)
+  --p4: #e3d5ca  (hover, field)
+  --p5: #d5bdaf  (aksent, badge)
+  --accent: #2bb5a5 (teal)
+*/
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+*:focus,*:focus-visible,*:focus-within{outline:none !important;box-shadow:none;}
+textarea:focus,input:focus,select:focus,button:focus{outline:none !important;}
+html,body{
+  width:100%;height:100%;
+  font-family:'Nunito',sans-serif;
+  background:#d6ccc2;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ── DARK MODE ── */
+body.dark{background:#0d1b2a;}
+body.dark .screen{background:#1b263b;box-shadow:0 24px 70px rgba(0,0,0,.55),inset 0 1px 0 rgba(119,141,169,.15);}
+body.dark .app{background:#162030;}
+body.dark .topbar{background:#162030;border-color:rgba(119,141,169,.12);}
+body.dark .search-outer{background:#1b263b;box-shadow:inset 2px 2px 5px rgba(0,0,0,.5),inset -1px -1px 3px rgba(119,141,169,.08);}
+body.dark .search-outer input{color:#e0e1dd;}
+body.dark .search-outer input::placeholder{color:#415a77;}
+body.dark .tb-date{color:#778da9;}
+body.dark .tb-time{color:#9aadbe;}
+body.dark .left{border-color:rgba(119,141,169,.1);}
+body.dark .left-title{color:#9aadbe;}
+body.dark .tc{background:#1b263b;box-shadow:2px 2px 6px rgba(0,0,0,.4),-1px -1px 3px rgba(119,141,169,.04);}
+body.dark .tc:hover{background:#243248;}
+body.dark .tc.active{background:linear-gradient(145deg,#33c4b3,#25a090);}
+body.dark .tc-name{color:#e0e1dd;}
+body.dark .tc.active .tc-name{color:#fff;}
+body.dark .tc-badge{background:#0d1b2a;color:#778da9;border-color:rgba(119,141,169,.15);}
+body.dark .tc.active .tc-badge{background:rgba(255,255,255,.15);color:#fff;}
+body.dark .tc-sub{color:#415a77;}
+body.dark .tc.active .tc-sub{color:rgba(255,255,255,.7);}
+body.dark .dh-title{color:#e0e1dd;}
+body.dark .dh-sub{color:#778da9;}
+body.dark .pill{background:#1b263b;color:#9aadbe;}
+body.dark .info-box{background:#1b263b;}
+body.dark .ib-title{color:#9aadbe;}
+body.dark .ib-field{background:#0d1b2a;color:#e0e1dd;box-shadow:inset 2px 2px 5px rgba(0,0,0,.55);}
+body.dark .ib-field::placeholder{color:#415a77;}
+body.dark .ib-tall{background:#0d1b2a;}
+body.dark .files-box{background:#1b263b;}
+body.dark .fc-head{background:#0d1b2a;color:#778da9;}
+body.dark .fc-file{background:#0d1b2a;color:#c8d5e0;}
+body.dark .modal-box{background:#1b263b;}
+body.dark .m-title{color:#e0e1dd;}
+body.dark .m-inp{background:#0d1b2a;color:#e0e1dd;}
+body.dark .m-inp::placeholder{color:#415a77;}
+body.dark .m-lbl{color:#778da9;}
+body.dark .m-cancel{background:#0d1b2a;color:#778da9;}
+body.dark .ctx-menu{background:#1b263b;box-shadow:4px 4px 22px rgba(0,0,0,.6);}
+body.dark .ctx-item{color:#c8d5e0;}
+body.dark .ctx-item:hover{background:rgba(119,141,169,.1);}
+body.dark .ctx-item.danger{color:#e06055;}
+body.dark .sb-btn{background:linear-gradient(145deg,#243248,#1b263b);box-shadow:4px 4px 10px rgba(0,0,0,.5),-2px -2px 6px rgba(119,141,169,.08);}
+body.dark .sb-btn.sb-active{background:linear-gradient(145deg,#33c4b3,#25a090);}
+body.dark .page-card{background:#1b263b;box-shadow:3px 3px 10px rgba(0,0,0,.45),-1px -1px 4px rgba(119,141,169,.06);}
+body.dark .task-item{background:#0d1b2a;color:#c8d5e0;box-shadow:1px 1px 5px rgba(0,0,0,.45);}
+body.dark .task-item.done{opacity:.5;}
+body.dark .task-item:hover{background:#1a2535;}
+body.dark .filter-btn{background:#1b263b;color:#778da9;}
+body.dark .filter-btn.active{background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;}
+body.dark .month-tab{background:#1b263b;color:#778da9;}
+body.dark .month-tab.active{background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;}
+body.dark .stat-card{background:#1b263b;color:#e0e1dd;}
+body.dark .stat-card.gold-card{background:linear-gradient(135deg,#b8832a,#d4a030);}
+body.dark .goal-card{background:#1b263b;}
+body.dark .habit-item{background:#1b263b;}
+body.dark .journal-entry{background:#1b263b;}
+body.dark .progress-bar-wrap{background:#243248;}
+body.dark .wm-day{background:#1b263b;}
+body.dark .wm-day.wm-today{background:var(--accent);}
+body.dark .add-inp{background:#0d1b2a;color:#e0e1dd;box-shadow:inset 2px 2px 5px rgba(0,0,0,.5);}
+body.dark .add-inp::placeholder{color:#415a77;}
+body.dark .add-sel{background:#0d1b2a;color:#e0e1dd;}
+body.dark .quote-block{background:#0d1b2a;}
+body.dark .vision-card{}
+body.dark .pomo-section{background:linear-gradient(135deg,#0a0806,#1a1008);}
+body.dark .pomo-ring-bg{stroke:rgba(255,255,255,.1)!important;}
+body.dark .ico-dark{stroke:#778da9;}
+
+/* ── OUTER SCREEN ── */
+.screen{
+  width:1380px;height:820px;
+  background:#edede9;
+  border-radius:26px;
+  display:flex;padding:12px 12px 12px 8px;
+  box-shadow:0 24px 70px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.45);
+  position:relative;z-index:1;
+}
+
+/* ── SIDEBAR (icon-only, Ishlar style) ── */
+.sidebar{
+  width:66px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:10px 0;gap:4px;flex-shrink:0;
+}
+.sb-btn{
+  width:50px;height:50px;border-radius:16px;
+  background:linear-gradient(145deg,#f0ece8,#d8cec6);
+  box-shadow:5px 5px 12px rgba(0,0,0,.14),-3px -3px 8px rgba(255,255,255,.7);
+  border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .18s;flex-shrink:0;font-size:18px;
+}
+.sb-btn:hover{box-shadow:2px 2px 6px rgba(0,0,0,.1),-1px -1px 4px rgba(255,255,255,.55);transform:scale(.97);}
+.sb-btn.sb-active{background:linear-gradient(145deg,#33c4b3,#25a090);box-shadow:4px 4px 10px rgba(0,0,0,.2),-2px -2px 6px rgba(255,255,255,.18);}
+.sb-btn .ico-sb{stroke:#8a7060;fill:none;stroke-width:1.65;stroke-linecap:round;stroke-linejoin:round;}
+.sb-btn.sb-active .ico-sb{stroke:rgba(255,255,255,.95);}
+.sb-spacer{height:8px;}
+.sb-badge{
+  position:absolute;top:-4px;right:-4px;
+  width:17px;height:17px;border-radius:50%;
+  background:#e04040;color:#fff;font-size:9px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Nunito',sans-serif;
+}
+.sb-btn-wrap{position:relative;}
+
+/* ── APP ── */
+.app{
+  flex:1;background:#f5ebe0;border-radius:20px;
+  display:flex;flex-direction:column;overflow:hidden;
+  transition:background .3s;position:relative;
+}
+
+/* ── TOPBAR ── */
+.topbar{
+  height:64px;background:#f5ebe0;display:flex;align-items:center;
+  padding:0 20px;flex-shrink:0;
+  border-bottom:1px solid rgba(0,0,0,.05);transition:background .3s;
+}
+.search-outer{
+  width:320px;height:42px;background:#edede9;border-radius:13px;
+  display:flex;align-items:center;padding:0 14px;gap:10px;
+  box-shadow:inset 2px 2px 5px rgba(0,0,0,.08),inset -1px -1px 3px rgba(255,255,255,.7);
+}
+.search-outer input{flex:1;background:transparent;border:none;outline:none;font-family:'Nunito',sans-serif;font-size:14px;color:#5a4838;}
+.search-outer input::placeholder{color:#b8a898;}
+.tb-datetime{margin-left:auto;display:flex;align-items:center;gap:14px;}
+.tb-date{font-size:17px;font-weight:700;color:#b06838;}
+.tb-time{font-size:17px;font-weight:700;color:#7a5e42;min-width:56px;font-family:'JetBrains Mono',monospace;}
+.tb-icons{display:flex;align-items:center;gap:8px;margin-left:14px;}
+.tbi{border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.tbi-round{width:38px;height:38px;border-radius:50%;background:linear-gradient(145deg,#33c4b3,#25a090);box-shadow:3px 3px 8px rgba(0,0,0,.2),-1px -1px 4px rgba(255,255,255,.18);}
+.tbi-round:hover{transform:scale(.94);}
+
+/* sun/moon toggle */
+.anim-toggle{cursor:pointer;user-select:none;flex-shrink:0;width:72px;height:36px;position:relative;}
+.anim-track{width:100%;height:100%;border-radius:18px;background:linear-gradient(135deg,#87ceeb,#b0dcf0);box-shadow:3px 3px 8px rgba(0,0,0,.18),-1px -1px 4px rgba(255,255,255,.5),inset 0 1px 3px rgba(0,0,0,.08);transition:background .8s ease;overflow:hidden;position:relative;}
+body.dark .anim-track{background:linear-gradient(135deg,#0d1b3e,#162540);box-shadow:3px 3px 8px rgba(0,0,0,.55),-1px -1px 4px rgba(119,141,169,.08),inset 0 1px 3px rgba(0,0,0,.3);}
+.anim-ts{position:absolute;background:white;border-radius:50%;opacity:0;transition:opacity .7s;}
+body.dark .anim-ts{opacity:1;}
+.anim-ts1{width:2px;height:2px;top:8px;left:18px;}.anim-ts2{width:1.5px;height:1.5px;top:18px;left:28px;}.anim-ts3{width:2px;height:2px;top:11px;left:33px;}
+.anim-knob{position:absolute;top:4px;left:4px;width:28px;height:28px;border-radius:50%;transition:transform .65s cubic-bezier(.34,1.56,.64,1);}
+body.dark .anim-knob{transform:translateX(36px);}
+.anim-sun{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff9c4,#FFD600 40%,#FF9800 100%);box-shadow:0 0 12px rgba(255,180,0,.7);transition:opacity .4s,transform .5s;opacity:1;transform:scale(1);}
+body.dark .anim-sun{opacity:0;transform:scale(.3);}
+.anim-moon{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 38% 38%,#f5f5e0,#d8d8b0 55%,#aaa880);box-shadow:0 0 12px rgba(200,200,140,.4);transition:opacity .4s,transform .5s;opacity:0;transform:scale(.3);}
+body.dark .anim-moon{opacity:1;transform:scale(1);}
+.anim-ray{position:absolute;top:50%;left:50%;width:3px;height:7px;margin-left:-1.5px;margin-top:-3.5px;background:#FFD600;border-radius:2px;transform-origin:center 17px;transition:opacity .4s;}
+body.dark .anim-ray{opacity:0;}
+.anim-moon-shadow{position:absolute;width:22px;height:22px;background:radial-gradient(circle at 40% 42%,#0d1b3e,transparent 65%);top:3px;left:-2px;border-radius:50%;opacity:.35;}
+.anim-crater{position:absolute;background:rgba(0,0,0,.09);border-radius:50%;}
+.anim-cr1{width:7px;height:7px;top:5px;left:4px;}.anim-cr2{width:5px;height:5px;top:16px;left:13px;}.anim-cr3{width:4px;height:4px;top:8px;left:16px;}
+
+/* topbar stat chips */
+.tb-stats{display:flex;align-items:center;gap:7px;margin-left:16px;flex-shrink:0;}
+.tb-stat{display:flex;align-items:center;gap:6px;background:#edede9;border-radius:11px;padding:5px 11px;box-shadow:2px 2px 6px rgba(0,0,0,.08),-1px -1px 3px rgba(255,255,255,.65);}
+.tb-stat-val{font-size:13px;font-weight:800;color:#3a2010;}
+.tb-stat-lbl{font-size:10px;font-weight:600;color:#9a8878;display:block;margin-top:1px;}
+.tb-stat-col{display:flex;flex-direction:column;}
+.tb-stat-sep{width:1px;height:22px;background:rgba(0,0,0,.08);margin:0 2px;}
+body.dark .tb-stat{background:#1b263b;}
+body.dark .tb-stat-val{color:#e0e1dd;}
+body.dark .tb-stat-lbl{color:#415a77;}
+body.dark .tb-stat-sep{background:rgba(119,141,169,.15);}
+
+/* ── LEFT PANEL ── */
+.body{flex:1;display:flex;overflow:hidden;position:relative;}
+.left{
+  width:270px;flex-shrink:0;padding:10px 10px;
+  display:flex;flex-direction:column;gap:3px;
+  overflow-y:auto;border-right:1px solid rgba(0,0,0,.05);
+}
+.left::-webkit-scrollbar{width:0;}
+.left-title{font-size:11px;font-weight:700;color:#5a4030;padding:6px 4px 2px;text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── RIGHT PANEL ── */
+.right{flex:1;min-width:0;padding:14px 18px 14px 14px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;}
+.right::-webkit-scrollbar{width:0;}
+
+/* ── NAV CARDS (tc) ── */
+.tc{
+  background:#edede9;border-radius:13px;padding:7px 12px;cursor:pointer;
+  border:1.5px solid transparent;
+  box-shadow:2px 2px 7px rgba(0,0,0,.08),-1px -1px 4px rgba(255,255,255,.7);
+  transition:all .15s;display:flex;flex-direction:column;gap:2px;
+}
+.tc:hover{background:#e3d5ca;}
+.tc.active{background:linear-gradient(145deg,#33c4b3,#25a090);box-shadow:2px 2px 8px rgba(43,181,165,.35);}
+.tc-row1{display:flex;align-items:center;justify-content:space-between;}
+.tc-left2{display:flex;align-items:center;gap:8px;min-width:0;flex:1;}
+.tc-dot{width:8px;height:8px;border-radius:50%;background:#2bb5a5;flex-shrink:0;}
+.tc.active .tc-dot{background:#fff;}
+.tc-name{font-size:13px;font-weight:800;color:#3a2810;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.tc.active .tc-name{color:#fff;}
+.tc-badge{font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:20px;background:#d6ccc2;color:#7a6858;border:1px solid rgba(0,0,0,.06);flex-shrink:0;}
+.tc.active .tc-badge{background:rgba(255,255,255,.2);color:#fff;border-color:transparent;}
+.tc-sub{font-size:10.5px;color:#9a8878;padding-left:16px;}
+.tc.active .tc-sub{color:rgba(255,255,255,.75);}
+.tc-icon{font-size:15px;flex-shrink:0;}
+
+/* section group label */
+.left-group-lbl{font-size:9.5px;font-weight:800;color:#b8a898;text-transform:uppercase;letter-spacing:.8px;padding:4px 4px 2px;margin-top:0;}
+
+/* ── DETAIL HEADER ── */
+.dh{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.dh-title{font-size:22px;font-weight:800;color:#2a1800;letter-spacing:.2px;}
+.dh-sub{font-size:12px;color:#9a7858;margin-top:2px;}
+.dh-right{display:flex;align-items:center;gap:9px;}
+
+/* ── PILL buttons ── */
+.pill{border-radius:22px;padding:8px 20px;background:#e3d5ca;border:none;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#7a6858;box-shadow:2px 2px 7px rgba(0,0,0,.09),-1px -1px 4px rgba(255,255,255,.6);cursor:pointer;}
+.pill:hover{background:#d5bdaf;}
+.pill-accent{background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;box-shadow:2px 2px 8px rgba(0,0,0,.18);}
+.pill-accent:hover{background:linear-gradient(145deg,#2eb8a8,#209080);}
+.pill-sm{padding:6px 14px;font-size:12px;}
+.pill-danger{background:#fce8e6;color:#c04030;}
+.pill-danger:hover{background:#f0d0cc;}
+
+/* ── PAGE CARDS ── */
+.page-card{background:#edede9;border-radius:16px;padding:16px 18px;box-shadow:3px 3px 12px rgba(0,0,0,.08),-1px -1px 5px rgba(255,255,255,.55);}
+
+/* ── ADD FORM ── */
+.add-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
+.add-inp{
+  flex:1;min-width:160px;background:#d6ccc2;border-radius:11px;padding:10px 13px;
+  font-size:13px;font-weight:600;color:#3a2810;border:none;outline:none;
+  font-family:'Nunito',sans-serif;
+  box-shadow:inset 1px 1px 4px rgba(0,0,0,.07),inset -1px -1px 3px rgba(255,255,255,.6);
+}
+.add-inp::placeholder{color:#b8a898;font-weight:400;}
+.add-inp:focus{box-shadow:inset 1px 1px 4px rgba(0,0,0,.09),0 0 0 2px rgba(43,181,165,.2);}
+.add-sel{
+  background:#d6ccc2;border-radius:11px;padding:10px 12px;
+  font-size:12px;font-weight:700;color:#3a2810;border:none;outline:none;
+  font-family:'Nunito',sans-serif;cursor:pointer;
+  box-shadow:inset 1px 1px 4px rgba(0,0,0,.07),inset -1px -1px 3px rgba(255,255,255,.6);
+}
+.add-sel:focus{box-shadow:inset 1px 1px 4px rgba(0,0,0,.09),0 0 0 2px rgba(43,181,165,.2);}
+
+/* ── TASK ITEMS ── */
+.task-item{
+  display:flex;align-items:center;gap:12px;padding:11px 14px;
+  background:#d6ccc2;border-radius:12px;cursor:pointer;
+  box-shadow:1px 1px 5px rgba(0,0,0,.07),-1px -1px 3px rgba(255,255,255,.6);
+  transition:all .15s;position:relative;overflow:hidden;
+}
+.task-item::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
+.task-item.p-yuqori::before{background:#e04040;}
+.task-item.p-orta::before{background:#c9943a;}
+.task-item.p-past::before{background:#3a9a5a;}
+.task-item:hover{box-shadow:2px 2px 9px rgba(0,0,0,.12);}
+.task-item.done .t-text{text-decoration:line-through;opacity:.55;}
+.task-item.done{opacity:.7;}
+.t-text{flex:1;font-size:13px;font-weight:600;color:#3a2810;}
+.check-circle{
+  width:22px;height:22px;border-radius:50%;border:2px solid #c0b0a0;
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:800;color:#2bb5a5;transition:all .15s;cursor:pointer;
+}
+.task-item.done .check-circle{background:#2bb5a5;border-color:#2bb5a5;color:#fff;}
+.t-del{width:22px;height:22px;border-radius:7px;border:none;background:transparent;cursor:pointer;color:#c0a898;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .12s;}
+.t-del:hover{background:rgba(192,64,48,.12);color:#c04030;}
+.t-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:20px;flex-shrink:0;}
+.b-yuqori{background:#fce8e8;color:#c04030;}
+.b-orta{background:#fdf0e0;color:#b07840;}
+.b-past{background:#e4f4e8;color:#3a8a4a;}
+
+/* ── PROGRESS BAR ── */
+.progress-bar-wrap{background:#d6ccc2;border-radius:100px;height:5px;overflow:hidden;margin-top:6px;box-shadow:inset 1px 1px 3px rgba(0,0,0,.08);}
+.progress-fill{height:100%;border-radius:100px;background:linear-gradient(90deg,#33c4b3,#2bb5a5);transition:width .6s cubic-bezier(.4,0,.2,1);}
+
+/* stats chips */
+.stats-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px;}
+.chip{background:#d6ccc2;border-radius:100px;padding:3px 10px;font-size:11px;color:#7a6858;border:1px solid rgba(0,0,0,.06);}
+.chip strong{color:#3a2810;}
+
+/* ── WEEK MINI ── */
+.week-mini{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:4px;}
+.wm-day{background:#d6ccc2;border-radius:10px;padding:8px 4px;text-align:center;cursor:pointer;border:1.5px solid transparent;transition:all .15s;box-shadow:1px 1px 4px rgba(0,0,0,.06),-1px -1px 2px rgba(255,255,255,.6);}
+.wm-day:hover{border-color:#2bb5a5;}
+.wm-day.wm-today{background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;}
+.wm-day.wm-today .wm-name{color:rgba(255,255,255,.8);}
+.wm-day.wm-sel{border-color:#5a4030;background:#c8b8a8;}
+.wm-name{font-size:.57rem;color:#9a8878;font-weight:700;text-transform:uppercase;letter-spacing:.04em;}
+.wm-today .wm-name{color:rgba(255,255,255,.8);}
+.wm-num{font-size:1.1rem;font-weight:800;margin:1px 0;color:#3a2810;}
+.wm-today .wm-num{color:#fff;}
+.wm-dot{width:4px;height:4px;border-radius:50%;background:#e04040;margin:2px auto 0;opacity:0;}
+.wm-day.wm-has .wm-dot{opacity:1;}
+
+/* ── FILTER BUTTONS ── */
+.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.filter-btn{padding:6px 14px;border-radius:20px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:11.5px;font-weight:700;background:#e3d5ca;color:#7a6858;box-shadow:2px 2px 5px rgba(0,0,0,.08),-1px -1px 3px rgba(255,255,255,.55);transition:all .15s;}
+.filter-btn.active{background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;box-shadow:2px 2px 7px rgba(0,0,0,.14);}
+.filter-btn:hover:not(.active){background:#d5bdaf;}
+
+/* ── MONTH TABS ── */
+.month-tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px;}
+.month-tab{padding:5px 10px;border-radius:16px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;background:#e3d5ca;color:#7a6858;box-shadow:2px 2px 5px rgba(0,0,0,.07),-1px -1px 3px rgba(255,255,255,.55);transition:all .15s;}
+.month-tab.active{background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;}
+
+/* ── STAT CARDS ── */
+.stat-cards-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.stat-card{background:#edede9;border-radius:14px;padding:14px 16px;box-shadow:3px 3px 10px rgba(0,0,0,.08),-1px -1px 4px rgba(255,255,255,.6);display:flex;flex-direction:column;gap:4px;}
+.stat-card.gold-card{background:linear-gradient(135deg,#c9943a,#e0b050);color:#fff;}
+.stat-icon{font-size:22px;}
+.stat-label{font-size:10px;font-weight:700;color:#9a8878;text-transform:uppercase;letter-spacing:.4px;}
+.stat-card.gold-card .stat-label{color:rgba(255,255,255,.7);}
+.stat-value{font-size:22px;font-weight:800;color:#2a1800;line-height:1;}
+.stat-card.gold-card .stat-value{color:#fff;}
+.stat-sub{font-size:10px;color:#b8a898;}
+.stat-card.gold-card .stat-sub{color:rgba(255,255,255,.6);}
+
+/* ── GOAL CARDS ── */
+.goal-card{background:#edede9;border-radius:14px;padding:14px 16px;box-shadow:2px 2px 8px rgba(0,0,0,.08),-1px -1px 4px rgba(255,255,255,.6);margin-bottom:8px;}
+.goal-title{font-size:14px;font-weight:800;color:#2a1800;display:flex;align-items:center;gap:8px;}
+.goal-meta{font-size:11px;color:#9a8878;margin-top:3px;display:flex;gap:10px;flex-wrap:wrap;}
+.goal-steps{margin-top:8px;display:flex;flex-direction:column;gap:4px;}
+.step-item{display:flex;align-items:center;gap:7px;font-size:12px;color:#5a4030;cursor:pointer;}
+.step-check{width:16px;height:16px;border-radius:5px;border:1.5px solid #c0b0a0;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;color:#2bb5a5;}
+.step-item.done-step .step-check{background:#2bb5a5;border-color:#2bb5a5;color:#fff;}
+.step-item.done-step span{text-decoration:line-through;opacity:.6;}
+
+/* ── HABIT ITEMS ── */
+.habit-item{background:#edede9;border-radius:14px;padding:13px 16px;box-shadow:2px 2px 8px rgba(0,0,0,.08),-1px -1px 4px rgba(255,255,255,.6);margin-bottom:8px;display:flex;align-items:center;gap:12px;}
+.habit-streak{font-size:11px;font-weight:700;color:#e04040;background:#fce8e8;padding:2px 8px;border-radius:20px;flex-shrink:0;}
+.habit-days{display:flex;gap:4px;margin-left:auto;}
+.habit-day{width:26px;height:26px;border-radius:8px;border:1.5px solid #d5bdaf;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#9a8878;cursor:pointer;transition:all .15s;}
+.habit-day.done{background:linear-gradient(145deg,#33c4b3,#25a090);border-color:transparent;color:#fff;}
+
+/* ── JOURNAL ── */
+.journal-entry{background:#edede9;border-radius:14px;padding:14px 16px;box-shadow:2px 2px 8px rgba(0,0,0,.08),-1px -1px 4px rgba(255,255,255,.6);margin-bottom:8px;position:relative;}
+.j-date{font-size:11px;color:#9a8878;font-weight:600;}
+.j-mood{font-size:16px;}
+.j-preview{font-size:13px;color:#4a3020;line-height:1.55;margin-top:5px;}
+.j-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px;}
+.j-tag{font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;background:#d6ccc2;color:#7a6858;}
+
+/* ── VISION GRID ── */
+.vision-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.vision-card{border-radius:16px;overflow:hidden;aspect-ratio:3/2;position:relative;cursor:pointer;box-shadow:3px 3px 12px rgba(0,0,0,.12),-1px -1px 4px rgba(255,255,255,.55);transition:transform .15s;}
+.vision-card:hover{transform:translateY(-3px);}
+.vision-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:40px;}
+.vision-overlay{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(0,0,0,.7));display:flex;flex-direction:column;justify-content:flex-end;padding:12px;}
+.vision-title{font-size:13px;font-weight:800;color:#fff;}
+.vision-cat{font-size:10px;color:rgba(255,255,255,.6);margin-top:2px;}
+.vision-del{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;border:none;cursor:pointer;background:rgba(200,60,50,.8);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s;}
+.vision-card:hover .vision-del{opacity:1;}
+
+/* ── QUOTE BLOCK ── */
+.quote-block{background:#2a1800;border-radius:16px;padding:20px 24px;position:relative;overflow:hidden;margin-bottom:4px;}
+.quote-text{font-size:14px;font-style:italic;color:rgba(255,255,255,.85);line-height:1.65;font-weight:600;}
+.quote-author{font-size:11px;font-weight:800;color:#c9943a;letter-spacing:.1em;margin-top:8px;}
+
+/* ── DASHBOARD GRID ── */
+.dash-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.dash-two{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.dash-section-title{font-size:12px;font-weight:800;color:#7a6858;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.dash-section-title::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.07);}
+
+/* ── POMODORO ── */
+.pomo-section{background:linear-gradient(135deg,#1a0e05,#2a1808);border-radius:18px;padding:20px 24px;margin-bottom:4px;}
+.pomo-inner{display:flex;align-items:center;gap:24px;}
+.pomo-ring-wrap{position:relative;width:140px;height:140px;flex-shrink:0;}
+.pomo-ring-wrap svg{width:140px;height:140px;}
+.pomo-ring-bg{fill:none;stroke:rgba(255,255,255,.1);stroke-width:8;}
+.pomo-ring-fill{fill:none;stroke:#e84a2e;stroke-width:8;stroke-linecap:round;stroke-dasharray:376;stroke-dashoffset:0;transition:stroke-dashoffset .5s,stroke .3s;transform:rotate(-90deg);transform-origin:70px 70px;}
+.pomo-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.pomo-time-display{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:700;color:#fff;letter-spacing:1px;}
+.pomo-mode-label{font-size:8px;font-weight:800;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-top:3px;}
+.pomo-right{flex:1;display:flex;flex-direction:column;gap:10px;}
+.pomo-task-name{font-size:15px;font-weight:800;color:#fff;line-height:1.2;}
+.pomo-task-sub{font-size:11px;color:rgba(255,255,255,.4);}
+.pomo-controls{display:flex;gap:8px;}
+.pomo-btn{padding:9px 18px;border-radius:11px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;transition:all .15s;}
+.pomo-btn-start{background:linear-gradient(145deg,#e84a2e,#c73a20);color:#fff;box-shadow:2px 2px 8px rgba(0,0,0,.25);}
+.pomo-btn-start:hover{transform:scale(.97);}
+.pomo-btn-ghost{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);}
+.pomo-btn-ghost:hover{background:rgba(255,255,255,.2);}
+.pomo-dots{display:flex;gap:6px;}
+.pomo-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.15);}
+.pomo-dot.done{background:#e84a2e;}
+.pomo-count-row{display:flex;align-items:center;gap:10px;font-size:11px;color:rgba(255,255,255,.5);}
+.pomo-count-row span{color:rgba(255,255,255,.75);}
+.pomo-settings{display:flex;gap:10px;font-size:11px;color:rgba(255,255,255,.5);}
+.pomo-settings input[type=number]{width:40px;background:rgba(255,255,255,.1);border:none;border-radius:6px;padding:3px 6px;color:#fff;font-family:'Nunito',sans-serif;font-size:11px;text-align:center;}
+
+/* ── MODAL ── */
+.mbg{position:fixed;inset:0;background:rgba(13,27,42,.88);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s;}
+.mbg.open{opacity:1;pointer-events:all;}
+.modal-box{background:#f5ebe0;border-radius:22px;padding:26px 28px 22px;width:460px;max-width:95vw;max-height:90vh;overflow-y:auto;box-shadow:6px 6px 26px rgba(0,0,0,.2),-2px -2px 8px rgba(255,255,255,.55);transform:scale(.95) translateY(10px);transition:transform .2s;}
+.mbg.open .modal-box{transform:scale(1) translateY(0);}
+.m-title{font-size:17px;font-weight:800;color:#3a2010;margin-bottom:16px;}
+.m-lbl{font-size:10.5px;font-weight:700;color:#8a7060;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;display:block;}
+.m-inp{width:100%;background:#e3d5ca;border-radius:11px;border:none;padding:10px 13px;font-family:'Nunito',sans-serif;font-size:13px;color:#3a2010;outline:none;box-shadow:inset 2px 2px 5px rgba(0,0,0,.07),inset -1px -1px 3px rgba(255,255,255,.6);margin-bottom:10px;}
+.m-inp:focus{box-shadow:inset 2px 2px 5px rgba(0,0,0,.09),0 0 0 2px rgba(43,181,165,.25);}
+.m-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.m-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+.m-btns{display:flex;gap:10px;margin-top:8px;}
+.m-ok{flex:1;padding:11px;background:linear-gradient(145deg,#33c4b3,#25a090);color:#fff;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;box-shadow:2px 2px 8px rgba(0,0,0,.18);}
+.m-ok:hover{transform:scale(.97);}
+.m-cancel{flex:1;padding:11px;background:#d6ccc2;color:#7a6858;border:none;border-radius:12px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+.m-cancel:hover{color:#3a2010;}
+.m-group{margin-bottom:10px;}
+
+/* ── NOTIFY ── */
+#notif{position:fixed;top:16px;right:16px;z-index:9999;background:#f5ebe0;border-radius:16px;padding:12px 18px;box-shadow:4px 4px 20px rgba(0,0,0,.2),-1px -1px 5px rgba(255,255,255,.55);display:flex;align-items:center;gap:10px;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;color:#3a2010;opacity:0;transform:translateY(-8px);transition:all .25s;pointer-events:none;}
+#notif.show{opacity:1;transform:translateY(0);}
+body.dark #notif{background:#1b263b;color:#e0e1dd;}
+
+/* empty state */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;color:#b8a898;text-align:center;gap:8px;}
+.e-icon{font-size:32px;}
+.empty p{font-size:13px;font-weight:600;}
+
+/* AI page */
+.ai-btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;}
+.ai-result-box{background:#d6ccc2;border-radius:13px;padding:14px;font-size:13px;line-height:1.7;color:#3a2010;min-height:60px;box-shadow:inset 1px 1px 4px rgba(0,0,0,.07);}
+body.dark .ai-result-box{background:#0d1b2a;color:#c8d5e0;}
+
+/* Yillik calendar */
+.ycal-months{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;}
+.ycal-month{font-size:10px;}
+.ycal-month-name{font-weight:800;color:#5a4030;margin-bottom:5px;letter-spacing:.3px;}
+.ycal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.ycal-day{width:100%;aspect-ratio:1;border-radius:3px;background:#e3d5ca;cursor:default;font-size:8px;display:flex;align-items:center;justify-content:center;color:#b8a898;}
+.ycal-day.yd-has{background:rgba(43,181,165,.4);color:#1a7060;}
+.ycal-day.yd-today{background:#e84a2e!important;color:#fff;}
+.ycal-day.yd-range{background:rgba(201,148,58,.4);color:#7a4a10;}
+body.dark .ycal-month-name{color:#9aadbe;}
+body.dark .ycal-day{background:#243248;color:#415a77;}
+body.dark .ycal-day.yd-has{background:rgba(43,181,165,.3);color:#2bb5a5;}
+
+@keyframes si{from{opacity:0;transform:translateX(-5px);}to{opacity:1;transform:translateX(0);}}
+.tc{animation:si .2s ease both;}
+.tc:nth-child(1){animation-delay:.03s}.tc:nth-child(2){animation-delay:.06s}.tc:nth-child(3){animation-delay:.09s}.tc:nth-child(4){animation-delay:.12s}.tc:nth-child(5){animation-delay:.15s}.tc:nth-child(6){animation-delay:.18s}
+</style>
+</head>
+<body>
+
+<div class="screen">
+
+  <!-- SIDEBAR: icon buttons -->
+  <aside class="sidebar">
+    <div class="sb-btn-wrap">
+      <button class="sb-btn sb-active" id="sb-dashboard" title="Dashboard" onclick="sbNav('dashboard')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect class="ico-sb" x="3" y="3" width="7" height="7" rx="1.5"/><rect class="ico-sb" x="14" y="3" width="7" height="7" rx="1.5"/><rect class="ico-sb" x="3" y="14" width="7" height="7" rx="1.5"/><rect class="ico-sb" x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-kunlik" title="Kunlik + Pomodoro" onclick="sbNav('kunlik')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle class="ico-sb" cx="12" cy="12" r="5"/><line class="ico-sb" x1="12" y1="1" x2="12" y2="3"/><line class="ico-sb" x1="12" y1="21" x2="12" y2="23"/><line class="ico-sb" x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line class="ico-sb" x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line class="ico-sb" x1="1" y1="12" x2="3" y2="12"/><line class="ico-sb" x1="21" y1="12" x2="23" y2="12"/><line class="ico-sb" x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line class="ico-sb" x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="sb-badge" id="sb-badge-k" style="display:none">0</span>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-haftalik" title="Haftalik" onclick="sbNav('haftalik')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect class="ico-sb" x="3" y="4" width="18" height="18" rx="2"/><line class="ico-sb" x1="16" y1="2" x2="16" y2="6"/><line class="ico-sb" x1="8" y1="2" x2="8" y2="6"/><line class="ico-sb" x1="3" y1="10" x2="21" y2="10"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-oylik" title="Oylik" onclick="sbNav('oylik')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect class="ico-sb" x="3" y="4" width="18" height="18" rx="2"/><line class="ico-sb" x1="16" y1="2" x2="16" y2="6"/><line class="ico-sb" x1="8" y1="2" x2="8" y2="6"/><line class="ico-sb" x1="3" y1="10" x2="21" y2="10"/><line class="ico-sb" x1="8" y1="14" x2="8" y2="14"/><line class="ico-sb" x1="12" y1="14" x2="12" y2="14"/><line class="ico-sb" x1="16" y1="14" x2="16" y2="14"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-yillik" title="Yillik" onclick="sbNav('yillik')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polyline class="ico-sb" points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </button>
+    </div>
+    <div class="sb-spacer"></div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-goals" title="Maqsadlar" onclick="sbNav('goals')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle class="ico-sb" cx="12" cy="12" r="10"/><circle class="ico-sb" cx="12" cy="12" r="6"/><circle class="ico-sb" cx="12" cy="12" r="2"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-habits" title="Odatlar" onclick="sbNav('habits')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path class="ico-sb" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path class="ico-sb" d="M8 12l3 3 5-5"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-journal" title="Kundalik" onclick="sbNav('journal')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path class="ico-sb" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path class="ico-sb" d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-vision" title="Vision Board" onclick="sbNav('vision')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><polygon class="ico-sb" points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-stats" title="Statistika" onclick="sbNav('stats')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><line class="ico-sb" x1="18" y1="20" x2="18" y2="10"/><line class="ico-sb" x1="12" y1="20" x2="12" y2="4"/><line class="ico-sb" x1="6" y1="20" x2="6" y2="14"/></svg>
+      </button>
+    </div>
+    <div class="sb-btn-wrap">
+      <button class="sb-btn" id="sb-ai" title="AI Tahlil" onclick="sbNav('ai')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path class="ico-sb" d="M12 2a8 8 0 0 1 8 8v1a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-1a8 8 0 0 1 8-8z"/><line class="ico-sb" x1="8" y1="21" x2="16" y2="21"/><line class="ico-sb" x1="12" y1="15" x2="12" y2="21"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- APP -->
+  <div class="app">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="search-outer">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><circle class="ico-dark" cx="11" cy="11" r="8" stroke="#b8a898" stroke-width="2" stroke-linecap="round"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="#b8a898" stroke-width="2" stroke-linecap="round"/></svg>
+        <input type="text" placeholder="Qidirish..." id="searchInput" oninput="filterSearch(this.value)">
+      </div>
+      <div class="tb-stats" id="tbStats">
+        <div class="tb-stat">
+          <div class="tb-stat-col"><span class="tb-stat-val" id="stat-today">0</span><span class="tb-stat-lbl">Bugungi</span></div>
+        </div>
+        <div class="tb-stat-sep"></div>
+        <div class="tb-stat">
+          <div class="tb-stat-col"><span class="tb-stat-val" id="stat-done">0%</span><span class="tb-stat-lbl">Bajarildi</span></div>
+        </div>
+        <div class="tb-stat-sep"></div>
+        <div class="tb-stat">
+          <div class="tb-stat-col"><span class="tb-stat-val" id="stat-streak">0🔥</span><span class="tb-stat-lbl">Streak</span></div>
+        </div>
+      </div>
+      <div class="tb-datetime">
+        <span class="tb-date" id="topDate"></span>
+        <span class="tb-time" id="topTime"></span>
+      </div>
+      <div class="tb-icons">
+        <div class="anim-toggle" id="animToggle" onclick="toggleDark()" title="Oq / Qora rejim">
+          <div class="anim-track">
+            <div class="anim-ts anim-ts1"></div><div class="anim-ts anim-ts2"></div><div class="anim-ts anim-ts3"></div>
+            <div class="anim-knob">
+              <div class="anim-sun">
+                <div class="anim-ray" style="transform:rotate(0deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(45deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(90deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(135deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(180deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(225deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(270deg) translateY(-22px)"></div><div class="anim-ray" style="transform:rotate(315deg) translateY(-22px)"></div>
+              </div>
+              <div class="anim-moon"><div class="anim-moon-shadow"></div><div class="anim-crater anim-cr1"></div><div class="anim-crater anim-cr2"></div><div class="anim-crater anim-cr3"></div></div>
+            </div>
+          </div>
+        </div>
+        <button class="sb-btn" onclick="window.location.href='Launcher.html'" title="Launcharga qaytish" style="width:36px;height:36px;border-radius:12px;flex-shrink:0;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><polyline class="ico-sb" points="15 18 9 12 15 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- BODY: LEFT nav + RIGHT content -->
+    <div class="body">
+
+      <!-- LEFT NAV -->
+      <div class="left" id="leftPanel">
+        <!-- filled by JS -->
+      </div>
+
+      <!-- RIGHT CONTENT -->
+      <div class="right" id="rightContent">
+        <!-- filled by JS -->
+      </div>
+
+    </div><!-- /body -->
+  </div><!-- /app -->
+</div><!-- /screen -->
+
+<!-- NOTIFY -->
+<div id="notif"><span id="n-icon">✓</span><span id="n-text"></span></div>
+
+
+
+<!-- GOAL MODAL -->
+<div class="mbg" id="goal-modal">
+  <div class="modal-box" style="max-width:520px">
+    <div class="m-title">🎯 Yangi maqsad</div>
+    <div class="m-group"><label class="m-lbl">Maqsad nomi *</label><input class="m-inp" id="gm-title" placeholder="Masalan: Ingliz tilini o'rganish"/></div>
+    <div class="m-row m-group">
+      <div><label class="m-lbl">Kategoriya</label><select class="m-inp" id="gm-cat"><option value="health">💪 Salomatlik</option><option value="career">💼 Karyera</option><option value="shaxsiy">🧠 Shaxsiy</option><option value="oila">👨‍👩‍👧 Oila</option><option value="moliya">💰 Moliya</option><option value="talim">🎓 Ta'lim</option></select></div>
+      <div><label class="m-lbl">Emoji</label><input class="m-inp" id="gm-icon" placeholder="🎯" maxlength="2" style="text-align:center;font-size:1.4rem"/></div>
+    </div>
+    <div class="m-row m-group">
+      <div><label class="m-lbl">Boshlanish</label><input class="m-inp" type="date" id="gm-start"/></div>
+      <div><label class="m-lbl">Tugash sanasi</label><input class="m-inp" type="date" id="gm-deadline"/></div>
+    </div>
+    <div class="m-group"><label class="m-lbl">Ustuvorlik</label><select class="m-inp" id="gm-priority"><option value="yuqori">🔴 Yuqori</option><option value="orta" selected>🟡 O'rta</option><option value="past">🟢 Past</option></select></div>
+    <div class="m-group"><label class="m-lbl">Nima uchun muhim?</label><input class="m-inp" id="gm-why" placeholder="Bu maqsad muhim, chunki..."/></div>
+    <div class="m-group"><label class="m-lbl">Bosqichlar (har qatorda)</label><textarea class="m-inp" id="gm-steps" rows="4" style="resize:vertical;line-height:1.65" placeholder="1. Birinchi qadam&#10;2. Ikkinchi qadam"></textarea></div>
+    <div class="m-btns"><button class="m-cancel" onclick="closeModal('goal-modal')">Bekor</button><button class="m-ok" onclick="saveGoal()">💾 Saqlash</button></div>
+  </div>
+</div>
+
+<!-- HABIT MODAL -->
+<div class="mbg" id="habit-modal">
+  <div class="modal-box" style="max-width:460px">
+    <div class="m-title">🔥 Yangi odat</div>
+    <div class="m-group"><label class="m-lbl">Odat nomi *</label><input class="m-inp" id="hm-name" placeholder="Kuniga 30 daqiqa yugurish"/></div>
+    <div class="m-row m-group">
+      <div><label class="m-lbl">Emoji</label><input class="m-inp" id="hm-icon" placeholder="🏃" maxlength="2" style="text-align:center;font-size:1.4rem"/></div>
+      <div><label class="m-lbl">Kategoriya</label><select class="m-inp" id="hm-cat"><option>💪 Salomatlik</option><option>🎓 Ta'lim</option><option>💼 Ish</option><option>🧘 Ruhiy</option><option>👨‍👩‍👧 Oila</option></select></div>
+    </div>
+    <div class="m-row m-group">
+      <div><label class="m-lbl">Davomiyligi (daqiqa)</label><input class="m-inp" type="number" id="hm-duration" placeholder="30" min="1"/></div>
+      <div><label class="m-lbl">Eslatma vaqti</label><input class="m-inp" type="time" id="hm-reminder"/></div>
+    </div>
+    <div class="m-group"><label class="m-lbl">Nima uchun muhim?</label><input class="m-inp" id="hm-why" placeholder="Bu odat menga yordam beradi..."/></div>
+    <div class="m-group"><label class="m-lbl">Faol kunlar</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd1" checked/> Du</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd2" checked/> Se</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd3" checked/> Cho</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd4" checked/> Pay</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd5" checked/> Ju</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd6"/> Sha</label>
+        <label style="display:flex;align-items:center;gap:4px;font-size:.82rem;cursor:pointer"><input type="checkbox" id="hd0"/> Yak</label>
+      </div>
+    </div>
+    <div class="m-btns"><button class="m-cancel" onclick="closeModal('habit-modal')">Bekor</button><button class="m-ok" onclick="saveHabit()">🔥 Saqlash</button></div>
+  </div>
+</div>
+
+<!-- JOURNAL MODAL -->
+<div class="mbg" id="journal-modal">
+  <div class="modal-box" style="max-width:520px">
+    <div class="m-title">📖 Kundalik yozuv</div>
+    <div class="m-row3 m-group">
+      <div><label class="m-lbl">Kayfiyat</label><select class="m-inp" id="jm-mood"><option value="🤩">🤩 Ajoyib</option><option value="😊">😊 Yaxshi</option><option value="😐">😐 Oddiy</option><option value="😔">😔 Yomon</option><option value="😤">😤 Asabiy</option><option value="😴">😴 Charchagan</option><option value="🙏">🙏 Minnatdor</option></select></div>
+      <div><label class="m-lbl">Energiya</label><select class="m-inp" id="jm-energy"><option value="5">⚡⚡⚡ Yuqori</option><option value="3" selected>⚡⚡ O'rta</option><option value="1">⚡ Past</option></select></div>
+      <div><label class="m-lbl">Teglar</label><input class="m-inp" id="jm-tags" placeholder="ish, sport"/></div>
+    </div>
+    <div class="m-group"><label class="m-lbl">Eng yaxshi lahza</label><input class="m-inp" id="jm-best" placeholder="Bugun nima yaxshi bo'ldi?"/></div>
+    <div class="m-group"><label class="m-lbl">3 ta minnatdorchilik</label><input class="m-inp" id="jm-gratitude" placeholder="Bugun nimalarga shukr qilaman..."/></div>
+    <div class="m-group"><label class="m-lbl">Erkin yozuv *</label><textarea class="m-inp" id="jm-text" rows="4" style="resize:vertical;line-height:1.65" placeholder="Bugun qanday kechdi?..."></textarea></div>
+    <div class="m-group"><label class="m-lbl">Ertangi reja</label><input class="m-inp" id="jm-tomorrow" placeholder="Ertaga nima qilmoqchiman?"/></div>
+    <div class="m-btns"><button class="m-cancel" onclick="closeModal('journal-modal')">Bekor</button><button class="m-ok" onclick="saveJournal()">📖 Saqlash</button></div>
+  </div>
+</div>
+
+<!-- VISION MODAL -->
+<div class="mbg" id="vision-modal">
+  <div class="modal-box" style="max-width:480px">
+    <div class="m-title">✨ Yangi orzu</div>
+    <div class="m-group"><label class="m-lbl">Orzu nomi *</label><input class="m-inp" id="vm-title" placeholder="O'z uyim bo'lsin..."/></div>
+    <div class="m-row m-group">
+      <div><label class="m-lbl">Kategoriya</label><select class="m-inp" id="vm-cat"><option>🏠 Uy-joy</option><option>💼 Karyera</option><option>✈️ Sayohat</option><option>💰 Moliya</option><option>💪 Salomatlik</option><option>👨‍👩‍👧 Oila</option><option>🎓 Ta'lim</option><option>🚗 Transport</option><option>✨ Boshqa</option></select></div>
+      <div><label class="m-lbl">Emoji</label><input class="m-inp" id="vm-emoji" placeholder="🏠" maxlength="2" style="text-align:center;font-size:1.6rem"/></div>
+    </div>
+    <div class="m-group"><label class="m-lbl">Nima uchun muhim?</label><input class="m-inp" id="vm-why" placeholder="Bu orzum amalga oshsa..."/></div>
+    <div class="m-group"><label class="m-lbl">Maqsad sana</label><input class="m-inp" type="date" id="vm-target"/></div>
+    <div class="m-group"><label class="m-lbl">Fon rangi</label>
+      <div style="display:flex;gap:8px;flex-wrap:wrap" id="vm-colors">
+        <div class="vc" data-c="#1a0f0a" style="width:32px;height:32px;border-radius:8px;background:#1a0f0a;cursor:pointer;outline:3px solid #2bb5a5;outline-offset:2px"></div>
+        <div class="vc" data-c="#0d3b66" style="width:32px;height:32px;border-radius:8px;background:#0d3b66;cursor:pointer"></div>
+        <div class="vc" data-c="#1e3a2f" style="width:32px;height:32px;border-radius:8px;background:#1e3a2f;cursor:pointer"></div>
+        <div class="vc" data-c="#3d1c32" style="width:32px;height:32px;border-radius:8px;background:#3d1c32;cursor:pointer"></div>
+        <div class="vc" data-c="#c9943a" style="width:32px;height:32px;border-radius:8px;background:#c9943a;cursor:pointer"></div>
+        <div class="vc" data-c="#2d3b4d" style="width:32px;height:32px;border-radius:8px;background:#2d3b4d;cursor:pointer"></div>
+        <div class="vc" data-c="#4a1942" style="width:32px;height:32px;border-radius:8px;background:#4a1942;cursor:pointer"></div>
+        <div class="vc" data-c="#2d1505" style="width:32px;height:32px;border-radius:8px;background:#2d1505;cursor:pointer"></div>
+      </div>
+    </div>
+    <div class="m-btns"><button class="m-cancel" onclick="closeModal('vision-modal')">Bekor</button><button class="m-ok" onclick="saveVision()">✨ Saqlash</button></div>
+  </div>
+</div>
+
+<!-- QUOTE MODAL -->
+<div class="mbg" id="quote-modal">
+  <div class="modal-box" style="max-width:460px">
+    <div class="m-title">💬 Sitatlar</div>
+    <div id="quote-list" style="max-height:260px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;margin-bottom:12px;"></div>
+    <div style="display:flex;gap:8px;">
+      <input class="m-inp" id="new-quote-text" placeholder="Sitat matni..." style="flex:2;margin:0"/>
+      <input class="m-inp" id="new-quote-author" placeholder="Muallif" style="flex:1;margin:0"/>
+      <button class="m-ok" style="flex:0 0 auto;padding:10px 14px;white-space:nowrap" onclick="addQuote()">+ Qo'sh</button>
+    </div>
+    <div class="m-btns" style="margin-top:12px"><button class="m-cancel" onclick="closeModal('quote-modal')">Yopish</button></div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// MY LIFE PLAN — Ishlar dizayni bilan qayta yozilgan
+// ============================================================
+
+var NOW = new Date();
+var OY = ['Yanvar','Fevral','Mart','Aprel','May','Iyun','Iyul','Avgust','Sentabr','Oktabr','Noyabr','Dekabr'];
+var KUN = ['Yak','Du','Se','Cho','Pay','Ju','Sha'];
+var KUN_FULL = ['Yakshanba','Dushanba','Seshanba','Chorshanba','Payshanba','Juma','Shanba'];
+
+var DEFAULT_QUOTES = [
+  {t:"Katta orzular ko'ring. Kichik boshlang. Hozir harakat qiling.", a:'ROBIN SHARMA'},
+  {t:"Muvaffaqiyat tasodif emas — bu qattiq mehnat va bag'rikenglik.", a:'COLIN POWELL'},
+  {t:"Har bir kun — yangi imkoniyat. Undan foydalaning.", a:'MARK TWAIN'},
+  {t:"O'zingizga ishoning. Siz o'ylayotganingizdan kuchliroqsiz.", a:'T.D. JAKES'},
+  {t:"Kelajak bugun nima qilayotganingizga bog'liq.", a:'GANDHI'},
+  {t:"Eng yaxshi vaqt — hozir.", a:'XITOY MAQOLI'},
+  {t:"Muvaffaqiyat — bu yo'nalish, natija emas.", a:'RICHARD BACH'},
+  {t:"Har bir katta yutuq — bir qator kichik qarorlardan iborat.", a:"NOMA'LUM"}
+];
+
+// ── STORAGE ──
+function ld(k){ try{ return JSON.parse(localStorage.getItem('mlp2_'+k)||'[]'); }catch(e){ return []; } }
+function ldo(k){ try{ return JSON.parse(localStorage.getItem('mlp2_'+k)||'{}'); }catch(e){ return {}; } }
+function sv(k,v){ localStorage.setItem('mlp2_'+k, JSON.stringify(v)); }
+function getQuotes(){ try{ var q=JSON.parse(localStorage.getItem('mlp_quotes')||'null'); return (q&&q.length)?q:DEFAULT_QUOTES; }catch(e){ return DEFAULT_QUOTES; } }
+function saveQuotes(q){ localStorage.setItem('mlp_quotes', JSON.stringify(q)); }
+function escH(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+function fmt2(n){ return String(Math.floor(n)).padStart(2,'0'); }
+function dKey(d){ return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate(); }
+function wKey(d){ var j=new Date(d.getFullYear(),0,1); return d.getFullYear()+'-W'+Math.ceil(((d-j)/864e5+j.getDay()+1)/7); }
+
+// ── DATA ──
+var D = {
+  kunlik: ldo('kunlik'), haftalik: ldo('haftalik'),
+  oylik: ldo('oylik'), yillik: ldo('yillik'),
+  goals: ld('goals'), habits: ld('habits'),
+  habitLog: ldo('habitLog'), journal: ld('journal'),
+  vision: ld('vision')
+};
+
+var SEL = {
+  kunlik: dKey(NOW), kFilter: 'barchasi',
+  haftalik: { dk: dKey(NOW), day: NOW.getDay(), week: wKey(NOW) },
+  oylik: { y: NOW.getFullYear(), m: NOW.getMonth() },
+  yillik: { y: NOW.getFullYear(), m: NOW.getMonth() },
+  gFilter: 'barchasi',
+  page: 'dashboard'
+};
+
+// ── POMODORO ──
+var POMO = {
+  running:false, interval:null, mode:'work', session:1, totalDone:0,
+  secsLeft:25*60, totalSecs:25*60, taskId:null, taskName:'Vazifa tanlanmagan',
+  workMin:25, breakMin:5, longMin:15
+};
+
+// ── QUOTES ──
+var QUOTES = getQuotes();
+var quoteIdx = Math.floor(Math.random() * QUOTES.length);
+var quoteTimerInterval = null;
+var quoteTimerSecs = 300;
+var quoteTimerMax = 300;
+
+// ── MISC ──
+var vmColor = '#1a0f0a';
+var aiCache = {};
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener("DOMContentLoaded", function(){
+  updateClock(); setInterval(updateClock, 1000);
+  initTheme();
+  showQuote(quoteIdx); startQuoteTimer();
+  syncHaftalikToKunlik();
+  sbNav('dashboard');
+  initVisionColors();
+});
+
+function syncHaftalikToKunlik(){
+  var todayDk = dKey(NOW);
+  var todayDayIdx = NOW.getDay();
+  var todayWeek = wKey(NOW);
+  var key = todayWeek+'-'+todayDayIdx;
+  var hTasks = D.haftalik[key]||[];
+  if(!hTasks.length) return;
+  if(!D.kunlik[todayDk]) D.kunlik[todayDk]=[];
+  var existingIds = D.kunlik[todayDk].map(function(t){ return t.id; });
+  var added = false;
+  hTasks.forEach(function(ht){
+    if(existingIds.indexOf(ht.id)===-1){
+      D.kunlik[todayDk].push({id:ht.id,text:ht.text,priority:ht.priority,deadline:ht.deadline||'',time:'',done:ht.done,pomos:0,fromHaftalik:true});
+      added = true;
+    }
+  });
+  if(added){ sv('kunlik',D.kunlik); }
+}
+
+// ── CLOCK ──
+function updateClock(){
+  var n=new Date();
+  var dateEl=document.getElementById('topDate');
+  var timeEl=document.getElementById('topTime');
+  if(dateEl) dateEl.textContent = n.getDate()+' '+OY[n.getMonth()].toUpperCase();
+  if(timeEl) timeEl.textContent = fmt2(n.getHours())+':'+fmt2(n.getMinutes());
+  updateTopStats();
+}
+
+function updateTopStats(){
+  var todayDk = dKey(NOW);
+  var todayT = D.kunlik[todayDk]||[];
+  var done = todayT.filter(function(t){ return t.done; }).length;
+  var pct = todayT.length ? Math.round(done/todayT.length*100) : 0;
+  var el1=document.getElementById('stat-today'); if(el1) el1.textContent=todayT.length;
+  var el2=document.getElementById('stat-done'); if(el2) el2.textContent=pct+'%';
+  var maxStreak=0;
+  D.habits.forEach(function(h){ if(h.streak>maxStreak) maxStreak=h.streak; });
+  var el3=document.getElementById('stat-streak'); if(el3) el3.textContent=maxStreak+'🔥';
+  var nbk=document.getElementById('sb-badge-k');
+  var active=todayT.filter(function(t){ return !t.done; }).length;
+  if(nbk){ nbk.style.display=active?'flex':'none'; nbk.textContent=active; }
+}
+
+// ── THEME ──
+function toggleDark(){
+  var dark=document.body.classList.toggle('dark');
+  localStorage.setItem('mlp_theme', dark?'dark':'light');
+}
+function initTheme(){
+  if(localStorage.getItem('mlp_theme')==='dark') document.body.classList.add('dark');
+}
+
+// ── SEARCH ──
+function filterSearch(v){
+  // basic highlight - just re-render with filter
+}
+
+// ============================================================
+// SIDEBAR NAVIGATION (Ishlar style: icon click → render left+right)
+// ============================================================
+var NAV_PAGES = [
+  {id:'dashboard', icon:'⊞', label:'Dashboard', group:'Asosiy'},
+  {id:'kunlik', icon:'☀️', label:'Kunlik', group:'Vazifalar'},
+  {id:'haftalik', icon:'📅', label:'Haftalik', group:'Vazifalar'},
+  {id:'oylik', icon:'🗓️', label:'Oylik', group:'Vazifalar'},
+  {id:'yillik', icon:'🌟', label:'Yillik', group:'Vazifalar'},
+  {id:'goals', icon:'🎯', label:'Maqsadlar', group:'Hayot'},
+  {id:'habits', icon:'🔥', label:'Odatlar', group:'Hayot'},
+  {id:'journal', icon:'📖', label:'Kundalik', group:'Hayot'},
+  {id:'vision', icon:'✨', label:'Vision Board', group:'Hayot'},
+  {id:'stats', icon:'📊', label:'Statistika', group:'Boshqa'},
+  {id:'ai', icon:'🤖', label:'AI Tahlil', group:'Boshqa'},
+];
+
+function sbNav(page){
+  SEL.page = page;
+  // Update sidebar active
+  NAV_PAGES.forEach(function(p){
+    var btn=document.getElementById('sb-'+p.id);
+    if(btn){ btn.classList.toggle('sb-active', p.id===page); }
+  });
+  renderLeft(page);
+  renderRight(page);
+}
+
+// ── LEFT PANEL ──
+function renderLeft(page){
+  var left=document.getElementById('leftPanel');
+  left.innerHTML='';
+
+  if(page==='dashboard'){
+    // Title + date
+    var dtDiv=document.createElement('div');
+    dtDiv.innerHTML='<div class="left-title">📅 '+KUN_FULL[NOW.getDay()]+'</div>'+
+      '<div style="font-size:28px;font-weight:800;color:#b06838;">'+NOW.getDate()+' '+OY[NOW.getMonth()]+'</div>'+
+      '<div style="font-size:11px;color:#9a8878;">'+NOW.getFullYear()+' yil</div>';
+    left.appendChild(dtDiv);
+
+    // Quote
+    var q=QUOTES[quoteIdx]||QUOTES[0];
+    var qDiv=document.createElement('div');
+    qDiv.className='quote-block'; qDiv.style.cursor='pointer';
+    qDiv.id='left-quote';
+    qDiv.onclick=function(){ openModal('quote-modal'); };
+    qDiv.innerHTML='<div class="quote-text">"'+escH(q.t)+'"</div>'+
+      '<div class="quote-author">— '+escH(q.a)+'</div>'+
+      '<div id="q-timer-bar" style="position:absolute;bottom:0;left:0;height:3px;background:rgba(201,148,58,.6);border-radius:0 3px 3px 0;width:100%;transition:width linear"></div>';
+    left.appendChild(qDiv);
+
+    // Ring + stats
+    var todayDk=dKey(NOW);
+    var todayT=D.kunlik[todayDk]||[];
+    var done=todayT.filter(function(t){ return t.done; }).length;
+    var pct=todayT.length?Math.round(done/todayT.length*100):0;
+    var stroke=125.7*(1-pct/100);
+    var ringDiv=document.createElement('div');
+    ringDiv.style.cssText='display:flex;align-items:center;gap:12px;';
+    ringDiv.innerHTML='<svg width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="20" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="4"/><circle id="ring-circle" cx="26" cy="26" r="20" fill="none" stroke="#2bb5a5" stroke-width="4" stroke-dasharray="125.7" stroke-dashoffset="'+stroke+'" stroke-linecap="round" transform="rotate(-90 26 26)" style="transition:stroke-dashoffset .8s ease"/></svg>'+
+      '<div><div style="font-size:20px;font-weight:800;color:#2bb5a5;">'+pct+'%</div><div style="font-size:11px;color:#9a8878;">Bugungi bajarildi</div></div>';
+    left.appendChild(ringDiv);
+
+    // Nav links
+    var groups = {};
+    NAV_PAGES.forEach(function(p){
+      if(p.id==='dashboard') return;
+      if(!groups[p.group]) groups[p.group]=[];
+      groups[p.group].push(p);
+    });
+    Object.keys(groups).forEach(function(grp){
+      var lbl=document.createElement('div');
+      lbl.className='left-group-lbl';
+      lbl.textContent=grp;
+      left.appendChild(lbl);
+      groups[grp].forEach(function(p){
+        var el=document.createElement('div');
+        el.className='tc'+(SEL.page===p.id?' active':'');
+        el.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-icon">'+p.icon+'</span><span class="tc-name">'+p.label+'</span></div></div>';
+        el.onclick=function(){ sbNav(p.id); };
+        left.appendChild(el);
+      });
+    });
+    return;
+  }
+
+  // For all other pages: show relevant sub-nav items
+  var todayDk=dKey(NOW);
+  var todayT=D.kunlik[todayDk]||[];
+  var done=todayT.filter(function(t){ return t.done; }).length;
+  var pct=todayT.length?Math.round(done/todayT.length*100):0;
+
+  // Page title in left
+  var cur=NAV_PAGES.find(function(p){ return p.id===page; });
+  if(cur) left.innerHTML='<div class="left-title" style="margin-bottom:10px;">'+cur.icon+' '+cur.label+'</div>';
+
+  if(page==='kunlik'){
+    // Week mini in left
+    left.innerHTML+='<div style="font-size:11px;font-weight:700;color:#9a8878;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">Hafta</div>';
+    var weekDiv=document.createElement('div');
+    left.appendChild(weekDiv);
+    buildWeekMini2(weekDiv, SEL.kunlik, 'selKunlik', function(d){ return (D.kunlik[dKey(d)]||[]).length>0; });
+    // Filter buttons
+    left.innerHTML+='<div style="font-size:11px;font-weight:700;color:#9a8878;margin:8px 0 5px;text-transform:uppercase;letter-spacing:.4px;">Filtr</div>';
+    ['barchasi','faol','bajarildi','yuqori'].forEach(function(f){
+      var btn=document.createElement('div');
+      btn.className='tc'+(SEL.kFilter===f?' active':'');
+      var labels={barchasi:'Barchasi',faol:'Faol',bajarildi:'Bajarildi',yuqori:'🔴 Yuqori'};
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-name">'+labels[f]+'</span></div></div>';
+      btn.onclick=function(){ SEL.kFilter=f; renderLeft('kunlik'); renderRight('kunlik'); };
+      left.appendChild(btn);
+    });
+    // Quick stats
+    var dk=SEL.kunlik;
+    var list=D.kunlik[dk]||[];
+    var d2=list.filter(function(t){ return t.done; }).length;
+    var pct2=list.length?Math.round(d2/list.length*100):0;
+    left.innerHTML+='<div style="margin-top:12px;font-size:11px;color:#9a8878;"><strong style="color:#2bb5a5;font-size:16px;">'+list.length+'</strong> vazifa &nbsp; <strong style="color:#2bb5a5;">'+pct2+'%</strong> bajarildi</div>';
+    var pwrap=document.createElement('div');
+    pwrap.className='progress-bar-wrap';
+    pwrap.style.marginTop='6px';
+    pwrap.innerHTML='<div class="progress-fill" style="width:'+pct2+'%"></div>';
+    left.appendChild(pwrap);
+  }
+
+  else if(page==='haftalik'){
+    left.innerHTML='<div class="left-title" style="margin-bottom:4px;">\u{1F4C5} Haftalik reja</div>';
+    var weekDiv2=document.createElement('div');
+    left.appendChild(weekDiv2);
+    buildWeekMini2(weekDiv2, SEL.haftalik.dk, 'selHaftalikDay', function(d){ var idx=d.getDay(); var key=SEL.haftalik.week+'-'+idx; return (D.haftalik[key]||[]).length>0; });
+
+    // Week stats
+    var week=SEL.haftalik.week;
+    var totalW=0, doneW=0;
+    for(var wi=0;wi<7;wi++){
+      var wt=D.haftalik[week+'-'+wi]||[];
+      totalW+=wt.length; doneW+=wt.filter(function(x){return x.done;}).length;
+    }
+    var sDiv=document.createElement('div');
+    sDiv.style.cssText='display:flex;flex-direction:column;gap:6px;margin-top:4px;';
+    sDiv.innerHTML='<div style="font-size:11px;font-weight:700;color:#9a8878;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Hafta natijasi</div>'+
+      '<div class="tc" style="padding:10px 12px;"><div style="display:flex;justify-content:space-between;"><span style="font-size:12px;font-weight:700;color:#3a2010;">\u{1F4CB} Vazifalar</span><span style="font-size:16px;font-weight:800;color:#2bb5a5;">'+totalW+'</span></div></div>'+
+      '<div class="tc" style="padding:10px 12px;"><div style="display:flex;justify-content:space-between;"><span style="font-size:12px;font-weight:700;color:#3a2010;">\u2705 Bajarildi</span><span style="font-size:16px;font-weight:800;color:#2bb5a5;">'+doneW+'</span></div></div>'+
+      '<div class="tc" style="padding:10px 12px;"><div style="display:flex;justify-content:space-between;"><span style="font-size:12px;font-weight:700;color:#3a2010;">\u{1F4CA} Foiz</span><span style="font-size:16px;font-weight:800;color:#2bb5a5;">'+(totalW?Math.round(doneW/totalW*100):0)+'%</span></div></div>';
+    left.appendChild(sDiv);
+
+    // Day list
+    var wparts=SEL.haftalik.week.split('-');
+    var wdate=new Date(parseInt(wparts[0]),0,1);
+    wdate.setDate(wdate.getDate()+(parseInt(wparts[1])-1)*7-wdate.getDay());
+    var dListDiv=document.createElement('div');
+    dListDiv.style.cssText='display:flex;flex-direction:column;gap:4px;margin-top:4px;';
+    dListDiv.innerHTML='<div style="font-size:11px;font-weight:700;color:#9a8878;text-transform:uppercase;letter-spacing:.4px;margin-bottom:2px;">Kunlar</div>';
+    for(var di=0;di<7;di++){
+      var dd=new Date(wdate); dd.setDate(wdate.getDate()+di);
+      var ddDk=dKey(dd);
+      var ddTasks=D.haftalik[week+'-'+di]||[];
+      var ddDone=ddTasks.filter(function(x){return x.done;}).length;
+      var isSel=(di===SEL.haftalik.day);
+      var dbtn=document.createElement('div');
+      dbtn.className='tc'+(isSel?' active':'');
+      dbtn.style.cssText='padding:8px 12px;cursor:pointer;';
+      dbtn.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;">'+
+        '<span style="font-size:12px;font-weight:700;color:'+(isSel?'#fff':'#3a2010')+';">'+KUN_FULL[di]+'</span>'+
+        (ddTasks.length?'<span style="font-size:11px;font-weight:600;color:'+(isSel?'rgba(255,255,255,.8)':'#9a8878')+';">'+ddDone+'/'+ddTasks.length+'</span>':'')+'</div>';
+      (function(dk2){ dbtn.onclick=function(){ selHaftalikDay(dk2); }; })(ddDk);
+      dListDiv.appendChild(dbtn);
+    }
+    left.appendChild(dListDiv);
+  }
+
+  else if(page==='oylik'){
+    left.innerHTML+='<div style="font-size:11px;font-weight:700;color:#9a8878;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">Oylar</div>';
+    OY.forEach(function(o,i){
+      var btn=document.createElement('div');
+      btn.className='tc'+(SEL.oylik.m===i?' active':'');
+      var key=SEL.oylik.y+'-'+i;
+      var cnt=(D.oylik[key]||[]).length;
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-name">'+o+'</span>'+(cnt?'<span class="tc-badge">'+cnt+'</span>':'')+'</div></div>';
+      (function(mi){ btn.onclick=function(){ SEL.oylik.m=mi; renderLeft('oylik'); renderRight('oylik'); }; })(i);
+      left.appendChild(btn);
+    });
+  }
+
+  else if(page==='yillik'){
+    left.innerHTML+='<div style="font-size:11px;font-weight:700;color:#9a8878;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">Oylar</div>';
+    OY.forEach(function(o,i){
+      var btn=document.createElement('div');
+      btn.className='tc'+(SEL.yillik.m===i?' active':'');
+      var key=SEL.yillik.y+'-'+i;
+      var cnt=(D.yillik[key]||[]).length;
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-name">'+o+'</span>'+(cnt?'<span class="tc-badge">'+cnt+'</span>':'')+'</div></div>';
+      (function(mi){ btn.onclick=function(){ SEL.yillik.m=mi; renderLeft('yillik'); renderRight('yillik'); }; })(i);
+      left.appendChild(btn);
+    });
+  }
+
+  else if(page==='goals'){
+    left.innerHTML+='<div style="font-size:11px;font-weight:700;color:#9a8878;margin-bottom:6px;text-transform:uppercase;letter-spacing:.4px;">Kategoriya</div>';
+    var cats=[{id:'barchasi',label:'Barchasi'},{id:'health',label:'💪 Salomatlik'},{id:'career',label:'💼 Karyera'},{id:'shaxsiy',label:'🧠 Shaxsiy'},{id:'oila',label:'👨‍👩‍👧 Oila'},{id:'moliya',label:'💰 Moliya'},{id:'talim',label:'🎓 Ta\'lim'}];
+    cats.forEach(function(c){
+      var btn=document.createElement('div');
+      btn.className='tc'+(SEL.gFilter===c.id?' active':'');
+      var cnt=c.id==='barchasi'?D.goals.length:D.goals.filter(function(g){ return g.cat===c.id; }).length;
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-name">'+c.label+'</span>'+(cnt?'<span class="tc-badge">'+cnt+'</span>':'')+'</div></div>';
+      (function(cid){ btn.onclick=function(){ SEL.gFilter=cid; renderLeft('goals'); renderRight('goals'); }; })(c.id);
+      left.appendChild(btn);
+    });
+    // Stats
+    var done2=D.goals.filter(function(g){ return g.progress>=100; }).length;
+    left.innerHTML+='<div style="margin-top:12px;font-size:11px;color:#9a8878;"><strong style="color:#2bb5a5;font-size:16px;">'+D.goals.length+'</strong> maqsad &nbsp;<strong style="color:#c9943a;">'+done2+'</strong> tugadi</div>';
+  }
+
+  else if(page==='habits'){
+    var today2Dk=dKey(NOW);
+    var doneCnt=D.habits.filter(function(h){ return D.habitLog[h.id]&&D.habitLog[h.id][today2Dk]; }).length;
+    left.innerHTML+='<div style="margin-bottom:10px;font-size:13px;color:#5a4030;"><strong style="font-size:22px;color:#e84a2e;">'+doneCnt+'</strong> / '+D.habits.length+'<div style="font-size:10px;color:#9a8878;margin-top:2px;">bugun bajarildi</div></div>';
+    var pw=document.createElement('div'); pw.className='progress-bar-wrap'; pw.style.marginBottom='14px';
+    var pct3=D.habits.length?Math.round(doneCnt/D.habits.length*100):0;
+    pw.innerHTML='<div class="progress-fill" style="width:'+pct3+'%"></div>'; left.appendChild(pw);
+    D.habits.forEach(function(h){
+      var dk3=dKey(NOW), done3=D.habitLog[h.id]&&D.habitLog[h.id][dk3];
+      var btn=document.createElement('div'); btn.className='tc'+(done3?' active':'');
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-icon">'+(h.icon||'✅')+'</span><span class="tc-name">'+escH(h.name)+'</span></div><span class="tc-badge">🔥'+h.streak+'</span></div>';
+      (function(hid){ btn.onclick=function(){ toggleHabit(hid,dk3); }; })(h.id);
+      left.appendChild(btn);
+    });
+  }
+
+  else if(page==='vision'){
+    left.innerHTML+='<div style="font-size:11px;color:#9a8878;margin-bottom:10px;">'+D.vision.length+' ta orzu</div>';
+    D.vision.forEach(function(v,i){
+      var btn=document.createElement('div'); btn.className='tc';
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-icon">'+(v.emoji||'✨')+'</span><span class="tc-name">'+escH(v.title)+'</span></div></div>';
+      left.appendChild(btn);
+    });
+  }
+
+  // For other pages, just show back navigation
+  else {
+    NAV_PAGES.forEach(function(p){
+      var btn=document.createElement('div');
+      btn.className='tc'+(SEL.page===p.id?' active':'');
+      btn.innerHTML='<div class="tc-row1"><div class="tc-left2"><span class="tc-icon">'+p.icon+'</span><span class="tc-name">'+p.label+'</span></div></div>';
+      btn.onclick=function(){ sbNav(p.id); };
+      left.appendChild(btn);
+    });
+  }
+}
+
+// ── RIGHT PANEL RENDER ──
+function renderRight(page){
+  var right=document.getElementById('rightContent');
+  right.innerHTML='';
+
+  if(page==='dashboard') renderDashboardRight(right);
+  else if(page==='kunlik') renderKunlikRight(right);
+  else if(page==='haftalik') renderHaftalikRight(right);
+  else if(page==='oylik') renderOylikRight(right);
+  else if(page==='yillik') renderYillikRight(right);
+  else if(page==='goals') renderGoalsRight(right);
+  else if(page==='habits') renderHabitsRight(right);
+  else if(page==='journal') renderJournalRight(right);
+  else if(page==='vision') renderVisionRight(right);
+  else if(page==='stats') renderStatsRight(right);
+  else if(page==='ai') renderAiRight(right);
+}
+
+// ── DASHBOARD ──
+function renderDashboardRight(right){
+  var todayDk=dKey(NOW);
+  var todayT=D.kunlik[todayDk]||[];
+  var done=todayT.filter(function(t){ return t.done; }).length;
+  var habitsDone=D.habits.filter(function(h){ return D.habitLog[h.id]&&D.habitLog[h.id][todayDk]; }).length;
+  var activeGoals=D.goals.filter(function(g){ return g.progress<100; }).length;
+
+  // Header
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='12px';
+  dh.innerHTML='<div><div class="dh-title">Xush kelibsiz! 👋</div><div class="dh-sub">'+KUN_FULL[NOW.getDay()]+', '+NOW.getDate()+' '+OY[NOW.getMonth()]+' '+NOW.getFullYear()+'</div></div>';
+  right.appendChild(dh);
+
+  // Stat cards
+  var statsDiv=document.createElement('div'); statsDiv.className='stat-cards-row';
+  statsDiv.innerHTML=
+    '<div class="stat-card"><div class="stat-icon">☀️</div><div class="stat-label">Bugungi</div><div class="stat-value">'+todayT.length+'</div><div class="stat-sub">Vazifa</div></div>'+
+    '<div class="stat-card gold-card"><div class="stat-icon">✅</div><div class="stat-label">Bajarildi</div><div class="stat-value">'+done+'</div><div class="stat-sub">'+todayT.length+' tadan</div></div>'+
+    '<div class="stat-card"><div class="stat-icon">🎯</div><div class="stat-label">Faol maqsadlar</div><div class="stat-value">'+activeGoals+'</div><div class="stat-sub">Jami '+D.goals.length+'</div></div>'+
+    '<div class="stat-card"><div class="stat-icon">🔥</div><div class="stat-label">Odatlar</div><div class="stat-value">'+habitsDone+'/'+D.habits.length+'</div><div class="stat-sub">Bugun</div></div>';
+  right.appendChild(statsDiv);
+
+  // Pomodoro + Today tasks
+  var twoRow=document.createElement('div'); twoRow.className='dash-two';
+
+  // Pomodoro card
+  var mins=Math.floor(POMO.secsLeft/60), secs=POMO.secsLeft%60;
+  var pomoDiv=document.createElement('div');
+  pomoDiv.innerHTML='<div class="dash-section-title">🍅 Pomodoro</div>';
+  var pomoCard=document.createElement('div');
+  pomoCard.className='page-card';
+  pomoCard.style.cssText='cursor:pointer;text-align:center;padding:20px';
+  pomoCard.innerHTML='<div style="font-size:2rem;margin-bottom:5px;">'+(POMO.mode==='work'?'🍅':'☕')+'</div>'+
+    '<div style="font-family:\'JetBrains Mono\',monospace;font-size:2rem;font-weight:700;color:#3a2810;">'+fmt2(mins)+':'+fmt2(secs)+'</div>'+
+    '<div style="font-size:.7rem;color:#9a8878;margin:4px 0 8px;text-transform:uppercase;letter-spacing:.1em;">'+({work:'Ishlash vaqti',break:'Dam olish',longBreak:'Uzun dam'}[POMO.mode]||'')+'</div>'+
+    '<div style="font-size:.84rem;font-weight:600;color:#5a4030;margin-bottom:10px;">'+escH(POMO.taskName)+'</div>'+
+    '<div style="display:flex;justify-content:center;gap:6px;margin-bottom:8px;">'+ [0,1,2,3].map(function(_,i){ return '<div style="width:8px;height:8px;border-radius:50%;background:'+(i<POMO.session-1?'#e84a2e':'rgba(0,0,0,.12)')+';"></div>'; }).join('') +'</div>'+
+    '<div style="font-size:.75rem;color:#9a8878;">Sessiya '+POMO.session+'/4 · 🍅 '+POMO.totalDone+'</div>';
+  pomoCard.onclick=function(){ sbNav('kunlik'); };
+  pomoDiv.appendChild(pomoCard);
+  twoRow.appendChild(pomoDiv);
+
+  // Today tasks
+  var todayDiv=document.createElement('div');
+  todayDiv.innerHTML='<div class="dash-section-title">📋 Bugungi vazifalar</div>';
+  if(!todayT.length){
+    todayDiv.innerHTML+='<div class="empty"><span class="e-icon">☀️</span><p>Bugun vazifa yo\'q</p></div>';
+  } else {
+    todayT.slice(0,6).forEach(function(t){
+      var item=document.createElement('div');
+      item.className='task-item p-'+t.priority+(t.done?' done':'');
+      item.style.marginBottom='6px';
+      item.innerHTML='<div class="check-circle">'+(t.done?'✓':'')+'</div>'+
+        '<div class="t-text">'+escH(t.text)+'</div>'+
+        '<span class="t-badge b-'+t.priority+'">'+(t.priority==='yuqori'?'Yuqori':t.priority==='orta'?"O'rta":'Past')+'</span>';
+      item.onclick=function(){ sbNav('kunlik'); };
+      todayDiv.appendChild(item);
+    });
+    if(todayT.length>6){
+      var more=document.createElement('div');
+      more.style.cssText='font-size:11px;color:#9a8878;text-align:center;margin-top:6px;cursor:pointer;';
+      more.textContent='+ '+(todayT.length-6)+' ta ko\'proq';
+      more.onclick=function(){ sbNav('kunlik'); };
+      todayDiv.appendChild(more);
+    }
+  }
+  twoRow.appendChild(todayDiv);
+  right.appendChild(twoRow);
+
+  // Goals + Habits preview
+  var twoRow2=document.createElement('div'); twoRow2.className='dash-two';
+
+  var goalsDiv=document.createElement('div');
+  goalsDiv.innerHTML='<div class="dash-section-title">🎯 Faol maqsadlar</div>';
+  var ag=D.goals.filter(function(g){ return g.progress<100; }).slice(0,3);
+  if(!ag.length){ goalsDiv.innerHTML+='<div class="empty"><span class="e-icon">🎯</span><p>Faol maqsad yo\'q</p></div>'; }
+  else {
+    ag.forEach(function(g){
+      var c=document.createElement('div'); c.className='page-card'; c.style.cssText='margin-bottom:7px;cursor:pointer';
+      c.innerHTML='<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px"><span style="font-size:1.2rem">'+(g.icon||'🎯')+'</span><span style="font-weight:700;font-size:.87rem;flex:1;color:#3a2010;">'+escH(g.title)+'</span><span style="font-size:.75rem;color:#c9943a;font-weight:800;">'+(g.progress||0)+'%</span></div>'+
+        '<div class="progress-bar-wrap"><div class="progress-fill" style="width:'+(g.progress||0)+'%"></div></div>';
+      c.onclick=function(){ sbNav('goals'); }; goalsDiv.appendChild(c);
+    });
+  }
+  twoRow2.appendChild(goalsDiv);
+
+  var habitsDiv=document.createElement('div');
+  habitsDiv.innerHTML='<div class="dash-section-title">🔥 Bugungi odatlar</div>';
+  if(!D.habits.length){ habitsDiv.innerHTML+='<div class="empty"><span class="e-icon">🔥</span><p>Odat yo\'q</p></div>'; }
+  else {
+    D.habits.slice(0,5).forEach(function(h){
+      var dk2=dKey(NOW), done2=D.habitLog[h.id]&&D.habitLog[h.id][dk2];
+      var item=document.createElement('div'); item.className='task-item'+(done2?' done':''); item.style.marginBottom='6px'; item.style.cursor='pointer';
+      item.innerHTML='<div class="check-circle">'+(done2?'✓':'')+'</div><span class="t-text">'+(h.icon||'✅')+' '+escH(h.name)+'</span><span class="habit-streak">🔥'+h.streak+'</span>';
+      (function(hid,dkk){ item.onclick=function(){ toggleHabit(hid,dkk); }; })(h.id,dk2);
+      habitsDiv.appendChild(item);
+    });
+  }
+  twoRow2.appendChild(habitsDiv);
+  right.appendChild(twoRow2);
+}
+
+// ── KUNLIK ──
+
+function renderKunlikRight(right){
+  // Header
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">☀️ Kunlik + 🍅 Pomodoro</div><div class="dh-sub">'+escH(SEL.kunlik)+'</div></div>';
+  right.appendChild(dh);
+
+  // Pomodoro
+  var pomoDiv=document.createElement('div'); pomoDiv.className='pomo-section'; pomoDiv.id='pomo-wrap';
+  var perc=1-(POMO.secsLeft/POMO.totalSecs); var offset=376*(1-perc);
+  pomoDiv.innerHTML='<div class="pomo-inner">'+
+    '<div class="pomo-ring-wrap"><svg viewBox="0 0 140 140"><circle class="pomo-ring-bg" cx="70" cy="70" r="58"/><circle class="pomo-ring-fill" id="pomo-ring" cx="70" cy="70" r="58" stroke-dasharray="364.4" stroke-dashoffset="'+offset*364.4/376+'"/></svg>'+
+    '<div class="pomo-center"><div class="pomo-time-display" id="pomo-display">'+fmt2(Math.floor(POMO.secsLeft/60))+':'+fmt2(POMO.secsLeft%60)+'</div><div class="pomo-mode-label" id="pomo-mode-label">'+({work:'ISHLASH',break:'DAM',longBreak:'UZUN DAM'}[POMO.mode]||'')+'</div></div></div>'+
+    '<div class="pomo-right">'+
+      '<div class="pomo-task-name" id="pomo-task-name">'+escH(POMO.taskName)+'</div>'+
+      '<div class="pomo-task-sub" id="pomo-task-sub">↓ Ro\'yxatdan vazifani bosing</div>'+
+      '<div class="pomo-controls">'+
+        '<button class="pomo-btn pomo-btn-start" id="pomo-start-btn" onclick="pomoStartStop()">'+(POMO.running?'⏸ To\'xtat':'▶ Boshlash')+'</button>'+
+        '<button class="pomo-btn pomo-btn-ghost" onclick="pomoReset()">↺ Qayta</button>'+
+        '<button class="pomo-btn pomo-btn-ghost" onclick="pomoSkip()">⏭</button>'+
+      '</div>'+
+      '<div class="pomo-count-row"><div class="pomo-dots" id="pomo-dots">'+ [0,1,2,3].map(function(_,i){ return '<div class="pomo-dot'+(i<POMO.session-1?' done':'')+'"></div>'; }).join('') +'</div>'+
+      'Sessiya <span id="pomo-session">'+POMO.session+'</span>/4 &nbsp;·&nbsp; 🍅 <span id="pomo-total">'+POMO.totalDone+'</span></div>'+
+      '<div class="pomo-settings">'+
+        '<label>🍅 <input type="number" id="pomo-work-min" value="'+POMO.workMin+'" min="1" max="60" onchange="pomoUpdateSettings()"/> daq</label>'+
+        '<label>☕ <input type="number" id="pomo-break-min" value="'+POMO.breakMin+'" min="1" max="30" onchange="pomoUpdateSettings()"/> daq</label>'+
+        '<label>🌿 <input type="number" id="pomo-long-min" value="'+POMO.longMin+'" min="5" max="60" onchange="pomoUpdateSettings()"/> daq</label>'+
+      '</div>'+
+    '</div>'+
+  '</div>';
+  right.appendChild(pomoDiv);
+
+  // Add form
+  var addCard=document.createElement('div'); addCard.className='page-card';
+  addCard.innerHTML='<div class="add-row">'+
+    '<input class="add-inp" id="k-input" placeholder="Yangi vazifa..." onkeydown="if(event.key===\'Enter\')addKunlik()"/>'+
+    '<select class="add-sel" id="k-priority"><option value="yuqori">🔴 Yuqori</option><option value="orta" selected>🟡 O\'rta</option><option value="past">🟢 Past</option></select>'+
+    '<input type="time" class="add-sel" id="k-time"/>'+
+    '<input type="date" class="add-sel" id="k-deadline" title="Tugash sanasi"/>'+
+    '<button class="pill pill-accent" onclick="addKunlik()">+ Qo\'shish</button>'+
+  '</div>'+
+  '<div class="stats-chips" id="k-stats"></div>'+
+  '<div class="progress-bar-wrap"><div class="progress-fill" id="k-prog" style="width:0%"></div></div>';
+  right.appendChild(addCard);
+
+  // Task list
+  var dk=SEL.kunlik;
+  var list=(D.kunlik[dk]||[]);
+  var filtered=list;
+  if(SEL.kFilter==='faol') filtered=list.filter(function(t){ return !t.done; });
+  else if(SEL.kFilter==='bajarildi') filtered=list.filter(function(t){ return t.done; });
+  else if(SEL.kFilter==='yuqori') filtered=list.filter(function(t){ return t.priority==='yuqori'; });
+
+  var done=list.filter(function(t){ return t.done; }).length;
+  var pct=list.length?Math.round(done/list.length*100):0;
+  var kStatsEl=addCard.querySelector('#k-stats');
+  kStatsEl.innerHTML='<span class="chip">Jami: <strong>'+list.length+'</strong></span>'+
+    '<span class="chip">✅ <strong>'+done+'</strong></span>'+
+    '<span class="chip">⏳ <strong>'+(list.length-done)+'</strong></span>'+
+    '<span class="chip">📊 <strong>'+pct+'%</strong></span>';
+  addCard.querySelector('#k-prog').style.width=pct+'%';
+
+  if(!filtered.length){
+    var emp=document.createElement('div'); emp.className='empty';
+    emp.innerHTML='<span class="e-icon">☀️</span><p>Vazifa yo\'q</p>';
+    right.appendChild(emp);
+  } else {
+    filtered.forEach(function(t){
+      var item=renderTaskItem(t,'kunlik',dk);
+      right.appendChild(item);
+    });
+  }
+}
+
+function renderTaskItem(t,scope,key){
+  var item=document.createElement('div');
+  item.className='task-item p-'+t.priority+(t.done?' done':'');
+  item.style.marginBottom='6px';
+
+  var pomoBtn='';
+  if(scope==='kunlik'){
+    pomoBtn='<button style="background:rgba(232,74,46,.12);border:none;border-radius:8px;padding:4px 8px;font-size:11px;cursor:pointer;color:#e84a2e;font-weight:700;" onclick="event.stopPropagation();pomoSelectTask('+t.id+',\''+escH(t.text)+'\')">🍅'+(t.pomos||0)+'</button>';
+  }
+
+  var deadlineHtml='';
+  if(t.deadline){ deadlineHtml='<span style="font-size:10px;color:#9a8878;background:#e3d5ca;padding:2px 7px;border-radius:20px;flex-shrink:0;">📅 '+t.deadline+'</span>'; }
+
+  item.innerHTML=
+    '<div class="check-circle">'+(t.done?'✓':'')+'</div>'+
+    '<div class="t-text">'+escH(t.text)+'</div>'+
+    deadlineHtml+
+    '<span class="t-badge b-'+t.priority+'">'+(t.priority==='yuqori'?'Yuqori':t.priority==='orta'?"O'rta":'Past')+'</span>'+
+    pomoBtn+
+    '<button class="t-del" onclick="event.stopPropagation();deleteT(\''+scope+'\',\''+key+'\','+t.id+')">✕</button>';
+
+  item.querySelector('.check-circle').addEventListener('click', function(e){
+    e.stopPropagation();
+    toggleT(scope,key,t.id);
+  });
+  return item;
+}
+
+function addKunlik(){
+  var txt=document.getElementById('k-input'); if(!txt||!txt.value.trim()) return;
+  var pri=document.getElementById('k-priority');
+  var tim=document.getElementById('k-time');
+  var dl=document.getElementById('k-deadline');
+  var dk=SEL.kunlik;
+  if(!D.kunlik[dk]) D.kunlik[dk]=[];
+  D.kunlik[dk].push({id:Date.now(),text:txt.value.trim(),priority:pri?pri.value:'orta',time:tim?tim.value:'',deadline:dl?dl.value:'',done:false,pomos:0});
+  sv('kunlik',D.kunlik);
+  txt.value='';
+  renderLeft('kunlik'); renderRight('kunlik');
+  notify('Vazifa qo\'shildi ☀️');
+}
+
+function selKunlik(dk){ SEL.kunlik=dk; renderLeft('kunlik'); renderRight('kunlik'); }
+
+// ── HAFTALIK ──
+function selHaftalikDay(dk){
+  var d=dkToDate(dk);
+  SEL.haftalik.dk=dk; SEL.haftalik.day=d.getDay(); SEL.haftalik.week=wKey(d);
+  renderLeft('haftalik'); renderRight('haftalik');
+}
+
+function dkToDate(dk){
+  var parts=dk.split('-'); return new Date(parseInt(parts[0]),parseInt(parts[1]),parseInt(parts[2]));
+}
+
+function renderHaftalikRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">📅 Haftalik reja</div><div class="dh-sub" id="h-week-sub"></div></div>';
+  right.appendChild(dh);
+
+  var dayIdx=SEL.haftalik.day;
+  var week=SEL.haftalik.week;
+  var key=week+'-'+dayIdx;
+
+  // Week days selection
+  var weekCard=document.createElement('div'); weekCard.className='page-card'; weekCard.style.marginBottom='10px';
+  var weekDiv=document.createElement('div');
+  weekCard.appendChild(weekDiv);
+  buildWeekMini2(weekDiv, SEL.haftalik.dk, 'selHaftalikDay', function(d){ var idx=d.getDay(); var k=SEL.haftalik.week+'-'+idx; return (D.haftalik[k]||[]).length>0; });
+  right.appendChild(weekCard);
+
+  var addCard=document.createElement('div'); addCard.className='page-card';
+  addCard.innerHTML='<div class="add-row">'+
+    '<input class="add-inp" id="h-input" placeholder="Haftalik vazifa..." onkeydown="if(event.key===\'Enter\')addHaftalik()"/>'+
+    '<select class="add-sel" id="h-priority"><option value="yuqori">🔴 Yuqori</option><option value="orta" selected>🟡 O\'rta</option><option value="past">🟢 Past</option></select>'+
+    '<input type="date" class="add-sel" id="h-deadline" title="Tugash sanasi"/>'+
+    '<button class="pill pill-accent" onclick="addHaftalik()">+ Qo\'shish</button>'+
+  '</div>'+
+  '<div class="stats-chips" id="h-stats"></div>'+
+  '<div class="progress-bar-wrap"><div class="progress-fill" id="h-prog" style="width:0%"></div></div>';
+  right.appendChild(addCard);
+
+  var list=D.haftalik[key]||[];
+  var done=list.filter(function(t){ return t.done; }).length;
+  var pct=list.length?Math.round(done/list.length*100):0;
+  addCard.querySelector('#h-stats').innerHTML='<span class="chip">Jami: <strong>'+list.length+'</strong></span><span class="chip">✅ <strong>'+done+'</strong></span><span class="chip">📊 <strong>'+pct+'%</strong></span>';
+  addCard.querySelector('#h-prog').style.width=pct+'%';
+
+  if(!list.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">📅</span><p>Bu kun uchun vazifa yo\'q</p>'; right.appendChild(emp); }
+  else { list.forEach(function(t){ right.appendChild(renderTaskItem(t,'haftalik',key)); }); }
+}
+
+function addHaftalik(){
+  var txt=document.getElementById('h-input'); if(!txt||!txt.value.trim()) return;
+  var pri=document.getElementById('h-priority');
+  var dl=document.getElementById('h-deadline');
+  var key=SEL.haftalik.week+'-'+SEL.haftalik.day;
+  if(!D.haftalik[key]) D.haftalik[key]=[];
+  D.haftalik[key].push({id:Date.now(),text:txt.value.trim(),priority:pri?pri.value:'orta',deadline:dl?dl.value:'',done:false});
+  sv('haftalik',D.haftalik); txt.value='';
+  renderLeft('haftalik'); renderRight('haftalik');
+  notify('Haftalik vazifa qo\'shildi 📅');
+}
+
+// ── OYLIK ──
+function renderOylikRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">🗓️ '+OY[SEL.oylik.m]+' — Oylik reja</div><div class="dh-sub">'+SEL.oylik.y+' yil</div></div>';
+  right.appendChild(dh);
+
+  var key=SEL.oylik.y+'-'+SEL.oylik.m;
+  var addCard=document.createElement('div'); addCard.className='page-card';
+  addCard.innerHTML='<div class="add-row">'+
+    '<input class="add-inp" id="o-input" placeholder="Oylik vazifa..." onkeydown="if(event.key===\'Enter\')addOylik()"/>'+
+    '<select class="add-sel" id="o-priority"><option value="yuqori">🔴 Yuqori</option><option value="orta" selected>🟡 O\'rta</option><option value="past">🟢 Past</option></select>'+
+    '<select class="add-sel" id="o-cat"><option>💼 Ish</option><option>💪 Salomatlik</option><option>👨‍👩‍👧 Oila</option><option>🧠 Shaxsiy</option><option>🎓 Ta\'lim</option><option>💰 Moliya</option></select>'+
+    '<input type="date" class="add-sel" id="o-deadline"/>'+
+    '<button class="pill pill-accent" onclick="addOylik()">+ Qo\'shish</button>'+
+  '</div>'+
+  '<div class="stats-chips" id="o-stats"></div>'+
+  '<div class="progress-bar-wrap"><div class="progress-fill" id="o-prog" style="width:0%"></div></div>';
+  right.appendChild(addCard);
+
+  var list=D.oylik[key]||[];
+  var done=list.filter(function(t){ return t.done; }).length;
+  var pct=list.length?Math.round(done/list.length*100):0;
+  addCard.querySelector('#o-stats').innerHTML='<span class="chip">Jami: <strong>'+list.length+'</strong></span><span class="chip">✅ <strong>'+done+'</strong></span><span class="chip">📊 <strong>'+pct+'%</strong></span>';
+  addCard.querySelector('#o-prog').style.width=pct+'%';
+
+  if(!list.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">🗓️</span><p>Bu oy uchun vazifa yo\'q</p>'; right.appendChild(emp); }
+  else { list.forEach(function(t){ right.appendChild(renderTaskItem(t,'oylik',key)); }); }
+}
+
+function addOylik(){
+  var txt=document.getElementById('o-input'); if(!txt||!txt.value.trim()) return;
+  var pri=document.getElementById('o-priority');
+  var dl=document.getElementById('o-deadline');
+  var cat=document.getElementById('o-cat');
+  var key=SEL.oylik.y+'-'+SEL.oylik.m;
+  if(!D.oylik[key]) D.oylik[key]=[];
+  D.oylik[key].push({id:Date.now(),text:txt.value.trim(),priority:pri?pri.value:'orta',cat:cat?cat.value:'',deadline:dl?dl.value:'',done:false});
+  sv('oylik',D.oylik); txt.value='';
+  renderLeft('oylik'); renderRight('oylik');
+  notify('Oylik vazifa qo\'shildi 🗓️');
+}
+
+// ── YILLIK ──
+function renderYillikRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">🌟 '+SEL.yillik.y+' yil rejalari</div><div class="dh-sub">'+OY[SEL.yillik.m]+' oyi</div></div>';
+  right.appendChild(dh);
+
+  // Year calendar mini
+  var calCard=document.createElement('div'); calCard.className='page-card'; calCard.style.marginBottom='10px';
+  var calDiv=document.createElement('div'); calDiv.className='ycal-months';
+  OY.forEach(function(monthName, mIdx){
+    var mDiv=document.createElement('div'); mDiv.className='ycal-month';
+    mDiv.innerHTML='<div class="ycal-month-name">'+monthName.substring(0,3)+'</div>';
+    var daysDiv=document.createElement('div'); daysDiv.className='ycal-days';
+    var firstDay=new Date(SEL.yillik.y,mIdx,1).getDay();
+    var daysInMonth=new Date(SEL.yillik.y,mIdx+1,0).getDate();
+    var today=new Date();
+    for(var x=0;x<firstDay;x++){
+      var e=document.createElement('div'); e.style.cssText=''; daysDiv.appendChild(e);
+    }
+    for(var d2=1;d2<=daysInMonth;d2++){
+      var cell=document.createElement('div'); cell.className='ycal-day';
+      var isToday=today.getFullYear()===SEL.yillik.y&&today.getMonth()===mIdx&&today.getDate()===d2;
+      var key=SEL.yillik.y+'-'+mIdx;
+      var hasTask=(D.yillik[key]||[]).length>0;
+      if(isToday) cell.classList.add('yd-today');
+      else if(hasTask) cell.classList.add('yd-has');
+      cell.title=d2+' '+monthName;
+      daysDiv.appendChild(cell);
+    }
+    mDiv.appendChild(daysDiv); calDiv.appendChild(mDiv);
+  });
+  calCard.appendChild(calDiv); right.appendChild(calCard);
+
+  var key=SEL.yillik.y+'-'+SEL.yillik.m;
+  var addCard=document.createElement('div'); addCard.className='page-card';
+  addCard.innerHTML='<div class="add-row">'+
+    '<input class="add-inp" id="y-input" placeholder="Yillik maqsad..." onkeydown="if(event.key===\'Enter\')addYillik()"/>'+
+    '<select class="add-sel" id="y-priority"><option value="yuqori">🔴 Yuqori</option><option value="orta" selected>🟡 O\'rta</option><option value="past">🟢 Past</option></select>'+
+    '<input type="number" class="add-sel" id="y-hours" placeholder="Soat" min="1" style="width:80px"/>'+
+    '<button class="pill pill-accent" onclick="addYillik()">+ Qo\'shish</button>'+
+  '</div>'+
+  '<div class="stats-chips" id="y-stats"></div>'+
+  '<div class="progress-bar-wrap"><div class="progress-fill" id="y-prog" style="width:0%"></div></div>';
+  right.appendChild(addCard);
+
+  var list=D.yillik[key]||[];
+  var done=list.filter(function(t){ return t.done; }).length;
+  var pct=list.length?Math.round(done/list.length*100):0;
+  addCard.querySelector('#y-stats').innerHTML='<span class="chip">Jami: <strong>'+list.length+'</strong></span><span class="chip">✅ <strong>'+done+'</strong></span><span class="chip">📊 <strong>'+pct+'%</strong></span>';
+  addCard.querySelector('#y-prog').style.width=pct+'%';
+
+  if(!list.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">🌟</span><p>Bu oy uchun yillik maqsad yo\'q</p>'; right.appendChild(emp); }
+  else { list.forEach(function(t){ right.appendChild(renderTaskItem(t,'yillik',key)); }); }
+}
+
+function addYillik(){
+  var txt=document.getElementById('y-input'); if(!txt||!txt.value.trim()) return;
+  var pri=document.getElementById('y-priority');
+  var hrs=document.getElementById('y-hours');
+  var key=SEL.yillik.y+'-'+SEL.yillik.m;
+  if(!D.yillik[key]) D.yillik[key]=[];
+  D.yillik[key].push({id:Date.now(),text:txt.value.trim(),priority:pri?pri.value:'orta',hours:hrs?hrs.value:'',done:false});
+  sv('yillik',D.yillik); txt.value='';
+  renderLeft('yillik'); renderRight('yillik');
+  notify('Yillik maqsad qo\'shildi 🌟');
+}
+
+// ── GOALS ──
+function renderGoalsRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">🎯 Maqsadlarim</div><div class="dh-sub">Katta hayotiy maqsadlar</div></div>'+
+    '<div class="dh-right"><button class="pill pill-accent" onclick="openModal(\'goal-modal\')">+ Yangi maqsad</button></div>';
+  right.appendChild(dh);
+
+  var list=SEL.gFilter==='barchasi'?D.goals:D.goals.filter(function(g){ return g.cat===SEL.gFilter; });
+  if(!list.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">🎯</span><p>Maqsad yo\'q</p>'; right.appendChild(emp); return; }
+
+  list.forEach(function(g){
+    var c=document.createElement('div'); c.className='goal-card';
+    var steps=g.steps||[];
+    var doneSt=steps.filter(function(s){ return s.done; }).length;
+    var stepsHtml=steps.length?'<div class="goal-steps">'+steps.map(function(s,si){
+      return '<div class="step-item'+(s.done?' done-step':'')+'" onclick="toggleGoalStep('+g.id+','+si+')"><div class="step-check">'+(s.done?'✓':'')+'</div><span>'+escH(s.text)+'</span></div>';
+    }).join('')+'</div>':'';
+    var deadline='';
+    if(g.deadline){ var dl=new Date(g.deadline); var diff=Math.ceil((dl-new Date())/86400000); deadline='<span style="color:'+(diff<0?'#e04040':'#c9943a')+';">'+(diff>0?diff+' kun qoldi':diff===0?'Bugun!':Math.abs(diff)+' kun o\'tdi')+'</span>'; }
+    c.innerHTML='<div class="goal-title"><span style="font-size:1.5rem">'+(g.icon||'🎯')+'</span>'+escH(g.title)+
+      '<span class="t-badge b-'+g.priority+'" style="margin-left:auto">'+(g.priority==='yuqori'?'Yuqori':g.priority==='orta'?"O'rta":'Past')+'</span>'+
+      '<button class="t-del" onclick="deleteGoal('+g.id+')">✕</button></div>'+
+      '<div class="goal-meta">'+(g.cat?'<span>'+g.cat+'</span>':'')+(deadline?deadline:'')+(g.why?'<span style="font-style:italic;color:#9a8878;">'+escH(g.why)+'</span>':'')+'</div>'+
+      '<div style="margin:8px 0 4px;display:flex;justify-content:space-between;align-items:center;"><span style="font-size:11px;color:#9a8878;">Bajarildi: <strong style="color:#2bb5a5;">'+(g.progress||0)+'%</strong></span>'+
+      (steps.length?'<span style="font-size:10.5px;color:#9a8878;">'+doneSt+'/'+steps.length+' bosqich</span>':'')+
+      '<div style="display:flex;gap:5px">'+
+        '<button class="pill pill-sm" onclick="changeGoalProgress('+g.id+',-10)">-10</button>'+
+        '<button class="pill pill-sm pill-accent" onclick="changeGoalProgress('+g.id+',10)">+10</button>'+
+      '</div></div>'+
+      '<div class="progress-bar-wrap"><div class="progress-fill" style="width:'+(g.progress||0)+'%"></div></div>'+
+      stepsHtml;
+    right.appendChild(c);
+  });
+}
+
+function changeGoalProgress(id,delta){
+  var g=D.goals.find(function(x){ return x.id===id; }); if(!g) return;
+  g.progress=Math.max(0,Math.min(100,(g.progress||0)+delta));
+  sv('goals',D.goals); renderLeft('goals'); renderRight('goals');
+}
+function toggleGoalStep(gid,si){
+  var g=D.goals.find(function(x){ return x.id===gid; }); if(!g||!g.steps) return;
+  g.steps[si].done=!g.steps[si].done;
+  var done=g.steps.filter(function(s){ return s.done; }).length;
+  g.progress=Math.round(done/g.steps.length*100);
+  sv('goals',D.goals); renderLeft('goals'); renderRight('goals');
+}
+function deleteGoal(id){ D.goals=D.goals.filter(function(x){ return x.id!==id; }); sv('goals',D.goals); renderLeft('goals'); renderRight('goals'); notify('Maqsad o\'chirildi'); }
+
+// ── HABITS ──
+function renderHabitsRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">🔥 Odatlarim</div><div class="dh-sub">Kundalik odatlar va ularning zanjiri</div></div>'+
+    '<div class="dh-right"><button class="pill pill-accent" onclick="openModal(\'habit-modal\')">+ Yangi odat</button></div>';
+  right.appendChild(dh);
+
+  if(!D.habits.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">🔥</span><p>Odat yo\'q</p>'; right.appendChild(emp); return; }
+
+  D.habits.forEach(function(h){
+    var c=document.createElement('div'); c.className='habit-item';
+    var today2Dk=dKey(NOW);
+    var done2=D.habitLog[h.id]&&D.habitLog[h.id][today2Dk];
+
+    // Last 7 days
+    var daysHtml='<div class="habit-days">';
+    for(var i=6;i>=0;i--){
+      var d=new Date(NOW); d.setDate(d.getDate()-i);
+      var dk2=dKey(d);
+      var isDone=D.habitLog[h.id]&&D.habitLog[h.id][dk2];
+      daysHtml+='<div class="habit-day'+(isDone?' done':'')+'">'+KUN[d.getDay()]+'</div>';
+    }
+    daysHtml+='</div>';
+
+    c.innerHTML='<div class="check-circle" style="cursor:pointer">'+(done2?'✓':'')+'</div>'+
+      '<div style="flex:1"><div style="font-size:14px;font-weight:800;color:#2a1800;">'+(h.icon||'✅')+' '+escH(h.name)+'</div>'+
+      '<div style="font-size:11px;color:#9a8878;margin-top:2px;">'+(h.cat||'')+(h.duration?' · '+h.duration+' daqiqa':'')+(h.reminder?' · ⏰'+h.reminder:'')+'</div></div>'+
+      '<span class="habit-streak">🔥'+h.streak+'</span>'+
+      daysHtml+
+      '<button class="t-del" onclick="deleteHabit('+h.id+')">✕</button>';
+
+    c.querySelector('.check-circle').addEventListener('click', function(){
+      toggleHabit(h.id, today2Dk);
+    });
+    right.appendChild(c);
+  });
+}
+
+function toggleHabit(hid, dk){
+  var h=D.habits.find(function(x){ return x.id===hid; }); if(!h) return;
+  if(!D.habitLog[hid]) D.habitLog[hid]={};
+  var wasDone=D.habitLog[hid][dk];
+  D.habitLog[hid][dk]=!wasDone;
+  if(!wasDone) h.streak=(h.streak||0)+1;
+  else h.streak=Math.max(0,(h.streak||0)-1);
+  sv('habitLog',D.habitLog); sv('habits',D.habits);
+  if(SEL.page==='habits'){ renderLeft('habits'); renderRight('habits'); }
+  else if(SEL.page==='dashboard'){ renderLeft('dashboard'); renderRight('dashboard'); }
+  else { updateTopStats(); }
+  notify(wasDone?'Odat bekor qilindi':'Odat bajarildi! 🔥');
+}
+
+function deleteHabit(id){ D.habits=D.habits.filter(function(x){ return x.id!==id; }); sv('habits',D.habits); renderLeft('habits'); renderRight('habits'); notify('Odat o\'chirildi'); }
+
+// ── JOURNAL ──
+function renderJournalRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">📖 Kundalik</div><div class="dh-sub">Fikrlar, his-tuyg\'ular va qaydlar</div></div>'+
+    '<div class="dh-right"><button class="pill pill-accent" onclick="openModal(\'journal-modal\')">+ Yozish</button></div>';
+  right.appendChild(dh);
+
+  if(!D.journal.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">📖</span><p>Hali yozuv yo\'q</p>'; right.appendChild(emp); return; }
+
+  D.journal.forEach(function(j){
+    var entry=document.createElement('div'); entry.className='journal-entry';
+    var energyStars=j.energy==5?'⚡⚡⚡':j.energy==3?'⚡⚡':'⚡';
+    var extras='';
+    if(j.best) extras+='<div style="font-size:.8rem;color:#c9943a;margin-top:5px;">🌟 '+escH(j.best)+'</div>';
+    if(j.gratitude) extras+='<div style="font-size:.8rem;color:#3a9a5a;margin-top:3px;">🙏 '+escH(j.gratitude)+'</div>';
+    if(j.tomorrow) extras+='<div style="font-size:.8rem;color:#9a8878;margin-top:3px;">➡️ '+escH(j.tomorrow)+'</div>';
+    var tags=j.tags&&j.tags.length?'<div class="j-tags">'+j.tags.map(function(t){ return '<span class="j-tag">#'+escH(t)+'</span>'; }).join('')+'</div>':'';
+    entry.innerHTML='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">'+
+      '<div class="j-date"><span class="j-mood">'+j.mood+'</span> '+energyStars+' '+escH(j.date)+'</div>'+
+      '<button class="t-del" onclick="deleteJournal('+j.id+')">✕</button></div>'+
+      '<div class="j-preview">'+escH(j.text)+'</div>'+extras+tags;
+    right.appendChild(entry);
+  });
+}
+
+function deleteJournal(id){ D.journal=D.journal.filter(function(x){ return x.id!==id; }); sv('journal',D.journal); renderRight('journal'); }
+
+// ── VISION ──
+function renderVisionRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">✨ Vision Board</div><div class="dh-sub">Orzu va intilishlaringiz</div></div>'+
+    '<div class="dh-right"><button class="pill pill-accent" onclick="openModal(\'vision-modal\')">+ Qo\'shish</button></div>';
+  right.appendChild(dh);
+
+  if(!D.vision.length){ var emp=document.createElement('div'); emp.className='empty'; emp.innerHTML='<span class="e-icon">✨</span><p>Vision board bo\'sh</p>'; right.appendChild(emp); return; }
+
+  var grid=document.createElement('div'); grid.className='vision-grid';
+  D.vision.forEach(function(v){
+    var card=document.createElement('div'); card.className='vision-card';
+    var targetLabel='';
+    if(v.target){
+      var td=new Date(v.target); var diff=Math.ceil((td-new Date())/86400000);
+      targetLabel='<div style="font-size:.65rem;color:rgba(255,255,255,.55);margin-top:2px;">'+(diff>0?diff+' kun qoldi':diff===0?'Bugun!':Math.abs(diff)+' kun o\'tdi')+'</div>';
+    }
+    card.innerHTML='<div class="vision-bg" style="background:'+v.color+'">'+v.emoji+'</div>'+
+      '<div class="vision-overlay"><div class="vision-title">'+escH(v.title)+'</div><div class="vision-cat">'+escH(v.cat)+'</div>'+(v.why?'<div style="font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;font-style:italic">'+escH(v.why)+'</div>':'')+targetLabel+'</div>';
+    var db=document.createElement('button'); db.className='vision-del'; db.textContent='✕';
+    (function(vid){ db.onclick=function(){ deleteVision(vid); }; })(v.id);
+    card.appendChild(db); grid.appendChild(card);
+  });
+  right.appendChild(grid);
+}
+
+function deleteVision(id){ D.vision=D.vision.filter(function(x){ return x.id!==id; }); sv('vision',D.vision); renderLeft('vision'); renderRight('vision'); }
+
+// ── STATS ──
+function renderStatsRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">📊 Statistika</div><div class="dh-sub">Faoliyatingiz tahlili</div></div>'+
+    '<div class="dh-right"><button class="pill" onclick="renderRight(\'stats\')">🔄 Yangilash</button></div>';
+  right.appendChild(dh);
+
+  // All tasks stats
+  var allKunlik=[]; Object.values(D.kunlik).forEach(function(arr){ allKunlik=allKunlik.concat(arr); });
+  var allHaftalik=[]; Object.values(D.haftalik).forEach(function(arr){ allHaftalik=allHaftalik.concat(arr); });
+  var allOylik=[]; Object.values(D.oylik).forEach(function(arr){ allOylik=allOylik.concat(arr); });
+  var allYillik=[]; Object.values(D.yillik).forEach(function(arr){ allYillik=allYillik.concat(arr); });
+
+  var statsDiv=document.createElement('div'); statsDiv.className='stat-cards-row';
+  statsDiv.innerHTML=
+    '<div class="stat-card gold-card"><div class="stat-icon">📝</div><div class="stat-label">Jami vazifa</div><div class="stat-value">'+(allKunlik.length+allHaftalik.length+allOylik.length+allYillik.length)+'</div></div>'+
+    '<div class="stat-card"><div class="stat-icon">🎯</div><div class="stat-label">Maqsadlar</div><div class="stat-value">'+D.goals.length+'</div><div class="stat-sub">'+D.goals.filter(function(g){ return g.progress>=100; }).length+' tugadi</div></div>'+
+    '<div class="stat-card"><div class="stat-icon">🔥</div><div class="stat-label">Odatlar</div><div class="stat-value">'+D.habits.length+'</div><div class="stat-sub">Jami</div></div>'+
+    '<div class="stat-card"><div class="stat-icon">📖</div><div class="stat-label">Yozuvlar</div><div class="stat-value">'+D.journal.length+'</div></div>';
+  right.appendChild(statsDiv);
+
+  // Goals progress
+  if(D.goals.length){
+    var gCard=document.createElement('div'); gCard.className='page-card';
+    gCard.innerHTML='<div style="font-size:13px;font-weight:800;color:#5a4030;margin-bottom:12px;">🎯 Maqsadlar holati</div>';
+    D.goals.forEach(function(g){
+      var row=document.createElement('div'); row.style.marginBottom='10px';
+      row.innerHTML='<div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:13px;font-weight:600;color:#3a2810;">'+(g.icon||'🎯')+' '+escH(g.title)+'<span style="color:#c9943a;font-weight:800;">'+(g.progress||0)+'%</span></div>'+
+        '<div class="progress-bar-wrap"><div class="progress-fill" style="width:'+(g.progress||0)+'%"></div></div>';
+      gCard.appendChild(row);
+    });
+    right.appendChild(gCard);
+  }
+
+  // Habit log heatmap
+  if(D.habits.length){
+    var hCard=document.createElement('div'); hCard.className='page-card';
+    hCard.innerHTML='<div style="font-size:13px;font-weight:800;color:#5a4030;margin-bottom:10px;">🔥 So\'nggi 7 kun odatlar</div>';
+    D.habits.forEach(function(h){
+      var row=document.createElement('div'); row.style.cssText='display:flex;align-items:center;gap:8px;margin-bottom:7px;';
+      var days='<div style="display:flex;gap:4px;">';
+      for(var i=6;i>=0;i--){
+        var d=new Date(NOW); d.setDate(d.getDate()-i);
+        var dk=dKey(d);
+        var isDone=D.habitLog[h.id]&&D.habitLog[h.id][dk];
+        days+='<div style="width:24px;height:24px;border-radius:6px;background:'+(isDone?'#2bb5a5':'#d6ccc2')+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:'+(isDone?'#fff':'#9a8878')+';">'+KUN[d.getDay()]+'</div>';
+      }
+      days+='</div>';
+      row.innerHTML='<span style="font-size:13px;width:24px;">'+(h.icon||'✅')+'</span>'+
+        '<span style="font-size:12px;font-weight:700;color:#3a2010;flex:1;min-width:80px;">'+escH(h.name)+'</span>'+
+        days+
+        '<span class="habit-streak">🔥'+h.streak+'</span>';
+      hCard.appendChild(row);
+    });
+    right.appendChild(hCard);
+  }
+}
+
+// ── AI ──
+function renderAiRight(right){
+  var dh=document.createElement('div'); dh.className='dh'; dh.style.marginBottom='10px';
+  dh.innerHTML='<div><div class="dh-title">🤖 AI Tahlil</div><div class="dh-sub">Sun\'iy intellekt yordamchingiz</div></div>';
+  right.appendChild(dh);
+
+  var card1=document.createElement('div'); card1.className='page-card'; card1.style.marginBottom='10px'; card1.style.display='flex'; card1.style.flexDirection='column';
+  card1.innerHTML='<div style="font-size:13px;font-weight:800;color:#5a4030;margin-bottom:10px;">⚡ Tezkor tahlil</div>'+
+    '<div class="ai-btn-row">'+
+      '<button class="pill pill-accent" onclick="aiAnalyze(\'umumiy\')">📋 Umumiy</button>'+
+      '<button class="pill" onclick="aiAnalyze(\'vazifalar\')">☀️ Vazifalar</button>'+
+      '<button class="pill" onclick="aiAnalyze(\'odatlar\')">🔥 Odatlar</button>'+
+      '<button class="pill" onclick="aiAnalyze(\'maqsadlar\')">🎯 Maqsadlar</button>'+
+      '<button class="pill" onclick="aiAnalyze(\'motivatsiya\')">💪 Motivatsiya</button>'+
+    '</div>'+
+    '<div id="ai-status" style="font-size:.8rem;color:#9a8878;margin-bottom:6px;"></div>'+
+    '<div class="ai-result-box" id="ai-result" style="min-height:60px;flex:1;">AI tahlil natijasi bu yerda ko\'rinadi...</div>';
+  right.appendChild(card1);
+
+  var card2=document.createElement('div'); card2.className='page-card'; card2.style.flex='1'; card2.style.display='flex'; card2.style.flexDirection='column';
+  card2.innerHTML='<div style="font-size:13px;font-weight:800;color:#5a4030;margin-bottom:10px;">💬 Savol bering</div>'+
+    '<div class="add-row" style="margin-bottom:10px;">'+
+      '<input class="add-inp" id="ai-question" placeholder="Bugun nima qilishim kerak?" onkeydown="if(event.key===\'Enter\')aiQuestion()"/>'+
+      '<button class="pill pill-accent" onclick="aiQuestion()">➤</button>'+
+    '</div>'+
+    '<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;">'+
+      '<button class="pill pill-sm" onclick="document.getElementById(\'ai-question\').value=\'Bugun nima qilishim kerak?\';aiQuestion()">📅 Bugun</button>'+
+      '<button class="pill pill-sm" onclick="document.getElementById(\'ai-question\').value=\'Qaysi odatlarim yaxshi?\';aiQuestion()">🔥 Odatlar</button>'+
+      '<button class="pill pill-sm" onclick="document.getElementById(\'ai-question\').value=\'Maqsadlarimga erishish uchun maslahat bering\';aiQuestion()">🎯 Maqsadlar</button>'+
+    '</div>'+
+    '<div class="ai-result-box" id="ai-answer" style="min-height:40px;flex:1;"></div>';
+  right.appendChild(card2);
+}
+
+// ============================================================
+// TASK OPERATIONS
+// ============================================================
+function toggleT(scope,key,id){
+  if(!D[scope][key]) return;
+  var t=D[scope][key].find(function(x){ return x.id==id; }); if(!t) return;
+  t.done=!t.done;
+  sv(scope,D[scope]);
+  if(scope==='kunlik'){
+    Object.keys(D.haftalik).forEach(function(hk){ var ht=D.haftalik[hk].find(function(x){ return x.id==id; }); if(ht) ht.done=t.done; });
+    sv('haftalik',D.haftalik);
+  }
+  if(scope==='haftalik'){
+    Object.keys(D.kunlik).forEach(function(kk){ var kt=D.kunlik[kk].find(function(x){ return x.id==id; }); if(kt) kt.done=t.done; });
+    sv('kunlik',D.kunlik);
+  }
+  renderLeft(SEL.page); renderRight(SEL.page);
+}
+
+function deleteT(scope,key,id){
+  if(!D[scope][key]) return;
+  D[scope][key]=D[scope][key].filter(function(x){ return x.id!=id; });
+  sv(scope,D[scope]);
+  renderLeft(SEL.page); renderRight(SEL.page);
+  notify('Vazifa o\'chirildi');
+}
+
+// ============================================================
+// WEEK MINI (Ishlar style)
+// ============================================================
+function buildWeekMini2(container, selDk, onSelFnName, hasTask){
+  var selDate=selDk?dkToDate(selDk):NOW;
+  var weekStart=new Date(selDate);
+  weekStart.setDate(selDate.getDate()-selDate.getDay());
+  container.className='week-mini';
+  container.innerHTML='';
+  for(var i=0;i<7;i++){
+    var d=new Date(weekStart); d.setDate(weekStart.getDate()+i);
+    var dk=dKey(d);
+    var isToday=dKey(NOW)===dk;
+    var isSel=dk===selDk;
+    var has=hasTask&&hasTask(d);
+    var day=document.createElement('div');
+    day.className='wm-day'+(isToday?' wm-today':'')+(isSel&&!isToday?' wm-sel':'')+(has?' wm-has':'');
+    day.innerHTML='<div class="wm-name">'+KUN[d.getDay()]+'</div><div class="wm-num">'+d.getDate()+'</div><div class="wm-dot"></div>';
+    (function(dkk){ day.onclick=function(){ window[onSelFnName](dkk); }; })(dk);
+    container.appendChild(day);
+  }
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function openModal(id){
+  if(id==='quote-modal') renderQuoteModal();
+  var el=document.getElementById(id); if(el) el.classList.add('open');
+}
+function closeModal(id){ var el=document.getElementById(id); if(el) el.classList.remove('open'); }
+
+document.querySelectorAll('.mbg').forEach(function(b){
+  b.addEventListener('click', function(e){ if(e.target===b) b.classList.remove('open'); });
+});
+
+// ============================================================
+// NOTIFY
+// ============================================================
+function notify(msg,icon){
+  icon=icon||'✓';
+  var ni=document.getElementById('n-icon'), nt=document.getElementById('n-text');
+  if(ni) ni.textContent=icon; if(nt) nt.textContent=msg;
+  var el=document.getElementById('notif'); if(!el) return;
+  el.classList.add('show');
+  setTimeout(function(){ el.classList.remove('show'); },2500);
+}
+
+// ============================================================
+// QUOTES
+// ============================================================
+function showQuote(idx){
+  QUOTES=getQuotes();
+  if(!QUOTES.length) return;
+  quoteIdx=(idx+QUOTES.length)%QUOTES.length;
+  var q=QUOTES[quoteIdx];
+  var qt=document.getElementById('q-text'), qa=document.getElementById('q-author');
+  if(qt) qt.textContent='"'+q.t+'"';
+  if(qa) qa.textContent='— '+q.a;
+  // Also update left panel if on dashboard
+  if(SEL.page==='dashboard'){
+    var lq=document.getElementById('left-quote');
+    if(lq){ lq.querySelector('.quote-text').textContent='"'+q.t+'"'; lq.querySelector('.quote-author').textContent='— '+q.a; }
+  }
+}
+function startQuoteTimer(){
+  if(quoteTimerInterval) clearInterval(quoteTimerInterval);
+  quoteTimerSecs=quoteTimerMax;
+  quoteTimerInterval=setInterval(function(){
+    quoteTimerSecs--;
+    if(quoteTimerSecs<=0){ quoteIdx=(quoteIdx+1)%QUOTES.length; showQuote(quoteIdx); quoteTimerSecs=quoteTimerMax; }
+    updateQuoteBar(quoteTimerSecs/quoteTimerMax);
+  },1000);
+}
+function updateQuoteBar(ratio){
+  var bar=document.getElementById('q-timer-bar');
+  if(bar) bar.style.width=(ratio*100)+'%';
+}
+function addQuote(){
+  var t=document.getElementById('new-quote-text'), a=document.getElementById('new-quote-author');
+  if(!t||!t.value.trim()) return;
+  QUOTES=getQuotes();
+  QUOTES.push({t:t.value.trim(), a:(a?a.value.trim():'')||"NOMA'LUM"});
+  saveQuotes(QUOTES); t.value=''; if(a) a.value='';
+  renderQuoteModal(); notify('Sitat qo\'shildi 💬');
+}
+function deleteQuote(idx){ QUOTES=getQuotes(); QUOTES.splice(idx,1); saveQuotes(QUOTES); renderQuoteModal(); notify('Sitat o\'chirildi'); }
+function renderQuoteModal(){
+  var el=document.getElementById('quote-list'); if(!el) return;
+  var qs=getQuotes(); el.innerHTML='';
+  qs.forEach(function(q,i){
+    var row=document.createElement('div');
+    row.style.cssText='background:#edede9;border-radius:10px;padding:10px 12px;display:flex;align-items:flex-start;gap:8px;';
+    row.innerHTML='<div style="flex:1"><div style="font-size:12px;font-weight:600;color:#3a2010;">'+escH(q.t)+'</div><div style="font-size:10px;color:#9a8878;margin-top:3px;">— '+escH(q.a)+'</div></div>'+
+      '<button class="t-del" onclick="deleteQuote('+i+')">✕</button>';
+    el.appendChild(row);
+  });
+}
+
+// ============================================================
+// POMODORO
+// ============================================================
+function pomoStartStop(){
+  if(POMO.running){ clearInterval(POMO.interval); POMO.running=false; }
+  else {
+    POMO.running=true;
+    POMO.interval=setInterval(function(){
+      POMO.secsLeft--;
+      updatePomoUI();
+      if(POMO.secsLeft<=0){
+        clearInterval(POMO.interval); POMO.running=false;
+        if(POMO.mode==='work'){
+          POMO.totalDone++; POMO.session++;
+          if(POMO.session>4){ POMO.session=1; POMO.mode='longBreak'; POMO.secsLeft=POMO.longMin*60; }
+          else { POMO.mode='break'; POMO.secsLeft=POMO.breakMin*60; }
+        } else { POMO.mode='work'; POMO.secsLeft=POMO.workMin*60; }
+        POMO.totalSecs=POMO.secsLeft;
+        notify(POMO.mode==='work'?'Dam olish tugadi! 🍅':'Ishlash vaqti! 💪');
+        updatePomoUI();
+      }
+    },1000);
+  }
+  updatePomoUI();
+}
+function pomoReset(){ clearInterval(POMO.interval); POMO.running=false; POMO.mode='work'; POMO.secsLeft=POMO.workMin*60; POMO.totalSecs=POMO.workMin*60; updatePomoUI(); }
+function pomoSkip(){ clearInterval(POMO.interval); POMO.running=false; if(POMO.mode==='work'){ POMO.totalDone++; POMO.session++; if(POMO.session>4){ POMO.session=1; POMO.mode='longBreak'; POMO.secsLeft=POMO.longMin*60; } else { POMO.mode='break'; POMO.secsLeft=POMO.breakMin*60; } } else { POMO.mode='work'; POMO.secsLeft=POMO.workMin*60; } POMO.totalSecs=POMO.secsLeft; updatePomoUI(); }
+function pomoResetTotal(){ POMO.totalDone=0; POMO.session=1; updatePomoUI(); }
+function pomoUpdateSettings(){
+  var wm=document.getElementById('pomo-work-min'), bm=document.getElementById('pomo-break-min'), lm=document.getElementById('pomo-long-min');
+  if(wm) POMO.workMin=parseInt(wm.value)||25;
+  if(bm) POMO.breakMin=parseInt(bm.value)||5;
+  if(lm) POMO.longMin=parseInt(lm.value)||15;
+  if(!POMO.running){ POMO.secsLeft=POMO.workMin*60; POMO.totalSecs=POMO.workMin*60; updatePomoUI(); }
+}
+function pomoSelectTask(id,name){ POMO.taskId=id; POMO.taskName=name; updatePomoUI(); notify('Vazifa tanlandi: '+name,'🍅'); }
+function updatePomoUI(){
+  var disp=document.getElementById('pomo-display');
+  var lbl=document.getElementById('pomo-mode-label');
+  var btn=document.getElementById('pomo-start-btn');
+  var dots=document.getElementById('pomo-dots');
+  var sess=document.getElementById('pomo-session');
+  var tot=document.getElementById('pomo-total');
+  var tname=document.getElementById('pomo-task-name');
+  var ring=document.getElementById('pomo-ring');
+  var mins=Math.floor(POMO.secsLeft/60), secs=POMO.secsLeft%60;
+  if(disp) disp.textContent=fmt2(mins)+':'+fmt2(secs);
+  if(lbl) lbl.textContent={work:'ISHLASH',break:'DAM OLISH',longBreak:'UZUN DAM'}[POMO.mode]||'';
+  if(btn) btn.textContent=POMO.running?'⏸ To\'xtat':'▶ Boshlash';
+  if(sess) sess.textContent=POMO.session;
+  if(tot) tot.textContent=POMO.totalDone;
+  if(tname) tname.textContent=POMO.taskName;
+  if(dots){ dots.innerHTML=''; for(var i=0;i<4;i++){ var d=document.createElement('div'); d.className='pomo-dot'+(i<POMO.session-1?' done':''); dots.appendChild(d); } }
+  if(ring){ var perc=POMO.totalSecs>0?POMO.secsLeft/POMO.totalSecs:1; ring.style.strokeDashoffset=364.4*(1-perc); ring.style.stroke=POMO.mode==='work'?'#e84a2e':'#2bb5a5'; }
+  updateTopStats();
+}
+
+// ============================================================
+// VISION COLORS
+// ============================================================
+function initVisionColors(){
+  document.querySelectorAll('.vc').forEach(function(c){
+    c.addEventListener('click', function(){
+      document.querySelectorAll('.vc').forEach(function(x){ x.style.outline='none'; });
+      c.style.outline='3px solid #2bb5a5'; c.style.outlineOffset='2px';
+      vmColor=c.dataset.c;
+    });
+  });
+}
+
+// ============================================================
+// SAVE MODALS
+// ============================================================
+function saveGoal(){
+  var title=document.getElementById('gm-title'); if(!title||!title.value.trim()) return;
+  var steps=(document.getElementById('gm-steps').value||'').split('\n').filter(function(s){ return s.trim(); }).map(function(s){ return {text:s.trim(),done:false}; });
+  D.goals.push({
+    id:Date.now(), title:title.value.trim(),
+    cat:document.getElementById('gm-cat').value,
+    deadline:document.getElementById('gm-deadline').value,
+    start:document.getElementById('gm-start').value,
+    why:document.getElementById('gm-why').value,
+    priority:document.getElementById('gm-priority').value,
+    icon:document.getElementById('gm-icon').value||'🎯',
+    steps:steps, progress:0
+  });
+  sv('goals',D.goals); closeModal('goal-modal');
+  ['gm-title','gm-steps','gm-icon','gm-why'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+  document.getElementById('gm-start').value=''; document.getElementById('gm-deadline').value='';
+  notify('Maqsad qo\'shildi! 🎯');
+  renderLeft('goals'); renderRight('goals');
+}
+
+function saveHabit(){
+  var name=document.getElementById('hm-name'); if(!name||!name.value.trim()) return;
+  var days=[];
+  [0,1,2,3,4,5,6].forEach(function(d){ var cb=document.getElementById('hd'+d); if(cb&&cb.checked) days.push(d); });
+  D.habits.push({
+    id:Date.now(), name:name.value.trim(),
+    icon:document.getElementById('hm-icon').value||'✅',
+    cat:document.getElementById('hm-cat').value,
+    duration:document.getElementById('hm-duration').value,
+    reminder:document.getElementById('hm-reminder').value,
+    why:document.getElementById('hm-why').value,
+    days:days.length?days:[1,2,3,4,5],
+    streak:0
+  });
+  sv('habits',D.habits); closeModal('habit-modal');
+  ['hm-name','hm-icon','hm-why'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+  notify('Odat qo\'shildi! 🔥');
+  renderLeft('habits'); renderRight('habits');
+}
+
+function saveJournal(){
+  var txt=document.getElementById('jm-text'); if(!txt||!txt.value.trim()) return;
+  D.journal.unshift({
+    id:Date.now(),
+    mood:document.getElementById('jm-mood').value,
+    energy:document.getElementById('jm-energy').value,
+    text:txt.value.trim(),
+    best:document.getElementById('jm-best').value,
+    gratitude:document.getElementById('jm-gratitude').value,
+    tomorrow:document.getElementById('jm-tomorrow').value,
+    tags:(document.getElementById('jm-tags').value||'').split(',').map(function(t){ return t.trim(); }).filter(Boolean),
+    date:new Date().toLocaleString('uz',{year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'})
+  });
+  sv('journal',D.journal); closeModal('journal-modal');
+  ['jm-text','jm-tags','jm-best','jm-gratitude','jm-tomorrow'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+  notify('Yozuv saqlandi! 📖');
+  renderRight('journal');
+}
+
+function saveVision(){
+  var title=document.getElementById('vm-title'); if(!title||!title.value.trim()) return;
+  D.vision.push({
+    id:Date.now(), title:title.value.trim(),
+    cat:document.getElementById('vm-cat').options[document.getElementById('vm-cat').selectedIndex].text,
+    emoji:document.getElementById('vm-emoji').value||'✨',
+    why:document.getElementById('vm-why').value,
+    target:document.getElementById('vm-target').value,
+    color:vmColor
+  });
+  sv('vision',D.vision); closeModal('vision-modal');
+  ['vm-title','vm-why','vm-target','vm-emoji'].forEach(function(id){ var e=document.getElementById(id); if(e) e.value=''; });
+  notify('Vision qo\'shildi! ✨');
+  renderLeft('vision'); renderRight('vision');
+}
+
+// ============================================================
+// AI
+// ============================================================
+function getDataSummary(){
+  var todayDk=dKey(NOW);
+  var todayT=D.kunlik[todayDk]||[];
+  var done=todayT.filter(function(t){ return t.done; }).length;
+  return 'Bugungi vazifalar: '+todayT.length+' ta ('+done+' bajarildi). Maqsadlar: '+D.goals.length+' ta. Odatlar: '+D.habits.length+' ta (bugun: '+D.habits.filter(function(h){ return D.habitLog[h.id]&&D.habitLog[h.id][todayDk]; }).length+' bajarildi). Kundalik yozuvlar: '+D.journal.length+' ta.';
+}
+function aiAnalyze(type){
+  var prompts={
+    umumiy:'Mening hayot rejam haqida qisqa tahlil bering: '+getDataSummary(),
+    vazifalar:'Mening vazifalarim: '+getDataSummary()+' Bugun nimalarga e\'tibor berishim kerak?',
+    odatlar:'Mening odatlarim: '+D.habits.map(function(h){ return h.icon+h.name+' (streak:'+h.streak+')'; }).join(', ')+'. Ularni yaxshilash bo\'yicha maslahat bering.',
+    maqsadlar:'Mening maqsadlarim: '+D.goals.map(function(g){ return (g.icon||'🎯')+g.title+' ('+g.progress+'%)'; }).join(', ')+'. Progress haqida fikringiz?',
+    motivatsiya:'Quyidagi ma\'lumotlar asosida motivatsion xabar yozing: '+getDataSummary()
+  };
+  callAI(prompts[type]||prompts.umumiy, 'ai-result', 'ai-status');
+}
+function aiQuestion(){
+  var q=document.getElementById('ai-question'); if(!q||!q.value.trim()) return;
+  callAI(q.value.trim()+'\n\nMening ma\'lumotlarim: '+getDataSummary(), 'ai-answer', null);
+}
+function callAI(prompt, resultId, statusId){
+  if(statusId){ var s=document.getElementById(statusId); if(s) s.textContent='⏳ Tahlil qilinmoqda...'; }
+  var r=document.getElementById(resultId); if(r) r.textContent='...';
+  fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',
+      max_tokens:500,
+      messages:[{role:'user',content:prompt+'\n\nO\'zbek tilida qisqa va aniq javob bering. 3-5 jumladan iborat.'}]
+    })
+  }).then(function(res){ return res.json(); }).then(function(data){
+    var text=(data.content||[]).map(function(c){ return c.text||''; }).join('');
+    if(r) r.textContent=text||'Javob olinmadi';
+    if(statusId){ var s2=document.getElementById(statusId); if(s2) s2.textContent='✅ Tahlil tayyor'; }
+  }).catch(function(err){
+    if(r) r.textContent='Xatolik: '+err.message;
+    if(statusId){ var s3=document.getElementById(statusId); if(s3) s3.textContent='❌ Xato yuz berdi'; }
+  });
+}
+
+</script>
+</body>
+</html>

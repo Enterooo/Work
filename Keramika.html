@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Keramika Studio — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#ede9e1;--surface:#f7f4ee;--card:#fff;--card2:#faf8f4;
+  --border:#dfd8cc;--border2:#cfc8bc;
+  --ink:#1f1a12;--ink2:#5c5244;--ink3:#9a8e7e;
+  --teal:#1fb896;--teal-h:#18a082;--teal-s:rgba(31,184,150,.13);--teal-bg:rgba(31,184,150,.08);
+  --red:#e85454;--red-s:rgba(232,84,84,.1);
+  --amber:#d97706;
+  --sh-s:0 1px 4px rgba(30,20,5,.07);--sh-m:0 4px 20px rgba(30,20,5,.10);
+  --sh-l:0 12px 48px rgba(30,20,5,.16);--sh-xl:0 24px 80px rgba(30,20,5,.22);
+  --r-xs:6px;--r-s:10px;--r-m:14px;--r-l:20px;
+  --ov:rgba(15,10,4,.78);--tr:.2s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"]{
+  --bg:#12100c;--surface:#1c1914;--card:#231f18;--card2:#2a2620;
+  --border:#332e25;--border2:#403a30;
+  --ink:#f0ebe0;--ink2:#a89880;--ink3:#6a5e50;
+  --teal:#20c9a4;--teal-h:#18a082;--teal-s:rgba(32,201,164,.14);--teal-bg:rgba(32,201,164,.07);
+  --red:#f07070;--red-s:rgba(240,112,112,.12);
+  --sh-s:0 1px 4px rgba(0,0,0,.3);--sh-m:0 4px 20px rgba(0,0,0,.35);
+  --sh-l:0 12px 48px rgba(0,0,0,.45);--sh-xl:0 24px 80px rgba(0,0,0,.55);
+  --ov:rgba(5,3,0,.85);
+}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);transition:background var(--tr),color var(--tr);}
+
+/* ═══ LAYOUT ═══ */
+.app{display:flex;height:100vh;overflow:hidden;}
+
+/* SIDEBAR */
+.sb{width:216px;flex-shrink:0;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;transition:background var(--tr);}
+.sb-logo{padding:18px 16px 14px;border-bottom:1px solid var(--border);}
+.sb-mark{width:36px;height:36px;border-radius:var(--r-s);background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:9px;box-shadow:0 2px 10px rgba(31,184,150,.3);}
+.sb-name{font-size:.9rem;font-weight:600;color:var(--ink);line-height:1.2;}
+.sb-sub{font-size:.67rem;font-weight:300;color:var(--ink3);letter-spacing:.04em;}
+.sb-nav{flex:1;padding:10px 8px;display:flex;flex-direction:column;gap:1px;overflow-y:auto;}
+.sb-nav::-webkit-scrollbar{width:3px;}
+.sb-nav::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.sl{font-size:.62rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);padding:10px 10px 4px;}
+.ni{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:var(--r-s);cursor:pointer;color:var(--ink2);font-size:.8rem;font-weight:400;border:none;background:transparent;width:100%;text-align:left;transition:all .14s;}
+.ni:hover{background:var(--bg);color:var(--ink);}
+.ni.on{background:var(--teal-bg);color:var(--teal);font-weight:500;}
+.ni-ic{font-size:.88rem;width:16px;text-align:center;flex-shrink:0;}
+.ni-badge{margin-left:auto;background:var(--teal);color:#fff;font-size:.6rem;font-weight:600;padding:1px 6px;border-radius:20px;min-width:18px;text-align:center;}
+.sb-foot{padding:10px 8px;border-top:1px solid var(--border);}
+.theme-row{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;}
+.theme-lbl{font-size:.75rem;color:var(--ink3);}
+.tsw{width:40px;height:21px;border-radius:11px;background:var(--border2);border:none;cursor:pointer;position:relative;padding:2px;display:flex;align-items:center;transition:background .2s;}
+[data-theme="dark"] .tsw{background:var(--teal);}
+.tk{width:17px;height:17px;border-radius:50%;background:#fff;transition:transform .25s cubic-bezier(.34,1.56,.64,1);font-size:9px;display:flex;align-items:center;justify-content:center;}
+[data-theme="dark"] .tk{transform:translateX(19px);}
+
+/* MAIN */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+
+/* TOPBAR */
+.topbar{height:54px;flex-shrink:0;display:flex;align-items:center;gap:10px;padding:0 20px;background:var(--surface);border-bottom:1px solid var(--border);}
+.sw{flex:1;max-width:320px;position:relative;}
+.sw input{width:100%;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:300;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:7px 12px 7px 32px;border-radius:20px;outline:none;transition:border .17s,box-shadow .17s;}
+.sw input::placeholder{color:var(--ink3);}
+.sw input:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-s);}
+.sw-ic{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--ink3);font-size:.78rem;pointer-events:none;}
+.vbtns{display:flex;gap:2px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r-s);padding:3px;}
+.vb{width:27px;height:23px;border-radius:5px;border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center;transition:all .13s;}
+.vb.on{background:var(--card);color:var(--teal);box-shadow:var(--sh-s);}
+.ssel{font-family:'DM Sans',sans-serif;font-size:.76rem;background:var(--bg);border:1px solid var(--border);color:var(--ink2);padding:6px 10px;border-radius:var(--r-s);outline:none;cursor:pointer;}
+.ssel:focus{border-color:var(--teal);}
+.tb-right{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.sp{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border);padding:5px 11px;border-radius:20px;font-size:.73rem;color:var(--ink2);}
+.btn-add{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;background:var(--teal);color:#fff;border:none;padding:7px 16px;border-radius:var(--r-m);cursor:pointer;box-shadow:0 2px 10px rgba(31,184,150,.28);transition:background .16s,transform .12s,box-shadow .16s;display:flex;align-items:center;gap:5px;}
+.btn-add:hover{background:var(--teal-h);transform:translateY(-1px);box-shadow:0 4px 16px rgba(31,184,150,.38);}
+
+/* FILTERBAR */
+.fbar{height:42px;flex-shrink:0;display:flex;align-items:center;gap:5px;padding:0 20px;border-bottom:1px solid var(--border);background:var(--surface);overflow-x:auto;}
+.fbar::-webkit-scrollbar{display:none;}
+.fc{font-family:'DM Sans',sans-serif;font-size:.71rem;font-weight:400;background:transparent;border:1px solid var(--border);color:var(--ink3);padding:4px 12px;border-radius:20px;cursor:pointer;white-space:nowrap;transition:all .14s;}
+.fc:hover{border-color:var(--teal);color:var(--ink2);}
+.fc.on{background:var(--teal);color:#fff;border-color:var(--teal);box-shadow:0 1px 6px rgba(31,184,150,.28);}
+.fcnt{font-size:.68rem;color:var(--ink3);font-weight:300;margin-left:auto;white-space:nowrap;flex-shrink:0;}
+
+/* GALLERY */
+.ga{flex:1;overflow-y:auto;padding:18px 20px;}
+.ga::-webkit-scrollbar{width:5px;}
+.ga::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+.masonry{columns:4;column-gap:14px;}
+.grid-view{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;}
+.list-view{display:flex;flex-direction:column;gap:9px;}
+@media(max-width:1400px){.masonry{columns:3;}}
+@media(max-width:960px){.masonry{columns:2;}}
+@media(max-width:600px){.masonry{columns:1;}}
+
+/* CARD */
+.card{break-inside:avoid;margin-bottom:20px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-m);overflow:hidden;cursor:pointer;position:relative;box-shadow:var(--sh-s);transition:transform .32s cubic-bezier(.34,1.56,.64,1),box-shadow .32s,border-color .32s;animation:cardIn .42s cubic-bezier(.34,1.56,.64,1) both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(22px) scale(.94);}to{opacity:1;transform:translateY(0) scale(1);}}
+.card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 20px 60px rgba(18,10,2,.16),0 6px 20px rgba(18,10,2,.08);border-color:var(--border2);}
+.grid-view .card{margin-bottom:0;}
+.ci{position:relative;overflow:hidden;}
+.ci img{width:100%;display:block;transition:transform .5s;}
+.card:hover .ci img{transform:scale(1.05);}
+.ci-ph{width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,var(--bg),var(--border));display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:.35;}
+.cov{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,10,4,.78) 0%,rgba(15,10,4,.06) 55%,transparent 100%);opacity:0;transition:opacity .23s;display:flex;flex-direction:column;justify-content:flex-end;padding:13px;gap:3px;}
+.card:hover .cov{opacity:1;}
+.cov-cat{font-size:.59rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.68);}
+.cov-name{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:#fff;line-height:1.25;}
+.cacts{position:absolute;top:9px;right:9px;display:flex;gap:4px;opacity:0;transition:opacity .18s;}
+.card:hover .cacts{opacity:1;}
+.ca{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:.75rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .13s;}
+.ca:hover{background:rgba(255,255,255,.32);}
+.ca.del:hover{background:rgba(232,84,84,.65);}
+.cb{padding:11px 13px;}
+.cn{font-family:'Cormorant Garamond',serif;font-size:1.08rem;font-weight:600;font-style:italic;color:var(--ink);line-height:1.22;margin-bottom:7px;}
+.cf{display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.ctag{font-size:.65rem;font-weight:500;padding:2px 8px;border-radius:20px;background:var(--teal-bg);color:var(--teal);border:1px solid rgba(31,184,150,.18);}
+.ytag{font-size:.66rem;color:var(--ink3);font-weight:300;}
+.fdot{margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--amber);flex-shrink:0;}
+
+/* LIST CARD */
+.lc{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r-m);padding:11px 14px;cursor:pointer;transition:all var(--tr);box-shadow:var(--sh-s);}
+.lc:hover{box-shadow:var(--sh-m);transform:translateX(3px);}
+.lt{width:60px;height:60px;border-radius:var(--r-s);overflow:hidden;flex-shrink:0;background:var(--bg);display:flex;align-items:center;justify-content:center;border:1px solid var(--border);}
+.lt img{width:100%;height:100%;object-fit:cover;}
+.lt-ph{font-size:1.5rem;opacity:.35;}
+.li{flex:1;min-width:0;}
+.li-n{font-size:.85rem;font-weight:500;color:var(--ink);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.li-d{font-size:.74rem;color:var(--ink3);font-weight:300;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.lm{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.la{display:flex;gap:4px;}
+.lab{width:26px;height:26px;border-radius:var(--r-xs);border:1px solid var(--border);background:transparent;color:var(--ink3);font-size:.72rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s;}
+.lab:hover{background:var(--bg);color:var(--teal);border-color:var(--teal);}
+.lab.del:hover{background:var(--red-s);color:var(--red);border-color:var(--red);}
+
+/* EMPTY */
+.empty{display:none;flex-direction:column;align-items:center;justify-content:center;padding:80px 20px;gap:13px;text-align:center;}
+.empty.on{display:flex;}
+.ei{font-size:3rem;opacity:.22;}
+.et{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;font-style:italic;color:var(--ink2);}
+.es{font-size:.82rem;color:var(--ink3);font-weight:300;}
+.eb{margin-top:4px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:500;background:var(--teal);color:#fff;border:none;padding:9px 20px;border-radius:var(--r-m);cursor:pointer;transition:background .14s;}
+.eb:hover{background:var(--teal-h);}
+
+/* ═══ PANEL ═══ */
+.pbd{position:fixed;inset:0;z-index:200;background:var(--ov);opacity:0;pointer-events:none;transition:opacity .26s;backdrop-filter:blur(6px);}
+.pbd.on{opacity:1;pointer-events:all;}
+.panel{position:absolute;top:0;right:0;bottom:0;width:396px;background:var(--surface);border-left:1px solid var(--border);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:var(--sh-xl);}
+.pbd.on .panel{transform:translateX(0);}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 14px;border-bottom:1px solid var(--border);flex-shrink:0;}
+.pt{font-size:.92rem;font-weight:600;color:var(--ink);}
+.pc{width:27px;height:27px;border-radius:var(--r-xs);border:1px solid var(--border);background:transparent;color:var(--ink3);cursor:pointer;font-size:.78rem;display:flex;align-items:center;justify-content:center;transition:all .12s;}
+.pc:hover{background:var(--bg);color:var(--ink);}
+.pb{flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:13px;}
+.pb::-webkit-scrollbar{width:3px;}
+.pb::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.pf{padding:13px 20px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end;flex-shrink:0;}
+.fg{display:flex;flex-direction:column;gap:4px;}
+.fg label{font-size:.68rem;font-weight:600;letter-spacing:.04em;color:var(--ink3);}
+.fg input,.fg textarea,.fg select{font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:300;background:var(--bg);border:1px solid var(--border);color:var(--ink);padding:8px 11px;border-radius:var(--r-s);outline:none;resize:vertical;transition:border .17s,box-shadow .17s;}
+.fg input::placeholder,.fg textarea::placeholder{color:var(--ink3);}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--teal);box-shadow:0 0 0 3px var(--teal-s);}
+.fg-note{font-size:.65rem;color:var(--ink3);text-align:right;margin-top:1px;}
+.psec{font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3);border-bottom:1px solid var(--border);padding-bottom:5px;margin-top:3px;}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.chk{display:flex;align-items:center;gap:7px;cursor:pointer;}
+.chk input[type=checkbox]{accent-color:var(--teal);width:13px;height:13px;cursor:pointer;}
+.chk span{font-size:.8rem;color:var(--ink2);}
+.dz{border:1.5px dashed var(--border2);border-radius:var(--r-m);padding:22px 14px;text-align:center;cursor:pointer;background:var(--bg);transition:all .19s;display:flex;flex-direction:column;align-items:center;gap:7px;}
+.dz:hover,.dz.drag{border-color:var(--teal);background:var(--teal-bg);}
+.dz-ic{font-size:1.7rem;opacity:.4;}
+.dz p{font-size:.75rem;color:var(--ink3);font-weight:300;line-height:1.5;}
+.dz input{display:none;}
+.dzp{width:100%;border-radius:var(--r-s);max-height:150px;object-fit:cover;display:none;border:1px solid var(--border);margin-top:3px;}
+.dzp.on{display:block;}
+.dz-ch{font-size:.7rem;color:var(--teal);cursor:pointer;text-decoration:underline;display:none;text-align:center;}
+.btn-g{font-family:'DM Sans',sans-serif;font-size:.78rem;background:transparent;border:1px solid var(--border);color:var(--ink2);padding:8px 16px;border-radius:var(--r-s);cursor:pointer;transition:all .12s;}
+.btn-g:hover{background:var(--bg);}
+.btn-p{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;background:var(--teal);color:#fff;border:none;padding:8px 20px;border-radius:var(--r-s);cursor:pointer;box-shadow:0 1px 6px rgba(31,184,150,.22);transition:background .13s,transform .11s;}
+.btn-p:hover{background:var(--teal-h);transform:translateY(-1px);}
+
+/* ═══ LIGHTBOX ═══ */
+.lb{position:fixed;inset:0;z-index:300;background:rgba(8,6,2,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;backdrop-filter:blur(14px);}
+.lb.on{opacity:1;pointer-events:all;}
+.lb-w{display:flex;align-items:stretch;max-width:1100px;width:93vw;max-height:88vh;border-radius:var(--r-l);overflow:hidden;box-shadow:var(--sh-xl);transform:scale(.93) translateY(16px);transition:transform .27s cubic-bezier(.34,1.56,.64,1);border:1px solid var(--border);}
+.lb.on .lb-w{transform:scale(1) translateY(0);}
+.lb-im{flex:1.7;position:relative;background:#080604;min-height:340px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.lb-im img{width:100%;height:100%;object-fit:contain;display:block;}
+.lb-im-ph{font-size:4rem;opacity:.18;}
+.lba{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.95rem;cursor:pointer;z-index:5;display:flex;align-items:center;justify-content:center;transition:background .13s;}
+.lba:hover{background:rgba(255,255,255,.22);}
+.lba[disabled]{opacity:.22;pointer-events:none;}
+.lb-prev{left:11px;} .lb-next{right:11px;}
+.lb-cl{position:absolute;top:12px;right:12px;z-index:10;width:32px;height:32px;border-radius:var(--r-xs);background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.82rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .12s;}
+.lb-cl:hover{background:rgba(255,255,255,.22);}
+.lb-ctr{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);font-size:.7rem;color:rgba(255,255,255,.45);background:rgba(0,0,0,.38);padding:3px 11px;border-radius:20px;white-space:nowrap;}
+.lb-in{width:272px;flex-shrink:0;background:var(--surface);display:flex;flex-direction:column;overflow:hidden;}
+.lb-ih{padding:22px 20px 14px;border-bottom:1px solid var(--border);}
+.lb-chip{display:inline-flex;background:var(--teal-bg);color:var(--teal);font-size:.62rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid rgba(31,184,150,.18);margin-bottom:9px;}
+.lb-tl{font-family:'Cormorant Garamond',serif;font-size:1.22rem;font-weight:400;font-style:italic;color:var(--ink);line-height:1.28;}
+.lb-ib{flex:1;overflow-y:auto;padding:14px 20px;display:flex;flex-direction:column;gap:11px;}
+.lb-ib::-webkit-scrollbar{width:3px;}
+.lb-ib::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.lb-ds{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.7;}
+.lb-mr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-top:1px solid var(--border);}
+.lb-ml{font-size:.68rem;color:var(--ink3);}
+.lb-mv{font-size:.78rem;color:var(--ink2);}
+.lb-fv{display:flex;align-items:center;gap:7px;padding:9px 11px;border-radius:var(--r-s);background:var(--bg);cursor:pointer;border:1px solid var(--border);transition:all .13s;}
+.lb-fv:hover{border-color:var(--amber);}
+.lb-fv.on{background:rgba(217,119,6,.07);border-color:rgba(217,119,6,.28);}
+.lb-fv span{font-size:.78rem;color:var(--ink2);}
+.lb-if{padding:13px 20px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:7px;}
+.lb-eb{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;background:var(--teal);color:#fff;border:none;padding:8px;border-radius:var(--r-s);cursor:pointer;transition:background .13s;text-align:center;}
+.lb-eb:hover{background:var(--teal-h);}
+.lb-db{font-family:'DM Sans',sans-serif;font-size:.76rem;background:transparent;border:1px solid var(--border);color:var(--red);padding:7px;border-radius:var(--r-s);cursor:pointer;transition:all .12s;text-align:center;}
+.lb-db:hover{background:var(--red-s);border-color:var(--red);}
+@media(max-width:680px){.lb-w{flex-direction:column;max-height:95vh;}.lb-in{width:100%;max-height:210px;}}
+
+/* ═══ DIALOG ═══ */
+.dbd{position:fixed;inset:0;z-index:400;background:var(--ov);opacity:0;pointer-events:none;transition:opacity .21s;backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;}
+.dbd.on{opacity:1;pointer-events:all;}
+.dlg{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-l);padding:26px 24px;max-width:370px;width:90%;box-shadow:var(--sh-xl);transform:scale(.91);transition:transform .23s cubic-bezier(.34,1.56,.64,1);}
+.dbd.on .dlg{transform:scale(1);}
+.dlg-ic{font-size:1.9rem;margin-bottom:11px;}
+.dlg-t{font-size:.95rem;font-weight:600;color:var(--ink);margin-bottom:7px;}
+.dlg-m{font-size:.82rem;font-weight:300;color:var(--ink2);line-height:1.65;margin-bottom:18px;}
+.dlg-m strong{color:var(--ink);font-weight:500;}
+.dlg-a{display:flex;gap:7px;justify-content:flex-end;}
+.btn-cd{font-family:'DM Sans',sans-serif;font-size:.78rem;background:transparent;border:1px solid var(--border);color:var(--ink2);padding:7px 16px;border-radius:var(--r-s);cursor:pointer;transition:all .12s;}
+.btn-cd:hover{background:var(--bg);}
+.btn-dd{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;background:var(--red);color:#fff;border:none;padding:7px 18px;border-radius:var(--r-s);cursor:pointer;transition:background .12s;}
+.btn-dd:hover{background:#d44;}
+
+/* ═══ TOASTS ═══ */
+.tws{position:fixed;bottom:20px;right:20px;z-index:500;display:flex;flex-direction:column-reverse;gap:7px;}
+.tw{display:flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--border);padding:10px 14px;border-radius:var(--r-m);box-shadow:var(--sh-l);font-size:.78rem;color:var(--ink);transform:translateX(110%);opacity:0;transition:all .28s cubic-bezier(.34,1.56,.64,1);min-width:200px;max-width:300px;}
+.tw.on{transform:translateX(0);opacity:1;}
+.tw-ic{font-size:.95rem;flex-shrink:0;}
+
+/* RESPONSIVE */
+@media(max-width:768px){.sb{display:none;}.topbar{padding:0 12px;}.fbar{padding:0 12px;}.ga{padding:12px;}.panel{width:100%;}}
+
+/* image count badge */
+.img-cnt-badge{
+  position:absolute;top:8px;left:8px;z-index:4;
+  background:rgba(0,0,0,.48);backdrop-filter:blur(6px);
+  color:#fff;font-size:.6rem;font-weight:600;
+  padding:2px 7px;border-radius:9px;
+  border:1px solid rgba(255,255,255,.16);
+  pointer-events:none;
+}
+/* thumbnail grid */
+.thumb-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:7px;
+}
+.thumb-item{
+  position:relative;aspect-ratio:1;
+  border-radius:var(--r-s);overflow:hidden;
+  border:1px solid var(--border);background:var(--bg);cursor:pointer;
+}
+.thumb-item img{width:100%;height:100%;object-fit:cover;display:block;}
+.thumb-item.primary::after{
+  content:'★';position:absolute;top:4px;left:4px;
+  background:rgba(15,168,126,.9);color:#fff;
+  font-size:.52rem;font-weight:700;padding:1px 5px;border-radius:5px;
+  pointer-events:none;
+}
+.thumb-del{
+  position:absolute;top:3px;right:3px;
+  width:20px;height:20px;border-radius:5px;
+  background:rgba(0,0,0,.55);border:none;color:#fff;
+  font-size:.62rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .14s;
+}
+.thumb-item:hover .thumb-del{opacity:1;}
+.thumb-add{
+  aspect-ratio:1;border-radius:var(--r-s);
+  border:1.5px dashed var(--border2);background:var(--bg);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;cursor:pointer;transition:all .13s;
+}
+.thumb-add:hover{border-color:var(--teal);background:var(--teal-bg);}
+.thumb-add .plus{font-size:1.2rem;color:var(--ink3);}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sb">
+    <div class="sb-logo">
+      <div class="sb-mark">🏺</div>
+      <div class="sb-name">Keramika Studio</div>
+      <div class="sb-sub">Portfolio v3</div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sl">Ko'rinish</div>
+      <button class="ni on" onclick="setV('all',this)"><span class="ni-ic">🖼</span>Barcha ishlar<span class="ni-badge" id="nb-all">0</span></button>
+      <button class="ni" onclick="setV('fav',this)"><span class="ni-ic">⭐</span>Sevimlilar<span class="ni-badge" id="nb-fav">0</span></button>
+      <div class="sl" style="margin-top:6px;">Kategoriyalar</div>
+      <div id="cat-nav"></div>
+    </nav>
+    <div class="sb-foot">
+      <div class="theme-row">
+        <span class="theme-lbl" id="tlbl">Kunduzgi</span>
+        <button class="tsw" onclick="toggleTheme()"><div class="tk" id="tk">☀</div></button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOPBAR -->
+    <div class="topbar">
+      <div class="sw"><span class="sw-ic">⌕</span><input id="sq" type="text" placeholder="Nom, kategoriya, mijoz..." oninput="doS()"></div>
+      <div class="vbtns">
+        <button class="vb on" id="vb-m" onclick="setL('masonry',this)" title="Masonry">⊞</button>
+        <button class="vb" id="vb-g" onclick="setL('grid',this)" title="Grid">▦</button>
+        <button class="vb" id="vb-l" onclick="setL('list',this)" title="List">☰</button>
+      </div>
+      <select class="ssel" id="srt" onchange="render()">
+        <option value="new">Yangi birinchi</option>
+        <option value="old">Eski birinchi</option>
+        <option value="az">A → Z</option>
+        <option value="za">Z → A</option>
+        <option value="fav">Sevimlilar</option>
+      </select>
+      <div class="tb-right">
+        <div class="sp">🖼 <span id="st-tot">0</span> ta</div>
+        <button class="btn-add" onclick="openPanel()"><span>+</span> Qo'shish</button>
+      </div>
+    </div>
+
+    <!-- FILTERBAR -->
+    <div class="fbar">
+      <button class="fc on" data-cat="all" onclick="setCat('all',this)">Hammasi</button>
+      <div id="cat-fb" style="display:contents;"></div>
+      <span class="fcnt" id="fcnt"></span>
+    </div>
+
+    <!-- GALLERY -->
+    <div class="ga" id="ga">
+      <div class="masonry" id="gal"></div>
+      <div class="empty" id="emp">
+        <div class="ei">🔍</div>
+        <div class="et">Hech narsa topilmadi</div>
+        <div class="es">Qidiruvni o'zgartiring yoki yangi ish qo'shing</div>
+        <button class="eb" onclick="openPanel()">+ Birinchi ish qo'shing</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PANEL -->
+<div class="pbd" id="pbd">
+  <div class="panel">
+    <div class="ph">
+      <div class="pt" id="pt">Yangi ish qo'shish</div>
+      <button class="pc" onclick="closePanel()">✕</button>
+    </div>
+    <div class="pb">
+      <!-- IMAGE UPLOAD -->
+      <div>
+        <label style="font-size:.65rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);display:block;margin-bottom:7px;">Loyiha rasmlari</label>
+        <div class="dz" id="dz" onclick="document.getElementById('fi').click()" ondragover="dzO(event,true)" ondragleave="dzO(event,false)" ondrop="dzD(event)">
+          <input type="file" id="fi" accept="image/*" multiple onchange="Array.from(this.files).forEach(f=>pickF(f))">
+          <div class="dz-ic">📷</div>
+          <p>Rasmlarni yuklash uchun bosing<br><span style="font-size:.69rem;">yoki bu yerga tashlang • Ko'p rasm mumkin • max 8MB</span></p>
+        </div>
+        <div class="thumb-grid" id="thumb-grid" style="display:none;margin-top:8px;"></div>
+      </div>
+
+      <div class="psec">Asosiy</div>
+      <div class="fg"><label>Loyiha nomi *</label><input id="fn" maxlength="80" placeholder="Ko'k Atlantika seriyasi" oninput="uc('fn','ncn',80)"><span class="fg-note" id="ncn">0/80</span></div>
+      <div class="fg"><label>Tavsif</label><textarea id="fd" rows="3" maxlength="300" placeholder="Ish haqida qisqacha..." oninput="uc('fd','ncd',300)"></textarea><span class="fg-note" id="ncd">0/300</span></div>
+      <div class="fg"><label>Kategoriya</label>
+        <select id="fcat">
+          <option>Devor plitkalari</option><option>Pol plitkalari</option>
+          <option>Mozaika</option><option>Dekorativ keramika</option>
+          <option>Oshxona seriyasi</option><option>Vannaxona seriyasi</option>
+          <option>Fasad plitkalari</option><option>Boshqa</option>
+        </select>
+      </div>
+      <div class="psec">Qo'shimcha</div>
+      <div class="g2">
+        <div class="fg"><label>Yil</label><input id="fyr" type="number" min="2000" max="2099" placeholder="2024"></div>
+        <div class="fg"><label>O'lcham (m²)</label><input id="fsz" type="text" placeholder="12.5"></div>
+      </div>
+      <div class="fg"><label>Mijoz</label><input id="fcl" maxlength="60" placeholder="Mijoz ismi"></div>
+      <div class="fg"><label>Joylashuv</label><input id="flc" maxlength="60" placeholder="Shahar, manzil"></div>
+      <label class="chk"><input type="checkbox" id="ffav"><span>⭐ Sevimlilarga qo'shish</span></label>
+    </div>
+    <div class="pf">
+      <button class="btn-g" onclick="closePanel()">Bekor</button>
+      <button class="btn-p" onclick="saveItem()">💾 Saqlash</button>
+    </div>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <div class="lb-w">
+    <div class="lb-im" id="lb-im">
+      <button class="lba lb-prev" id="lbp" onclick="lbN(-1)">←</button>
+      <img id="lbi" src="" alt="" style="display:none">
+      <div class="lb-im-ph" id="lb-ph">🏺</div>
+      <button class="lba lb-next" id="lbn" onclick="lbN(1)">→</button>
+      <div class="lb-ctr" id="lb-ctr"></div>
+    </div>
+    <div class="lb-in">
+      <div class="lb-ih">
+        <div class="lb-chip" id="lb-cat"></div>
+        <div class="lb-tl" id="lb-tl"></div>
+      </div>
+      <div class="lb-ib">
+        <div class="lb-ds" id="lb-ds"></div>
+        <div id="lb-mts"></div>
+        <div class="lb-fv" id="lb-fv" onclick="toggleFavLb()">
+          <span id="lb-fic">☆</span><span id="lb-ftx">Sevimlilarga qo'shish</span>
+        </div>
+      </div>
+      <div class="lb-if">
+        <button class="lb-eb" onclick="editFromLb()">✎ Tahrirlash</button>
+        <button class="lb-db" onclick="delFromLb()">🗑 O'chirish</button>
+      </div>
+    </div>
+  </div>
+  <button class="lb-cl" onclick="closeLb()">✕</button>
+</div>
+
+<!-- DIALOG -->
+<div class="dbd" id="dbd">
+  <div class="dlg">
+    <div class="dlg-ic">🗑</div>
+    <div class="dlg-t">O'chirishni tasdiqlang</div>
+    <div class="dlg-m" id="dlg-m"></div>
+    <div class="dlg-a">
+      <button class="btn-cd" onclick="closeDlg()">Bekor</button>
+      <button class="btn-dd" onclick="confirmDel()">O'chirish</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOASTS -->
+<div class="tws" id="tws"></div>
+
+<script>
+/* ─── DATA ─── */
+const DEMO=[
+  {id:1,name:"Ko'k Atlantika seriyasi",desc:"Dengiz ilhomidan yaratilgan qo'lda bo'yalgan devor plitkalari. Har bir parcha noyob.",cat:"Devor plitkalari",year:2024,size:"18.5",client:"Aqua Hotel",loc:"Toshkent",fav:true,imgs:["https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=85"]},
+  {id:2,name:"Terrakota Zamin",desc:"Issiq tuproq tonlarida pol plitkalari. Interer uchun tabiiy hissiyot.",cat:"Pol plitkalari",year:2023,size:"34",client:"Klassika Restaurant",loc:"Samarqand",fav:false,imgs:["https://images.unsplash.com/photo-1615529182904-14819c35db37?w=700&q=85"]},
+  {id:3,name:"Oq Mozaika Panel",desc:"2×2 sm mozaika qoplamalari, klassik intererlar uchun.",cat:"Mozaika",year:2024,size:"8",client:"",loc:"Buxoro",fav:true,imgs:["https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=700&q=85"]},
+  {id:4,name:"Yashil Nefrit",desc:"Tabiiy tosh effektidagi devor plitkalari, noyob yashil pallet.",cat:"Devor plitkalari",year:2023,size:"22",client:"Oasis SPA",loc:"Toshkent",fav:false,imgs:["https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=700&q=85"]},
+  {id:5,name:"Sanoat Beton",desc:"Beton teksturali pol plitkalari, zamonaviy ofis va loft uchun.",cat:"Pol plitkalari",year:2022,size:"56",client:"Tech Park",loc:"Toshkent",fav:false,imgs:["https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=700&q=85"]},
+  {id:6,name:"Oltin Arabesque",desc:"Oltin naqshli dekorativ panellar, mehmonxona zali uchun.",cat:"Dekorativ keramika",year:2024,size:"14",client:"Grand Palace",loc:"Toshkent",fav:true,imgs:["https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=700&q=85"]},
+  {id:7,name:"Hammom Klassik",desc:"Vannaxona uchun klassik oq-ko'k seriyasi.",cat:"Vannaxona seriyasi",year:2023,size:"9",client:"",loc:"Namangan",fav:false,imgs:["https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=700&q=85"]},
+  {id:8,name:"Bistro Oshxona",desc:"Issiqqa va namga chidamli oshxona plitkalari.",cat:"Oshxona seriyasi",year:2024,size:"7",client:"Bistro Milano",loc:"Andijon",fav:false,imgs:["https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=85"]},
+  {id:9,name:"Antik Roma Mozaika",desc:"Roma davri ilhomlangan geometrik mozaika naqshlari.",cat:"Mozaika",year:2022,size:"11",client:"Roma Cafe",loc:"Samarqand",fav:true,imgs:["https://images.unsplash.com/photo-1605774337664-7a846e9cdf96?w=700&q=85"]},
+  {id:10,name:"Fasad Granit",desc:"Bino fasadi uchun chidamli tashqi qoplama plitkalari.",cat:"Fasad plitkalari",year:2023,size:"120",client:"Riviera Complex",loc:"Toshkent",fav:false,imgs:["https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=85"]},
+];
+let items=JSON.parse(localStorage.getItem('ks_v3')||'null')||DEMO;
+let nid=Math.max(...items.map(i=>i.id),0)+1;
+const sv=()=>localStorage.setItem('ks_v3',JSON.stringify(items));
+
+/* STATE */
+let curCat='all',curView='all',curLayout='masonry',sq='',editId=null,delId=null;
+let lbList=[],lbIdx=0,curImg=null;
+
+/* ─── THEME ─── */
+function toggleTheme(){
+  const t=document.documentElement.getAttribute('data-theme');
+  const n=t==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',n);
+  document.getElementById('tk').textContent=n==='dark'?'☾':'☀';
+  document.getElementById('tlbl').textContent=n==='dark'?'Tungi':'Kunduzgi';
+  localStorage.setItem('ks_th',n);
+}
+(()=>{const t=localStorage.getItem('ks_th')||'light';document.documentElement.setAttribute('data-theme',t);document.getElementById('tk').textContent=t==='dark'?'☾':'☀';document.getElementById('tlbl').textContent=t==='dark'?'Tungi':'Kunduzgi';})();
+
+/* ─── STATE SETTERS ─── */
+function setV(v,el){
+  curView=v;curCat='all';sq='';
+  document.getElementById('sq').value='';
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.fc').forEach(b=>b.classList.remove('on'));
+  document.querySelector('.fc[data-cat="all"]').classList.add('on');
+  render();
+}
+function setL(l,el){
+  curLayout=l;
+  document.querySelectorAll('.vb').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.getElementById('gal').className=l==='masonry'?'masonry':l==='grid'?'grid-view':'list-view';
+  render();
+}
+function setCat(c,el){
+  curCat=c;
+  document.querySelectorAll('.fc').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+function doS(){sq=document.getElementById('sq').value.toLowerCase();render();}
+
+/* ─── FILTER ─── */
+function getFilt(){
+  const srt=document.getElementById('srt').value;
+  let l=[...items];
+  if(curView==='fav') l=l.filter(i=>i.fav);
+  if(curCat!=='all') l=l.filter(i=>i.cat===curCat);
+  if(sq) l=l.filter(i=>i.name.toLowerCase().includes(sq)||(i.desc||'').toLowerCase().includes(sq)||i.cat.toLowerCase().includes(sq)||(i.client||'').toLowerCase().includes(sq)||(i.loc||'').toLowerCase().includes(sq));
+  if(srt==='new')l.sort((a,b)=>b.id-a.id);
+  else if(srt==='old')l.sort((a,b)=>a.id-b.id);
+  else if(srt==='az')l.sort((a,b)=>a.name.localeCompare(b.name));
+  else if(srt==='za')l.sort((a,b)=>b.name.localeCompare(a.name));
+  else if(srt==='fav')l.sort((a,b)=>b.fav-a.fav);
+  return l;
+}
+
+/* ─── RENDER ─── */
+function render(){
+  buildSbCats(); buildFbar();
+  const vis=getFilt(); lbList=vis;
+  const g=document.getElementById('gal'); g.innerHTML='';
+  document.getElementById('emp').classList.toggle('on',vis.length===0);
+  document.getElementById('st-tot').textContent=items.length;
+  document.getElementById('nb-all').textContent=items.length;
+  document.getElementById('nb-fav').textContent=items.filter(i=>i.fav).length;
+  document.getElementById('fcnt').textContent=vis.length+' ta';
+  vis.forEach((it,idx)=>g.appendChild(curLayout==='list'?mkLC(it,idx):mkC(it,idx)));
+}
+
+function buildSbCats(){
+  const cats=[...new Set(items.map(i=>i.cat))].sort();
+  const el=document.getElementById('cat-nav'); el.innerHTML='';
+  cats.forEach(cat=>{
+    const cnt=items.filter(i=>i.cat===cat).length;
+    const b=document.createElement('button');
+    b.className='ni'+(curCat===cat&&curView==='all'?' on':'');
+    b.innerHTML=`<span class="ni-ic">◆</span><span style="flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.78rem;">${e(cat)}</span><span style="font-size:.63rem;color:var(--ink3);">${cnt}</span>`;
+    b.onclick=()=>{
+      curView='all';curCat=cat;
+      document.querySelectorAll('.ni').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      document.querySelectorAll('.fc').forEach(x=>x.classList.remove('on'));
+      document.querySelector(`.fc[data-cat="${cat}"]`)?.classList.add('on');
+      render();
+    };
+    el.appendChild(b);
+  });
+}
+
+function buildFbar(){
+  const fb=document.getElementById('cat-fb'); fb.innerHTML='';
+  [...new Set(items.map(i=>i.cat))].sort().forEach(cat=>{
+    const b=document.createElement('button');
+    b.className='fc'+(curCat===cat?' on':'');
+    b.dataset.cat=cat; b.textContent=cat;
+    b.onclick=()=>setCat(cat,b);
+    fb.appendChild(b);
+  });
+}
+
+/* ─── CARDS ─── */
+function mkC(it,idx){
+  const d=document.createElement('div'); d.className='card';
+  const hi=!!it.img;
+  d.innerHTML=`
+    <div class="ci">
+      ${hi?`<img src="${it.img}" alt="${e(it.name)}" loading="lazy">`:`<div class="ci-ph">🏺</div>`}
+      <div class="cov"><div class="cov-cat">${e(it.cat)}</div><div class="cov-name">${e(it.name)}</div></div>
+      <div class="cacts">
+        <button class="ca" onclick="event.stopPropagation();editItem(${it.id})" title="Tahrirlash">✎</button>
+        <button class="ca" onclick="event.stopPropagation();toggleFav(${it.id})" title="Sevimli">${it.fav?'★':'☆'}</button>
+        <button class="ca del" onclick="event.stopPropagation();askDel(${it.id})" title="O'chirish">🗑</button>
+      </div>
+    </div>
+    <div class="cb">
+      <div class="cn">${e(it.name)}</div>
+      <div class="cf">
+        <span class="ctag">${e(it.cat)}</span>
+        ${it.year?`<span class="ytag">${it.year}</span>`:''}
+        ${it.size?`<span class="ytag">${it.size} m²</span>`:''}
+        ${it.fav?`<span class="fdot" title="Sevimli"></span>`:''}
+      </div>
+    </div>`;
+  d.onclick=()=>openLb(idx);
+  return d;
+}
+
+function mkLC(it,idx){
+  const d=document.createElement('div'); d.className='lc';
+  d.innerHTML=`
+    <div class="lt">${it.img?`<img src="${it.img}" alt="${e(it.name)}" loading="lazy">`:`<div class="lt-ph">🏺</div>`}</div>
+    <div class="li">
+      <div class="li-n">${e(it.name)} ${it.fav?'⭐':''}</div>
+      <div class="li-d">${e(it.desc||'—')}</div>
+    </div>
+    <div class="lm">
+      <span class="ctag" style="font-size:.64rem;">${e(it.cat)}</span>
+      <div class="la">
+        <button class="lab" onclick="event.stopPropagation();editItem(${it.id})" title="Tahrirlash">✎</button>
+        <button class="lab" onclick="event.stopPropagation();toggleFav(${it.id})" title="Sevimli">${it.fav?'★':'☆'}</button>
+        <button class="lab del" onclick="event.stopPropagation();askDel(${it.id})" title="O'chirish">🗑</button>
+      </div>
+    </div>`;
+  d.onclick=()=>openLb(idx);
+  return d;
+}
+
+function e(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+/* ─── PANEL ─── */
+function openPanel(){
+  editId=null;curImg=null;
+  document.getElementById('pt').textContent="Yangi ish qo'shish";
+  ['fn','fd','fyr','fsz','fcl','flc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('fcat').value='Devor plitkalari';
+  document.getElementById('ffav').checked=false;
+  updateThumbGrid();
+  ['fn','fd'].forEach(id=>{const nc=id==='fn'?'ncn':'ncd';const mx=id==='fn'?80:300;uc(id,nc,mx);});
+  document.getElementById('pbd').classList.add('on');
+}
+function editItem(id){
+  const it=items.find(i=>i.id===id);if(!it)return;
+  editId=id;curImg=it.img||null;
+  document.getElementById('pt').textContent='Ishni tahrirlash';
+  document.getElementById('fn').value=it.name;
+  document.getElementById('fd').value=it.desc||'';
+  document.getElementById('fyr').value=it.year||'';
+  document.getElementById('fsz').value=it.size||'';
+  document.getElementById('fcl').value=it.client||'';
+  document.getElementById('flc').value=it.loc||'';
+  document.getElementById('fcat').value=it.cat;
+  document.getElementById('ffav').checked=!!it.fav;
+  uc('fn','ncn',80);uc('fd','ncd',300);
+  updateThumbGrid();
+  document.getElementById('pbd').classList.add('on');
+  closeLb();
+}
+function closePanel(){document.getElementById('pbd').classList.remove('on');}
+function saveItem(){
+  const name=document.getElementById('fn').value.trim();
+  if(!name){toast('⚠️','Loyiha nomi kiriting!','amber');return;}
+  const it={
+    id:editId||nid++,
+    name,
+    desc:document.getElementById('fd').value.trim(),
+    cat:document.getElementById('fcat').value,
+    year:+document.getElementById('fyr').value||null,
+    size:document.getElementById('fsz').value.trim()||null,
+    client:document.getElementById('fcl').value.trim()||null,
+    loc:document.getElementById('flc').value.trim()||null,
+    fav:document.getElementById('ffav').checked,
+    img:curImg||null,
+  };
+  if(editId){items[items.findIndex(x=>x.id===editId)]=it;toast('✅','Saqlandi','teal');}
+  else{items.unshift(it);toast('✅',"Ish qo'shildi",'teal');}
+  sv();closePanel();render();
+}
+
+/* ─── DROPZONE ─── */
+function dzO(e,on){e.preventDefault();document.getElementById('dz').classList.toggle('drag',on);}
+function dzD(e){e.preventDefault();document.getElementById('dz').classList.remove('drag');pickF(e.dataTransfer.files[0]);}
+function pickF(f){
+  if(!f||!f.type.startsWith('image/')){toast('⚠️','Faqat rasm fayllari!','amber');return;}
+  if(f.size>8*1024*1024){toast('⚠️','Max 8MB rasm!','amber');return;}
+  const r=new FileReader();
+  r.onload=ev=>{panelImgs.push(ev.target.result);updateThumbGrid();};
+  r.readAsDataURL(f);
+}
+function updateThumbGrid(){
+  const dz=document.getElementById('dz'),tg=document.getElementById('thumb-grid');
+  if(panelImgs.length===0){dz.style.display='flex';tg.style.display='none';return;}
+  dz.style.display='none';tg.style.display='grid';
+  tg.innerHTML=panelImgs.map((src,i)=>`
+    <div class="thumb-item${i===0?' primary':''}" onclick="setThumbPrimary(${i})" title="${i===0?'Asosiy rasm':'Asosiy qilish'}">
+      <img src="${src}" alt="">
+      <button class="thumb-del" onclick="event.stopPropagation();removeThumb(${i})">✕</button>
+    </div>`).join('')+
+    (panelImgs.length<10?`<div class="thumb-add" onclick="document.getElementById('fi').click()"><div class="plus">＋</div><span style="font-size:.6rem;">Rasm</span></div>`:'');
+}
+function setThumbPrimary(i){if(i===0)return;panelImgs.unshift(panelImgs.splice(i,1)[0]);updateThumbGrid();}
+function removeThumb(i){panelImgs.splice(i,1);updateThumbGrid();}
+function uc(fi,ni,mx){document.getElementById(ni).textContent=`${document.getElementById(fi).value.length}/${mx}`;}
+
+/* ─── FAVORITES ─── */
+function toggleFav(id){
+  const i=items.findIndex(x=>x.id===id);if(i<0)return;
+  items[i].fav=!items[i].fav;
+  sv();render();
+  toast(items[i].fav?'⭐':'☆',items[i].fav?"Sevimlilarga qo'shildi":'Olib tashlandi','teal');
+}
+
+/* ─── LIGHTBOX ─── */
+function openLb(idx){lbIdx=idx;showLb();document.getElementById('lb').classList.add('on');}
+function showLb(){
+  const it=lbList[lbIdx];if(!it)return;
+  const img=document.getElementById('lbi'),ph=document.getElementById('lb-ph');
+  const imgs=it.imgs||[];
+  if(imgs.length>0){img.src=imgs[lbImgIdx||0];img.style.display='block';ph.style.display='none';}
+  else{img.style.display='none';ph.style.display='flex';}
+  document.getElementById('lb-cat').textContent=it.cat;
+  document.getElementById('lb-tl').textContent=it.name;
+  document.getElementById('lb-ds').textContent=it.desc||'Tavsif yo\'q';
+  const mts=[];
+  if(it.year)mts.push(['📅 Yil',it.year]);
+  if(it.size)mts.push(['📐 O\'lcham',it.size+' m²']);
+  if(it.client)mts.push(['👤 Mijoz',it.client]);
+  if(it.loc)mts.push(['📍 Joy',it.loc]);
+  document.getElementById('lb-mts').innerHTML=mts.map(([l,v])=>`<div class="lb-mr"><span class="lb-ml">${l}</span><span class="lb-mv">${e(String(v))}</span></div>`).join('');
+  const fv=document.getElementById('lb-fv');
+  fv.classList.toggle('on',!!it.fav);
+  document.getElementById('lb-fic').textContent=it.fav?'★':'☆';
+  document.getElementById('lb-ftx').textContent=it.fav?"Sevimlilardan olib tashlash":"Sevimlilarga qo'shish";
+  document.getElementById('lbp').disabled=lbIdx===0;
+  document.getElementById('lbn').disabled=lbIdx===lbList.length-1;
+  document.getElementById('lb-ctr').textContent=`${lbIdx+1} / ${lbList.length}`;
+}
+function closeLb(){document.getElementById('lb').classList.remove('on');}
+function lbN(d){lbIdx=Math.max(0,Math.min(lbList.length-1,lbIdx+d));showLb();}
+function toggleFavLb(){
+  const it=lbList[lbIdx];if(!it)return;
+  toggleFav(it.id);
+  lbList=getFilt();
+  const ni=lbList.findIndex(i=>i.id===it.id);
+  if(ni>=0)lbIdx=ni; showLb();
+}
+function editFromLb(){editItem(lbList[lbIdx]?.id);}
+function delFromLb(){askDel(lbList[lbIdx]?.id);}
+
+/* ─── DELETE ─── */
+function askDel(id){
+  delId=id;
+  const it=items.find(i=>i.id===id);
+  document.getElementById('dlg-m').innerHTML=`<strong>"${e(it?.name)}"</strong> ishini o'chirmoqchimisiz? Bu amalni qaytarib bo'lmaydi.`;
+  document.getElementById('dbd').classList.add('on');
+}
+function closeDlg(){document.getElementById('dbd').classList.remove('on');delId=null;}
+function confirmDel(){
+  if(!delId)return;
+  items=items.filter(i=>i.id!==delId);
+  sv();closeDlg();closeLb();render();
+  toast('🗑',"O'chirildi",'red');
+}
+
+/* ─── TOAST ─── */
+function toast(ic,msg,type='teal'){
+  const w=document.getElementById('tws');
+  const t=document.createElement('div');
+  t.className='tw';
+  t.style.borderLeft=`3px solid var(--${type})`;
+  t.innerHTML=`<span class="tw-ic">${ic}</span><span>${msg}</span>`;
+  w.appendChild(t);
+  requestAnimationFrame(()=>requestAnimationFrame(()=>t.classList.add('on')));
+  setTimeout(()=>{t.classList.remove('on');setTimeout(()=>t.remove(),360);},2800);
+}
+
+/* ─── KEYBOARD ─── */
+document.addEventListener('keydown',ev=>{
+  const lb=document.getElementById('lb'),pb=document.getElementById('pbd'),db=document.getElementById('dbd');
+  if(db.classList.contains('on')&&ev.key==='Escape'){closeDlg();return;}
+  if(pb.classList.contains('on')&&ev.key==='Escape'){closePanel();return;}
+  if(lb.classList.contains('on')){
+    if(ev.key==='Escape')closeLb();
+    if(ev.key==='ArrowLeft')lbN(-1);
+    if(ev.key==='ArrowRight')lbN(1);
+    if(ev.key.toLowerCase()==='f')toggleFavLb();
+  }
+});
+document.getElementById('lb').addEventListener('click',ev=>{if(ev.target===document.getElementById('lb'))closeLb();});
+document.getElementById('pbd').addEventListener('click',ev=>{if(ev.target===document.getElementById('pbd'))closePanel();});
+document.getElementById('dbd').addEventListener('click',ev=>{if(ev.target===document.getElementById('dbd'))closeDlg();});
+
+render();
+</script>
+</body>
+</html>
